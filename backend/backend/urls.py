@@ -26,7 +26,7 @@ from api.urls import router
 urlpatterns = [
     path('content/', include('content.urls')),
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    #path('api/', include(router.urls)),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/login', LoginView.as_view(authentication_form=AuthenticationForm), name='login'),
     path('register/', views.register, name='register'),
@@ -38,5 +38,8 @@ urlpatterns = [
 
     # for the analysis app
     path('analysis/', include('analysis.urls')),
+
+    # for the user api
+    path('', include('users.urls')),
 
 ]

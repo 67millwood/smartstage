@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'analysis.apps.AnalysisConfig',
     'users.apps.UsersConfig',
     'rest_framework',
+    'knox',
 ]
 
 MIDDLEWARE = [
@@ -116,6 +117,14 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'knox.auth.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
