@@ -12,9 +12,9 @@ try:
 
     data_actions = [
         "TRUNCATE content_beltlevel, content_question, content_category, content_questiontype CASCADE;",
-        "COPY content_beltlevel FROM '/Users/kmhome/Development/Experiment/buildout1/proto1/data/beltlevels2.csv' DELIMITER ',' CSV",
-        "COPY content_category FROM '/Users/kmhome/Development/Experiment/buildout1/proto1/data/category.csv' DELIMITER ',' CSV",
-        "COPY content_questiontype FROM '/Users/kmhome/Development/Experiment/buildout1/proto1/data/questiontypes.csv' DELIMITER ',' CSV",
+        "COPY content_beltlevel FROM '/Users/kmhome/Development/Experiment/buildout1/backend/data/beltlevels2.csv' DELIMITER ',' CSV",
+        "COPY content_category FROM '/Users/kmhome/Development/Experiment/buildout1/backend/data/category.csv' DELIMITER ',' CSV",
+        "COPY content_questiontype FROM '/Users/kmhome/Development/Experiment/buildout1/backend/data/questiontypes.csv' DELIMITER ',' CSV",
         ]
 
     # Loop to run through all data_actions to populate database
