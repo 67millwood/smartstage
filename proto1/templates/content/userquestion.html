@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h4>This is your next question...</h4>
+
+    {% for question, answer in session_questions|slice:":1" %}
+
+    <h5 style="background-color: {{ question.belt_level.belt_color }}">Belt Level:  {{ question.belt_level.belt_name }}</h5>
+    <h5>Category: {{ question.category }}</h5>
+    Question id: {{ question.id }}
+    <br>
+    Question type: {{ question.qtype }}
+    <br>
+    {{ question.question_text }}
+    <br>
+
+    {% if question.qtype_id == 1 %}
+    <p>Which answer is most correct:</p>
+
+      <form method="POST" id="post-answer">
+        {% csrf_token %}
+      <input type="hidden" id="q_id" name="questionid" value="{{ question.id }}">
+      <input type="hidden" id="correct_answer" name="correct" value="{{ answer.correct_answer }}">
+
+      <input id="guess" type="radio" name='choice' value="{{ answer.choice_1 }}">{{ answer.choice_1 }}<br>
+      <input id="guess" type="radio" name='choice' value="{{ answer.choice_2 }}">{{ answer.choice_2 }}<br>
+      <input id="guess" type="radio" name='choice' value="{{ answer.choice_3 }}">{{ answer.choice_3 }}<br>
+      <input id="guess" type="radio" name='choice' value="{{ answer.choice_4 }}">{{ answer.choice_4 }}<br>
+      <button type="submit">Submit</button>
+
+      </form>
+      <br>
+      <br>
+
+    <br>
+    {{ answer.pk }}
+    <br>
+    {{ answer.correct_answer }}
+    <br>
+    {{ answer.correct_response }}
+    <br>
+    {{ answer.incorrect_response }}
+
+    {% elif question.qtype_id == 2 %}
+    <ul>
+      <form method="POST" id="post-answer">
+        {% csrf_token %}
+      <input type="hidden" id="q_id" name="questionid" value="{{ question.id }}">
+      <input type="hidden" id="correct_answer" name="correct" value="{{ answer.is_it_true }}">
+
+      <input type="radio" name='choice' value='True'>True<br>
+      <input type="radio" name='choice' value='False'>False<br>
+      <input type="submit" value="Submit">
+
+      </form>
+    </ul>
+
+    <br>
+    {{ answer.pk }}
+
+    {% elif question.qtype_id == 3 %}
+    <p>What do you think?</p>
+      <form action="/create_post/" method="POST" id="post-answer">
+      <!-- <form method='POST'> -->
+      {% csrf_token %}
+      <input type="hidden" id="q_id" name="questionid" value="{{ question.id }}">
+      <input type="hidden" id="correct_answer" name="correct" value="{{ answer.score }}">
+
+      <select name="choice">
+        <option value="1">1 strongly disagree</option>
+        <option value="2">2 disagree</option>
+        <option value="3">3 sort of disagree</option>
+        <option value="4">4 neither agree nor disagree</option>
+        <option value="5">5 sort of agree</option>
+        <option value="6">6 agree</option>
+        <option value="7">7 strongly agree</option>
+      </select>
+      <br>
+      <input type="submit" value="Submit">
+      </form>
+      <br>
+    {{ answer.score }}
+    <br>
+    {{ answer.pk }}
+
+    {% else %}
+    <ul>
+      <select name="rank">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      {{ answer.choice_1 }}<br>
+      <select name="rank">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      {{ answer.choice_2 }}<br>
+      <select name="rank">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      {{ answer.choice_3 }}<br>
+      <select name="rank">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      {{ answer.choice_4 }}<br>
+    </ul>
+    <input type="submit" value="Submit">
+    <br>
+
+    {{ answer.pk }}
+
+
+    {% endif %}
+    <!-- here is where we need to submit, store and then let loop run -->
+
+    {% endfor %}
+
+{% endblock %}
+
+{% block extrajs %}
+<script  src="{% static 'js/app.js' %}"></script>
+{% endblock %}
+
+

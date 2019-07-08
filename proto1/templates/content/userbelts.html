@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if belt_list %}
+    <h4>My Belts: {{ belt_list|length }}</h4>
+    <h5>Your current belt level: {{ highest_belt_name }}</h5>
+
+    <ul>
+
+      {% for belt in belt_list %}
+        <li style="background-color: {{ belt.belt_level.belt_color }}">{{ belt.belt_level }}...notches: {{ belt.notches_in_belt }}</li>
+        <ul>
+          <li>Required notches: {{ belt.belt_level.belt_notches }}
+          {% if belt.belt_complete == True %}
+          <li>Congrats on completing this belt 🐳</li>
+          {% else %}
+          <li>This belt is {{ belt.percent_complete }}% complete. </li>
+          {% endif %}
+        </ul>
+
+      {% endfor %}
+    </ul>
+    {% lorem 3 p %}
+
+    {% else %}
+      <h5>Welcome to your belt page</h5>
+      <h6>When you answer questions correctly, you'll earn notches on your first belt.</h6>
+      {% lorem 3 p %}
+    {% endif %}
+{% endblock %}

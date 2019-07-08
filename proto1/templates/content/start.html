@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<title>Smrtr.life</title>
+
+</head>
+
+
+<p>This is where you'll choose a category:</p>
+
+      <form method='POST'>
+      {% csrf_token %}
+
+      <select name="category">
+        <option value="1">Critical Thinking</option>
+        <option value="2">Human Behavior</option>
+        <option value="3">Technology</option>
+        <option value="4">Finance</option>
+      </select>
+      <br>
+      <br>
+      <input id="startquestions" type="submit" value="Start">
+      </form>
+      <br>
+
+<button id="div1">click</button>
+<br>
+
+<!-- testing pictures
+<img src="{% static 'images/dude.png' %}">
+-->
+
+{% endblock %}
+{% block extrajs %}
+<script  src="{% static 'js/app.js' %}"></script>
+{% endblock %}
+
