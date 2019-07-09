@@ -6,4 +6,5 @@ app_name = 'belts'
 
 urlpatterns = [
   path('', views.index, name='index'),
+
   ]

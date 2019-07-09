@@ -42,4 +42,8 @@ urlpatterns = [
     # for the user api
     path('', include('users.urls')),
 
+    # for the userbelts api
+    path('', include('belts.urlsapi')),
+
+
 ]
