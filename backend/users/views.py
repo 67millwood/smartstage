@@ -12,6 +12,3 @@ class UserList(generics.ListCreateAPIView):
     serializer_class = CustomUserSerializer
 
 
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
