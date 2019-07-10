@@ -45,7 +45,19 @@ export default class BeltsScreen extends Component {
   }
 
   renderlist = ({ item }) => (
-    <Text>User: {item.user.email} {"\n"} Belt Level: {item.belt_level.belt_name}</Text>
+    <View>
+      <TouchableOpacity 
+        style={{backgroundColor: `${item.belt_level.belt_color}` }}>
+          <Text>
+            Belt: {item.belt_level.belt_name}...notches: {item.notches_complete}
+          </Text>
+      </TouchableOpacity>
+          <Text>    
+                  required notches: {item.belt_level.belt_notches}
+                {"\n"}
+                  this belt is {item.percent_complete}% complete. 
+          </Text>
+    </View>
   );
 
 
