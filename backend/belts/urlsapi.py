@@ -1,11 +1,7 @@
-from django.urls import path
+from rest_framework import routers
+from .api import UserBeltViewSet
 
-from .views import UserBeltsList
+router = routers.DefaultRouter()
+router.register('api/userbelts', UserBeltViewSet, 'firstuserbelts')
 
-app_name = 'belts'
-
-urlpatterns = [
-  path('api/auth/userbelts', UserBeltsList.as_view()),
-
-
-  ]
+urlpatterns = router.urls

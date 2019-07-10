@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 class UserBeltsSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserBelts
-        fields = ('user', 'belt_level', 'notches_complete',)
+        fields = '__all__'
 
 
 
