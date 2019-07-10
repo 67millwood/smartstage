@@ -45,7 +45,7 @@ export default class BeltsScreen extends Component {
   }
 
   renderlist = ({ item }) => (
-    <Text>User: {item.user}, Belt Level: {item.belt_level}</Text>
+    <Text>User: {item.user.email} {"\n"} Belt Level: {item.belt_level.belt_name}</Text>
   );
 
 
