@@ -18,7 +18,7 @@ export default class BeltsScreen extends Component {
     console.log(userToken)
 
     try {
-        return fetch('http://localhost:8080/api/userbelts/', {
+        return fetch('http://localhost:8080/api/singleuserbelts', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
