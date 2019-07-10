@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 from .serializers import UserBeltsSerializer
 from rest_framework import generics, permissions
@@ -17,5 +16,6 @@ class UserBeltsList(generics.ListCreateAPIView):
 
     queryset = UserBelts.objects.all()
     serializer_class = UserBeltsSerializer
+
 
 

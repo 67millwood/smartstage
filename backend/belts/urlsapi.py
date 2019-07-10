@@ -7,4 +7,5 @@ app_name = 'belts'
 urlpatterns = [
   path('api/auth/userbelts', UserBeltsList.as_view()),
 
+
   ]
