@@ -8,7 +8,8 @@ export default class BeltsScreen extends Component {
   constructor(){
     super();
     this.state = {
-      datasource: []
+      datasource: [],
+    
     }
   }
 
@@ -69,10 +70,18 @@ export default class BeltsScreen extends Component {
           <Text>    
                   required notches: {item.belt_level.belt_notches}
                 {"\n"}
-                  this belt is {item.percent_complete}% complete. 
+                {this.finishedbelt(item.percent_complete)}
           </Text>
     </View>
   );
+
+  finishedbelt = (data) => {
+    if (data >= 100) {
+      return 'This belt is done. 🦋'
+    } else {
+      return `This belt ${data}% complete`
+    }
+  }
 
 
   render() {
