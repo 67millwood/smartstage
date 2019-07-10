@@ -3,6 +3,7 @@ from content.models import BeltLevel
 from rest_framework import viewsets, permissions, generics
 from .serializers import UserBeltsSerializer, BeltLevelSerializer
 
+
 # UserBelt Viewset
 class UserBeltViewSet(viewsets.ModelViewSet):
     queryset = UserBelts.objects.all()

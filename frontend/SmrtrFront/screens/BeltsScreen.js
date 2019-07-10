@@ -12,6 +12,20 @@ export default class BeltsScreen extends Component {
     }
   }
 
+  componentDidMount() {
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener("didFocus", () => {
+      // The screen is focused
+      this.getallbelts();
+  });
+}
+
+  componentWillUnmount() {
+    // Remove the event listener
+    this.focusListener.remove();
+  }
+
+
 
   getallbelts = async () => {
     const userToken = await AsyncStorage.getItem('LoginToken');
@@ -64,12 +78,9 @@ export default class BeltsScreen extends Component {
   render() {
     return (
       <View>
-        <TouchableOpacity
-        style={{backgroundColor: 'aqua' }} 
-        onPress={this.getallbelts}
-          >
-            <Text>Give me Belts</Text>
-        </TouchableOpacity>
+        <Text>
+          Here are your belts:
+        </Text>
         <FlatList
         data={this.state.datasource}
         renderItem={this.renderlist}
