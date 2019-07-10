@@ -7,7 +7,7 @@ router = routers.DefaultRouter()
 router.register('api/userbelts', UserBeltViewSet, 'firstuserbelts')
 
 urlpatterns = [
-    path('api/singleuserbelts', SingleUserBeltViewSet.as_view())
+    path('api/singleuserbelts', SingleUserBeltViewSet.as_view()),
 ]
 
 urlpatterns += router.urls

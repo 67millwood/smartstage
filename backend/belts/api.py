@@ -19,9 +19,12 @@ class SingleUserBeltViewSet(generics.ListAPIView):
     ]
     serializer_class = UserBeltsSerializer
 
+    # always check methods.  get_queryset expects a QuerySet in return.
+    # create that from model managers (or at least check)
     def get_queryset(self):
         user = self.request.user
-        beltlist = UserBelts.objects.filter(user=user)
-        return beltlist
+        beltlist = UserBelts.objects.all_belts(user=user)
+        print(beltlist['belts'])
+        return beltlist['belts']
 
 
