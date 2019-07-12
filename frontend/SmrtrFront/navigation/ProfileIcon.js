@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 

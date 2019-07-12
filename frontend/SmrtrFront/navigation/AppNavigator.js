@@ -3,9 +3,9 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import AuthNavigator from './AuthNavigator';
-// import Login from '../screens/authscreens/Login';
 import ProfilePage from '../screens/authscreens/ProfilePage';
 import AuthLoadingScreen from '../screens/authscreens/AuthLoadingScreen';
+import QuestionNavigator from './QuestionNavigator';
 
 export default createAppContainer(
   createSwitchNavigator({
@@ -15,6 +15,7 @@ export default createAppContainer(
     Main: MainTabNavigator,
     Authnav: AuthNavigator,
     Profile: ProfilePage,
+    Question: QuestionNavigator,
   },
   {
     initialRouteName: 'Auth'

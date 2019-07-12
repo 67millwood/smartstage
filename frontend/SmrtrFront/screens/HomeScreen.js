@@ -44,10 +44,14 @@ export default class HomeScreen extends Component {
   //Method for carosel
   renderItem = ({item, index}) => {
     const {title, backgroundColor} = item;
+    const { navigate } = this.props.navigation        
+
     return (
         <TouchableOpacity 
           style={[styles.item, {backgroundColor}]} >
               <Text style={styles.text}>{title}</Text>
+              <Button title="Questions" onPress={() => {navigate('Question')}} />
+
         </TouchableOpacity>)
   };
   

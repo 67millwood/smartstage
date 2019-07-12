@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { Text, View } from 'react-native';
-import { Icon } from 'react-native-elements';
 import ProfileIcon from '../navigation/ProfileIcon';
 
 export default class Analytics extends Component {
