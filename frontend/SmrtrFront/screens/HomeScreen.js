@@ -20,7 +20,7 @@ const data = [
   {title: 'Critical Thinking', backgroundColor: 'red'},
   {title: 'Human Behaviour', backgroundColor: 'blue'},
   {title: 'Technology', backgroundColor: 'green'},
-  {title: 'Finance', backgroundColor: 'aqua'},
+  {title: 'Finance', backgroundColor: 'cornflowerblue'},
 ];
 
 const {width} = Dimensions.get('window');
@@ -50,8 +50,21 @@ export default class HomeScreen extends Component {
         <TouchableOpacity 
           style={[styles.item, {backgroundColor}]} >
               <Text style={styles.text}>{title}</Text>
-              <Button title="Questions" onPress={() => {navigate('Question')}} />
+              <TouchableOpacity
+                    style={{flex: 1, width: 180, backgroundColor: 'cadetblue' }} 
+                    onPress={() => {navigate('Question')}}
+                      >
+                        <Text style={styles.sections}>Questions</Text>
 
+                </TouchableOpacity>
+
+              <TouchableOpacity
+                    style={{flex: 1, width: 180, backgroundColor: 'aqua', marginBottom: 5 }} 
+                    onPress={() => {navigate('Review')}}
+                      >
+                        <Text style={styles.sections}>Review</Text>
+
+                </TouchableOpacity>
         </TouchableOpacity>)
   };
   
@@ -66,10 +79,7 @@ export default class HomeScreen extends Component {
                 Smrtr.life
               </Text>
             </View>
-            <View>
-              <Button title="Do nothing" />
-            </View>
-            <View style={{backgroundColor: '#fff'}}>
+            <View style={{backgroundColor: '#fff', marginTop: 50}}>
                 <Carousel  style={styles.carousel}
                     data={data}
                     renderItem={this.renderItem}
@@ -110,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 50,
   },
   getStartedText: {
     fontSize: 17,
@@ -119,11 +129,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
     carousel: {
+      marginTop: 100,
       height: 500,
       flex:1
   },
   item: {
-    height: 275,
+    height: 450,
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center'
@@ -131,6 +142,10 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 30,
-    color: 'white'
+    color: 'white',
+    flex: 4,
   },
+  sections: {
+    fontSize: 20
+  }
 });

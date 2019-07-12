@@ -6,6 +6,7 @@ import AuthNavigator from './AuthNavigator';
 import ProfilePage from '../screens/authscreens/ProfilePage';
 import AuthLoadingScreen from '../screens/authscreens/AuthLoadingScreen';
 import QuestionNavigator from './QuestionNavigator';
+import ReviewNavigator from './ReviewNavigator';
 
 export default createAppContainer(
   createSwitchNavigator({
@@ -16,6 +17,7 @@ export default createAppContainer(
     Authnav: AuthNavigator,
     Profile: ProfilePage,
     Question: QuestionNavigator,
+    Review: ReviewNavigator,
   },
   {
     initialRouteName: 'Auth'
