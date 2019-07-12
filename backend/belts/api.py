@@ -24,7 +24,6 @@ class SingleUserBeltViewSet(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         beltlist = UserBelts.objects.all_belts(user=user)
-        print(beltlist['belts'])
         return beltlist['belts']
 
 

@@ -9,7 +9,22 @@ import {
   View,
   AsyncStorage,
   Button,
+  Dimensions,
+  TouchableOpacity,
 } from 'react-native';
+
+import Carousel from 'react-native-anchor-carousel';
+
+
+const data = [
+  {title: 'Amazing', backgroundColor: 'red'},
+  {title: 'Super', backgroundColor: 'blue'},
+  {title: 'AmazGreating', backgroundColor: 'green'},
+  {title: 'Wow', backgroundColor: 'aqua'},
+];
+
+const {width} = Dimensions.get('window');
+
 
 export default class HomeScreen extends Component {
   componentDidMount() {
@@ -24,6 +39,20 @@ export default class HomeScreen extends Component {
     // Remove the event listener
     this.focusListener.remove();
   }
+
+  renderItem = ({item, index}) => {
+    const {title, backgroundColor} = item;
+    return (
+        <TouchableOpacity style={[styles.item, {backgroundColor}]}
+                          onPress={() => {
+                              this._carousel.scrollToIndex(index);
+                          }}>
+              <Text style={styles.text}>{title}</Text>
+        </TouchableOpacity>)
+  };
+
+
+
 
   render() {
       return (
@@ -50,6 +79,18 @@ export default class HomeScreen extends Component {
             </View>
             <View>
               <Button title="Do nothing" />
+            </View>
+            <View style={styles.carouselContainer}>
+            <Carousel  style={styles.carousel}
+                data={data}
+                renderItem={this.renderItem}
+                itemWidth={200}
+                containerWidth={width - 20} 
+                separatorWidth={20}
+                ref={(c) => {
+                    this._carousel = c;
+                }}
+            />
             </View>
 
           </ScrollView>
@@ -168,5 +209,15 @@ const styles = StyleSheet.create({
   helpLinkText: {
     fontSize: 14,
     color: '#2e78b7',
+  },
+  carouselContainer: {
+    height:400  
+  },
+    carousel: {
+      flex:1
+  },
+  text: {
+    fontSize: 30,
+    color: 'white'
   },
 });

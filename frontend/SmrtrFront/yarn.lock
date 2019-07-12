@@ -5905,6 +5905,13 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-anchor-carousel@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-anchor-carousel/-/react-native-anchor-carousel-2.2.0.tgz#3cbc1ab8690e2bac1cd8449015eec5cd6f730ee0"
+  integrity sha512-By3A+ieqBBaW5+b8cj+ahzeaA3N/T0OR67TWGI0Kqi7l0O2kUo7zSpIl3TZ6YVTbXNqXLhy6PKW1g2zp2QxSPA==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-branch@2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
