@@ -17,16 +17,17 @@ import Carousel from 'react-native-anchor-carousel';
 
 
 const data = [
-  {title: 'Amazing', backgroundColor: 'red'},
-  {title: 'Super', backgroundColor: 'blue'},
-  {title: 'AmazGreating', backgroundColor: 'green'},
-  {title: 'Wow', backgroundColor: 'aqua'},
+  {title: 'Critcal Thinking', backgroundColor: 'red'},
+  {title: 'Human Behaviour', backgroundColor: 'blue'},
+  {title: 'Technology', backgroundColor: 'green'},
+  {title: 'Finance', backgroundColor: 'aqua'},
 ];
 
 const {width} = Dimensions.get('window');
 
 
 export default class HomeScreen extends Component {
+  //event listener runs any function when page 'didFocus' or reloads
   componentDidMount() {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", () => {
@@ -40,39 +41,24 @@ export default class HomeScreen extends Component {
     this.focusListener.remove();
   }
 
+  //Method for carosel
   renderItem = ({item, index}) => {
     const {title, backgroundColor} = item;
     return (
-        <TouchableOpacity style={[styles.item, {backgroundColor}]}
-                          onPress={() => {
-                              this._carousel.scrollToIndex(index);
-                          }}>
+        <TouchableOpacity 
+          style={[styles.item, {backgroundColor}]}
+          onPress={() => {this._carousel.scrollToIndex(index);}}>
               <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>)
   };
-
-
-
-
+  
   render() {
       return (
-        <View style={styles.container}>
           <ScrollView
             style={styles.container}
             contentContainerStyle={styles.contentContainer}>
-            <View style={styles.welcomeContainer}>
-              <Image
-                source={
-                  __DEV__
-                    ? require('../assets/images/robot-dev.png')
-                    : require('../assets/images/robot-prod.png')
-                }
-                style={styles.welcomeImage}
-              />
-            </View>
 
-            <View style={styles.getStartedContainer}>
-
+            <View style={styles.contentContainer}>
               <Text style={styles.getStartedText}>
                 Smrtr.life
               </Text>
@@ -80,22 +66,22 @@ export default class HomeScreen extends Component {
             <View>
               <Button title="Do nothing" />
             </View>
-            <View style={styles.carouselContainer}>
-            <Carousel  style={styles.carousel}
-                data={data}
-                renderItem={this.renderItem}
-                itemWidth={200}
-                containerWidth={width - 20} 
-                separatorWidth={20}
-                ref={(c) => {
-                    this._carousel = c;
-                }}
-            />
+            <View style={{backgroundColor: '#fff'}}>
+                <Carousel  style={styles.carousel}
+                    data={data}
+                    renderItem={this.renderItem}
+                    itemWidth={200}
+                    containerWidth={width - 20} 
+                    separatorWidth={20}
+                    pagingEnable={true}
+                    ref={(c) => {
+                        this._carousel = c;
+                    }}
+                />
             </View>
 
           </ScrollView>
 
-        </View>
       );
     }
 }
@@ -104,66 +90,25 @@ printMyToken = async () => {
   try {
     const value = await AsyncStorage.getItem('LoginToken');
     if (value !== null) {
-      // We have data!!
       console.log(value);
     } else {
       console.log('not an error but we not got it')
     }
   } catch (error) {
-    // Error retrieving data
     console.log(Math.random());
   }
 }
-
-
-
 
 HomeScreen.navigationOptions = {
   header: null,
 };
 
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
   },
   contentContainer: {
     paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
   },
   getStartedText: {
     fontSize: 17,
@@ -171,51 +116,17 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: 'center',
   },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-  carouselContainer: {
-    height:400  
-  },
     carousel: {
+      height: 500,
       flex:1
   },
+  item: {
+    height: 275,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
   text: {
     fontSize: 30,
     color: 'white'
