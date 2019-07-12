@@ -13,11 +13,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import Carousel from 'react-native-anchor-carousel';
-
+//import Carousel from 'react-native-anchor-carousel';
+import Carousel from 'react-native-snap-carousel';
 
 const data = [
-  {title: 'Critcal Thinking', backgroundColor: 'red'},
+  {title: 'Critical Thinking', backgroundColor: 'red'},
   {title: 'Human Behaviour', backgroundColor: 'blue'},
   {title: 'Technology', backgroundColor: 'green'},
   {title: 'Finance', backgroundColor: 'aqua'},
@@ -46,8 +46,7 @@ export default class HomeScreen extends Component {
     const {title, backgroundColor} = item;
     return (
         <TouchableOpacity 
-          style={[styles.item, {backgroundColor}]}
-          onPress={() => {this._carousel.scrollToIndex(index);}}>
+          style={[styles.item, {backgroundColor}]} >
               <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>)
   };
@@ -71,9 +70,8 @@ export default class HomeScreen extends Component {
                     data={data}
                     renderItem={this.renderItem}
                     itemWidth={200}
-                    containerWidth={width - 20} 
-                    separatorWidth={20}
-                    pagingEnable={true}
+                    enableSnap={true}
+                    sliderWidth={width - 20} 
                     ref={(c) => {
                         this._carousel = c;
                     }}
