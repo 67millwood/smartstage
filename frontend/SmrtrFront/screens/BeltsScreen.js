@@ -6,7 +6,7 @@ import ProfileIcon from '../navigation/ProfileIcon';
 
 export default class BeltsScreen extends Component {
   constructor(){
-    super();
+    super(props);
     this.state = {
       datasource: [],
     

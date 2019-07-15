@@ -1,14 +1,11 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, { Component } from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
   View,
   AsyncStorage,
-  Button,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
@@ -27,6 +24,15 @@ const {width} = Dimensions.get('window');
 
 
 export default class HomeScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+        category: '',
+        }
+  }
+
+
+
   //event listener runs any function when page 'didFocus' or reloads
   componentDidMount() {
     const { navigation } = this.props;
@@ -46,13 +52,18 @@ export default class HomeScreen extends Component {
     const {title, backgroundColor} = item;
     const { navigate } = this.props.navigation        
 
+
     return (
         <TouchableOpacity 
           style={[styles.item, {backgroundColor}]} >
               <Text style={styles.text}>{title}</Text>
               <TouchableOpacity
                     style={{flex: 1, width: 180, backgroundColor: 'cadetblue' }} 
-                    onPress={() => {navigate('Question')}}
+                    onPress={() => {
+                      this.setState({ category: {title}})
+                      //this.printtitle();
+                    }
+                    }
                       >
                         <Text style={styles.sections}>Questions</Text>
 
@@ -67,7 +78,23 @@ export default class HomeScreen extends Component {
                 </TouchableOpacity>
         </TouchableOpacity>)
   };
-  
+
+  componentDidUpdate = () => {
+    console.log(this.state.category)
+    this.setcategory();
+  }
+
+  setcategory = async () => {
+    const { navigate } = this.props.navigation        
+    try {
+      await AsyncStorage.setItem('category', (`${this.state.category.title}`))
+    } catch (e){
+      //errors go here
+
+    }
+    navigate('Question')
+  }
+
   render() {
       return (
           <ScrollView

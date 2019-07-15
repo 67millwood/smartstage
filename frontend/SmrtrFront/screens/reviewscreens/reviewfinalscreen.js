@@ -10,7 +10,9 @@ export default class ReviewFinalScreen extends Component {
     constructor(props) {
         super(props)
     }
+
     render() {
+        
         const { navigate } = this.props.navigation        
         return (
             <View>
@@ -21,7 +23,5 @@ export default class ReviewFinalScreen extends Component {
             </View>
         )
     }
-
-
-
 }
+
