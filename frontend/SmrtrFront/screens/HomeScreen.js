@@ -80,7 +80,6 @@ export default class HomeScreen extends Component {
   };
 
   componentDidUpdate = () => {
-    console.log(this.state.category)
     this.setcategory();
   }
 

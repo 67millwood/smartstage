@@ -20,7 +20,7 @@ export default class QuestionScreen extends Component {
         }
     }
 
-    static navigationOptions = () => {
+    static navigationOptions = ({ navigation }) => {
         return {
         title: 'Questions',
         headerStyle: {
@@ -37,19 +37,32 @@ export default class QuestionScreen extends Component {
         )
         }}
     
-    getallbelts = async () => {
+    componentDidMount() {
+        const { navigation } = this.props;
+        this.focusListener = navigation.addListener("didFocus", () => {
+          // The screen is focused
+          this.getCategory();
+      });
+    }
+    
+    componentWillUnmount() {
+        // Remove the event listener
+        this.focusListener.remove();
+      }
+      
+    
+    getCategory = async () => {
       const category = await AsyncStorage.getItem('category');
-      console.log(category)
+      this.setState({category: category})
     }
     
     
     render() {
         const { navigate } = this.props.navigation   
-        this.getallbelts();
 
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <Text>Some questions</Text>
+                <Text>{this.state.category}</Text>
                 <Button
                 title='Done'
                 onPress={() => navigate('QuestionFinal')}
