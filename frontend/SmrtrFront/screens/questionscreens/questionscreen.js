@@ -62,7 +62,8 @@ export default class QuestionScreen extends Component {
 
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <Text>{this.state.category}</Text>
+                <Text>This is a question page {"\n"}
+                {this.state.category}</Text>
                 <Button
                 title='Done'
                 onPress={() => navigate('QuestionFinal')}

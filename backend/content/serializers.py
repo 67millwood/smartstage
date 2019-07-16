@@ -12,6 +12,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = ('__all__')
 
+# Reading Serializer
 class ReadingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reading

@@ -3,22 +3,27 @@ import {
     Text,
     View,
     Button,
+    AsyncStorage,
 } from 'react-native';
 import HomeIcon from '../../navigation/HomeIcon';
 
 
 export default class ReviewScreen extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+          reviewpack: [],
+          category: ''
+        }
     }
 
-    static navigationOptions = () => {
+    static navigationOptions = ({ navigation }) => {
         return {
-        title: 'Review',
-        headerStyle: {
-          backgroundColor: 'burlywood',
-        },
-        headerTintColor: '#fff',
+          title: navigation.getParam('otherParam', 'A Nested Details Screen'),
+          headerStyle: {
+            backgroundColor: navigation.getParam('color', 'white'),
+          },
+          headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -29,12 +34,35 @@ export default class ReviewScreen extends Component {
         )
         }}
     
+    componentDidMount() {
+      const { navigation } = this.props;
+      this.focusListener = navigation.addListener("didFocus", () => {
+        // The screen is focused
+        this.getCategory();
+      });
+    }
+    
+    componentWillUnmount() {
+        // Remove the event listener
+        this.focusListener.remove();
+      }
+      
+    
+    getCategory = async () => {
+      const category = await AsyncStorage.getItem('category');
+      this.setState({category: category})
+    }
+  
+    
     render() {
         const { navigate } = this.props.navigation        
 
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <Text>First Review section.</Text>
+                <Text>This is a Review page.
+                      {"\n"}
+                      {this.state.category}
+                </Text>
                 <Button
                 title='Done'
                 onPress={() => navigate('ReviewFinal')}

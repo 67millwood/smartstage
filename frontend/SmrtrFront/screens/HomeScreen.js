@@ -65,7 +65,6 @@ export default class HomeScreen extends Component {
                         color: backgroundColor,
                         otherParam: title,
                       });
-                      //this.printtitle();
                     }
                     }
                       >
@@ -75,7 +74,14 @@ export default class HomeScreen extends Component {
 
               <TouchableOpacity
                     style={{flex: 1, width: 180, backgroundColor: 'aqua', marginBottom: 5 }} 
-                    onPress={() => {navigate('Review')}}
+                    onPress={() => {
+                      this.setState({ category: {title}})
+                      this.props.navigation.navigate('Review', {
+                        color: backgroundColor,
+                        otherParam: title,
+                      });
+                    }
+                    }
                       >
                         <Text style={styles.sections}>Review</Text>
 
@@ -95,7 +101,7 @@ export default class HomeScreen extends Component {
       //errors go here
 
     }
-    navigate('Question')
+    //navigate('Question')
   }
 
   render() {

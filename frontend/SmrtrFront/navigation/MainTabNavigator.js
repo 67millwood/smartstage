@@ -10,11 +10,13 @@ import HomeScreen from '../screens/HomeScreen';
 import BeltsScreen from '../screens/BeltsScreen';
 import Analytics from '../screens/AnalyticsScreen';
 import QuestionScreen from '../screens/questionscreens/questionscreen';
-
+import ReviewScreen from '../screens/reviewscreens/reviewscreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  Review: ReviewScreen,
   Question: QuestionScreen,
+  
 });
 
 HomeStack.navigationOptions = {
