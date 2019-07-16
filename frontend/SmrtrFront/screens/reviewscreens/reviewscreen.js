@@ -13,7 +13,8 @@ export default class ReviewScreen extends Component {
         super(props);
         this.state = {
           reviewpack: [],
-          category: ''
+          category: '',
+          pagecount: 0,
         }
     }
 
@@ -52,6 +53,18 @@ export default class ReviewScreen extends Component {
       const category = await AsyncStorage.getItem('category');
       this.setState({category: category})
     }
+
+    pageTurn = () => {
+      const { navigate, push } = this.props.navigation        
+
+      if (this.state.pagecount == 3) {
+        navigate('ReviewFinal')
+      } else {
+        this.setState({ pagecount: this.state.pagecount + 1})
+        
+        
+      }
+    }
   
     
     render() {
@@ -63,9 +76,18 @@ export default class ReviewScreen extends Component {
                       {"\n"}
                       {this.state.category}
                 </Text>
+                <Text>
+                  {this.state.pagecount}
+                </Text>
                 <Button
                 title='Done'
                 onPress={() => navigate('ReviewFinal')}
+                />
+                <Button
+                title='Next'
+                onPress={() => {
+                  this.pageTurn()}
+                }
                 />
             </View>
             )
