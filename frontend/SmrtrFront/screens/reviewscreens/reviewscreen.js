@@ -4,6 +4,8 @@ import {
     View,
     Button,
     AsyncStorage,
+    FlatList,
+    TouchableOpacity,
 } from 'react-native';
 import HomeIcon from '../../navigation/HomeIcon';
 
@@ -12,7 +14,7 @@ export default class ReviewScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          reviewpack: [],
+          readings: [],
           category: '',
           pagecount: 0,
         }
@@ -40,6 +42,7 @@ export default class ReviewScreen extends Component {
       this.focusListener = navigation.addListener("didFocus", () => {
         // The screen is focused
         this.getCategory();
+        this.getReadings();
       });
     }
     
@@ -47,7 +50,56 @@ export default class ReviewScreen extends Component {
         // Remove the event listener
         this.focusListener.remove();
       }
-      
+    
+    getReadings = async () => {
+      const userToken = await AsyncStorage.getItem('LoginToken');
+      console.log(userToken)
+  
+      try {
+          return fetch('http://localhost:8080/api/readings', {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': `Token ${userToken}`,
+            },
+        })
+        .then(response => {
+          if(!response.ok) {
+            console.log('crap')      
+            } else {
+              response.json().then(data => {
+                console.log(data)
+                this.setState({
+                  readings: data
+                }
+                )
+              })
+          }
+        })}
+      catch(error) {
+        console.log('no readings coming');
+      };
+    }
+
+    renderlist = ({ item }) => (
+      <View>
+        <TouchableOpacity 
+          style={{backgroundColor: 'green' }}>
+            <Text>
+              Reading {item.reading_text}
+            </Text>
+        </TouchableOpacity>
+      </View>
+    );
+
+    pullOut = () => {
+      const value = this.state.readings
+      value.forEach(function(item) {
+          let x = item.reading_text
+          console.log(x)
+      })
+    }
     
     getCategory = async () => {
       const category = await AsyncStorage.getItem('category');
@@ -68,7 +120,8 @@ export default class ReviewScreen extends Component {
   
     
     render() {
-        const { navigate } = this.props.navigation        
+        const { navigate } = this.props.navigation
+        this.pullOut();     
 
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -76,6 +129,15 @@ export default class ReviewScreen extends Component {
                       {"\n"}
                       {this.state.category}
                 </Text>
+                <Text>
+                  
+                </Text>
+                <FlatList
+                data={this.state.readings}
+                renderItem={this.renderlist}
+                keyExtractor={(item) => String(item.id)}
+                />
+
                 <Text>
                   {this.state.pagecount}
                 </Text>
