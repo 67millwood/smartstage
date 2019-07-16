@@ -22,9 +22,9 @@ export default class QuestionScreen extends Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-        title: 'Questions',
+        title: navigation.getParam('otherParam', 'A Nested Details Screen'),
         headerStyle: {
-          backgroundColor: 'aqua',
+          backgroundColor: navigation.getParam('color', 'white'),
         },
         headerTintColor: '#fff',
         headerTitleStyle: {

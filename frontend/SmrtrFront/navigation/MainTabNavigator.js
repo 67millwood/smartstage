@@ -9,10 +9,12 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import BeltsScreen from '../screens/BeltsScreen';
 import Analytics from '../screens/AnalyticsScreen';
+import QuestionScreen from '../screens/questionscreens/questionscreen';
 
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  Question: QuestionScreen,
 });
 
 HomeStack.navigationOptions = {

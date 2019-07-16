@@ -61,6 +61,10 @@ export default class HomeScreen extends Component {
                     style={{flex: 1, width: 180, backgroundColor: 'cadetblue' }} 
                     onPress={() => {
                       this.setState({ category: {title}})
+                      this.props.navigation.navigate('Question', {
+                        color: backgroundColor,
+                        otherParam: title,
+                      });
                       //this.printtitle();
                     }
                     }
