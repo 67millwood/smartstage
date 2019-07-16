@@ -12,11 +12,4 @@ class QuestionManager(models.Manager):
 
     return question_info
 
-"""
-  def question_maker(self, category, level):
-    result = super().get_queryset().filter(qtype=1, category=category, belt_level=level)
-    question_list = list(result)
-    print(question_list[0].id, question_list[0].qtype_id)
-    return result
-"""
 

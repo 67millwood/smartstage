@@ -45,5 +45,9 @@ urlpatterns = [
     # for the userbelts api
     path('', include('belts.urlsapi')),
 
+    # for the questions api
+    path('', include('content.urlsapi')),
+
+
 
 ]
