@@ -1,6 +1,6 @@
-from .models import Question
+from .models import Question, Reading
 from rest_framework import viewsets, permissions, generics
-from .serializers import QuestionSerializer
+from .serializers import QuestionSerializer, ReadingSerializer
 
 
 # Question Viewset
@@ -9,12 +9,15 @@ class QuestionViewSet(generics.ListAPIView):
         permissions.IsAuthenticated,
     ]
     serializer_class = QuestionSerializer
-
-    # always check methods.  get_queryset expects a QuerySet in return.
-    # create that from model managers (or at least check)
     def get_queryset(self):
-        user = self.request.user
-        questions = Question.objects.one_level_questions(user=user)
-        return questions['result']
+        questionlist = Question.objects.one_level_questions(category=1, level=1)
+        return questionlist['result']
 
+# Reading Viewset
+class ReadingViewSet(generics.ListAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = ReadingSerializer
+    queryset = Reading.objects.filter(belt_level=1, category=1)
 
