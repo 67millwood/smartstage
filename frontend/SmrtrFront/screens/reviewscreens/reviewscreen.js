@@ -37,6 +37,8 @@ export default class ReviewScreen extends Component {
         )
         }}
     
+    // getCategory sets the state.category
+    // getReadings calls the api and gets an object with 4 readings in the correct Category
     componentDidMount() {
       const { navigation } = this.props;
       this.focusListener = navigation.addListener("didFocus", () => {
@@ -51,6 +53,7 @@ export default class ReviewScreen extends Component {
         this.focusListener.remove();
       }
     
+    // gets the readings via the api
     getReadings = async () => {
       const userToken = await AsyncStorage.getItem('LoginToken');
       console.log(userToken)
@@ -82,24 +85,28 @@ export default class ReviewScreen extends Component {
       };
     }
 
+    // takes the object with 4 reading blocks, breaks into a list
+    // feeds the page one reading at a time based on state.pagecount
     singleReading = () => {
       const readings = this.state.readings
       const listed = []
       readings.forEach(function(item) {
         const reading = item.reading_text
-        //console.log(reading)
         listed.push(reading)
       })
       return listed[this.state.pagecount]
     }
     
+    // get category from device storage
     getCategory = async () => {
       const category = await AsyncStorage.getItem('category');
       this.setState({category: category})
     }
 
+    // click handler when user clicks 'next' increases state.pagecount
+    // ends after readings are done by navigating to final page of review
     pageTurn = () => {
-      const { navigate, push } = this.props.navigation        
+      const { navigate } = this.props.navigation        
 
       if (this.state.pagecount == 3) {
         navigate('ReviewFinal')
