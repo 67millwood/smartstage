@@ -69,7 +69,7 @@ export default class ReviewScreen extends Component {
             console.log('crap')      
             } else {
               response.json().then(data => {
-                console.log(data)
+                //console.log(data)
                 this.setState({
                   readings: data
                 }
@@ -82,23 +82,15 @@ export default class ReviewScreen extends Component {
       };
     }
 
-    renderlist = ({ item }) => (
-      <View>
-        <TouchableOpacity 
-          style={{backgroundColor: 'green' }}>
-            <Text>
-              Reading {item.reading_text}
-            </Text>
-        </TouchableOpacity>
-      </View>
-    );
-
-    pullOut = () => {
-      const value = this.state.readings
-      value.forEach(function(item) {
-          let x = item.reading_text
-          console.log(x)
+    singleReading = () => {
+      const readings = this.state.readings
+      const listed = []
+      readings.forEach(function(item) {
+        const reading = item.reading_text
+        //console.log(reading)
+        listed.push(reading)
       })
+      return listed[this.state.pagecount]
     }
     
     getCategory = async () => {
@@ -121,8 +113,7 @@ export default class ReviewScreen extends Component {
     
     render() {
         const { navigate } = this.props.navigation
-        this.pullOut();     
-
+          
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
                 <Text>This is a Review page.
@@ -130,14 +121,8 @@ export default class ReviewScreen extends Component {
                       {this.state.category}
                 </Text>
                 <Text>
-                  
+                  {this.singleReading()}
                 </Text>
-                <FlatList
-                data={this.state.readings}
-                renderItem={this.renderlist}
-                keyExtractor={(item) => String(item.id)}
-                />
-
                 <Text>
                   {this.state.pagecount}
                 </Text>
