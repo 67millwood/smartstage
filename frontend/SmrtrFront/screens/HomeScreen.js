@@ -14,10 +14,10 @@ import {
 import Carousel from 'react-native-snap-carousel';
 
 const data = [
-  {title: 'Critical Thinking', backgroundColor: 'red'},
-  {title: 'Human Behaviour', backgroundColor: 'blue'},
-  {title: 'Technology', backgroundColor: 'green'},
-  {title: 'Finance', backgroundColor: 'cornflowerblue'},
+  {title: 'Critical Thinking', backgroundColor: 'red', category_id: 1},
+  {title: 'Human Behaviour', backgroundColor: 'blue', category_id: 2},
+  {title: 'Technology', backgroundColor: 'green', category_id: 3},
+  {title: 'Finance', backgroundColor: 'cornflowerblue', category_id: 4},
 ];
 
 const {width} = Dimensions.get('window');
@@ -28,6 +28,7 @@ export default class HomeScreen extends Component {
     super(props)
     this.state = {
         category: '',
+        category_id: null,
         }
   }
 
@@ -49,7 +50,7 @@ export default class HomeScreen extends Component {
 
   //Method for carosel
   renderItem = ({item, index}) => {
-    const {title, backgroundColor} = item;
+    const {title, backgroundColor, category_id} = item;
     const { navigate } = this.props.navigation        
 
 
@@ -61,6 +62,7 @@ export default class HomeScreen extends Component {
                     style={{flex: 1, width: 180, backgroundColor: 'cadetblue' }} 
                     onPress={() => {
                       this.setState({ category: {title}})
+                      this.setState({ category_id: {category_id}})
                       this.props.navigation.navigate('Question', {
                         color: backgroundColor,
                         otherParam: title,
@@ -76,6 +78,7 @@ export default class HomeScreen extends Component {
                     style={{flex: 1, width: 180, backgroundColor: 'aqua', marginBottom: 5 }} 
                     onPress={() => {
                       this.setState({ category: {title}})
+                      this.setState({ category_id: {category_id}})
                       this.props.navigation.navigate('Review', {
                         color: backgroundColor,
                         otherParam: title,
@@ -97,6 +100,8 @@ export default class HomeScreen extends Component {
     const { navigate } = this.props.navigation        
     try {
       await AsyncStorage.setItem('category', (`${this.state.category.title}`))
+      await AsyncStorage.setItem('category_id', (`${this.state.category_id.category_id}`))
+
     } catch (e){
       //errors go here
 

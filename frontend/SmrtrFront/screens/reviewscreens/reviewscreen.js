@@ -43,7 +43,7 @@ export default class ReviewScreen extends Component {
       const { navigation } = this.props;
       this.focusListener = navigation.addListener("didFocus", () => {
         // The screen is focused
-        this.getCategory();
+        //this.getCategory();
         this.getReadings();
       });
     }
@@ -55,11 +55,17 @@ export default class ReviewScreen extends Component {
     
     // gets the readings via the api
     getReadings = async () => {
+      const category = await AsyncStorage.getItem('category');
+      this.setState({category: category})
+
+      const category_id = await AsyncStorage.getItem('category_id');
+      console.log(category_id)
+
       const userToken = await AsyncStorage.getItem('LoginToken');
       console.log(userToken)
   
       try {
-          return fetch('http://localhost:8080/api/readings?category=4', {
+          return fetch(('http://localhost:8080/api/readings?category=' + category_id), {
             method: 'GET',
             headers: {
               Accept: 'application/json',
@@ -97,11 +103,13 @@ export default class ReviewScreen extends Component {
       return listed[this.state.pagecount]
     }
     
-    // get category from device storage
+    /*
+    // get category from device storage.  commented out as it was pulled into getReadings()
     getCategory = async () => {
       const category = await AsyncStorage.getItem('category');
       this.setState({category: category})
     }
+    */
 
     // click handler when user clicks 'next' increases state.pagecount
     // ends after readings are done by navigating to final page of review
