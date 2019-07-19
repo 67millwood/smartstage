@@ -43,7 +43,6 @@ export default class ReviewScreen extends Component {
       const { navigation } = this.props;
       this.focusListener = navigation.addListener("didFocus", () => {
         // The screen is focused
-        //this.getCategory();
         this.getReadings();
       });
     }

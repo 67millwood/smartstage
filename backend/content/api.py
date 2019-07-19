@@ -12,10 +12,11 @@ class QuestionViewSet(generics.ListAPIView):
     serializer_class = QuestionSerializer
     def get_queryset(self):
         user = self.request.user
+        category = self.request.query_params.get('category')
         beltlist = UserBelts.objects.all_belts(user=user)
         highest_belt = beltlist['highest_belt_level']
 
-        questionlist = Question.objects.one_level_questions(category=1, level=highest_belt)
+        questionlist = Question.objects.one_level_questions(category=category, level=highest_belt)
         return questionlist['result']
 
 # Reading Viewset
