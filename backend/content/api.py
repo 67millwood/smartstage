@@ -26,7 +26,8 @@ class ReadingViewSet(generics.ListAPIView):
     serializer_class = ReadingSerializer
     def get_queryset(self):
         user = self.request.user
+        category = self.request.query_params.get('category')
         beltlist = UserBelts.objects.all_belts(user=user)
         highest_belt = beltlist['highest_belt_level']
-        return Reading.objects.filter(belt_level=highest_belt, category=1)
+        return Reading.objects.filter(belt_level=highest_belt, category=category)
 

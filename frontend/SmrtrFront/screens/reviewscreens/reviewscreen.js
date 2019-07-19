@@ -59,7 +59,7 @@ export default class ReviewScreen extends Component {
       console.log(userToken)
   
       try {
-          return fetch('http://localhost:8080/api/readings', {
+          return fetch('http://localhost:8080/api/readings?category=4', {
             method: 'GET',
             headers: {
               Accept: 'application/json',
