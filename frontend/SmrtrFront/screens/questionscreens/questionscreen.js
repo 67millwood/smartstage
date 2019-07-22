@@ -9,7 +9,7 @@ import {
     Button,
 } from 'react-native';
 import HomeIcon from '../../navigation/HomeIcon';
-
+import MainQuestion from '../../components/questionpieces/thequestion';
 
 export default class QuestionScreen extends Component {
   constructor(props) {
@@ -100,7 +100,7 @@ singleQuestion = () => {
     const question = item.question_text
     listed.push(question)
   })
-  //console.log(listed[this.state.pagecount])
+  console.log(listed[this.state.pagecount])
   return listed[this.state.pagecount]
 }
 
@@ -129,9 +129,10 @@ render() {
                   {"\n"}
                   {this.state.category}
             </Text>
-            <Text>
-              {this.singleQuestion()}
-            </Text>
+            <MainQuestion
+            questiontext={this.singleQuestion()}
+            />
+              
             <Text>
               {this.state.pagecount}
             </Text>
