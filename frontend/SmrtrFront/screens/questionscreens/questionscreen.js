@@ -18,6 +18,9 @@ export default class QuestionScreen extends Component {
       questions: [],
       category: '',
       pagecount: 0,
+      maintext: '',
+      questionid: null,
+
     }
 }
 
@@ -78,14 +81,16 @@ getQuestions = async () => {
         console.log('crap')      
         } else {
           response.json().then(data => {
-            //console.log(data)
             this.setState({
               questions: data
             }
             )
+            this.singleQuestion()
+            //console.log(this.state.questions[0].question_text)
           })
       }
-    })}
+    })
+    }
   catch(error) {
     console.log('no questions coming');
   };
@@ -94,14 +99,14 @@ getQuestions = async () => {
 // takes the object with 4 questions blocks, breaks into a list
 // feeds the page one question at a time based on state.pagecount
 singleQuestion = () => {
-  const questions = this.state.questions
-  const listed = []
-  questions.forEach(function(item) {
-    const question = item.question_text
-    listed.push(question)
+  this.setState({
+    maintext: this.state.questions[this.state.pagecount].question_text,
+    questionid: this.state.questions[this.state.pagecount].id
   })
-  return listed[this.state.pagecount]
-}
+  }
+
+
+
 
 
 // click handler when user clicks 'next' increases state.pagecount
@@ -109,10 +114,13 @@ singleQuestion = () => {
 pageTurn = () => {
   const { navigate } = this.props.navigation        
 
-  if (this.state.pagecount == 3) {
+  if (this.state.pagecount == 4) {
     navigate('QuestionFinal')
   } else {
-    this.setState({ pagecount: this.state.pagecount + 1})
+    this.setState({ 
+      pagecount: this.state.pagecount + 1,
+    })
+    this.singleQuestion()
     
     
   }
@@ -129,7 +137,7 @@ render() {
                   {this.state.category}
             </Text>
             <MainQuestion
-            questiontext={this.singleQuestion()}
+            questiontext={this.state.maintext}
             />
               
             <Text>
