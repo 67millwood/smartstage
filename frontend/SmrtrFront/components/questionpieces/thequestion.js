@@ -12,11 +12,32 @@ import {
 
 
 export default class MainQuestion extends Component {
+
+    questionType = () => {
+        const qtype = this.props.questiontype
+        switch (qtype) {
+            case 1:
+                return 'Multiple Choice'
+            case 2:
+                return 'True/False'
+            case 3:
+                return 'Rating'
+            case 4:
+                return 'Ranking'
+        }
+    }
+
+
     render() {
         return (
-            <Text>
-                {this.props.questiontext}
-            </Text>
+            <View>
+                <Text>
+                    {this.questionType()}
+                </Text>
+                <Text>
+                    {this.props.questiontext}
+                </Text>
+            </View>
         )
     }
 }

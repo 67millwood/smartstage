@@ -20,6 +20,7 @@ export default class QuestionScreen extends Component {
       pagecount: 0,
       maintext: '',
       questionid: null,
+      questiontype: '',
 
     }
 }
@@ -96,25 +97,20 @@ getQuestions = async () => {
   };
 }
 
-// takes the object with 4 questions blocks, breaks into a list
-// feeds the page one question at a time based on state.pagecount
+// sets the various required states
 singleQuestion = () => {
   this.setState({
     maintext: this.state.questions[this.state.pagecount].question_text,
     questionid: this.state.questions[this.state.pagecount].id,
+    questiontype: this.state.questions[this.state.pagecount].qtype,
     pagecount: this.state.pagecount + 1,
   })
   }
-
-
-
-
 
 // click handler when user clicks 'next' increases state.pagecount
 // ends after questions are done by navigating to final page of review
 pageTurn = () => {
   const { navigate } = this.props.navigation        
-
   if (this.state.pagecount == 4) {
     navigate('QuestionFinal')
   } else {
@@ -122,8 +118,6 @@ pageTurn = () => {
       pagecount: this.state.pagecount + 1,
     })
     this.singleQuestion()
-    
-    
   }
 }
 
@@ -133,17 +127,13 @@ render() {
       
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text>This is a Review page.
-                  {"\n"}
-                  {this.state.category}
+            <Text>This is a Question page.
             </Text>
             <MainQuestion
             questiontext={this.state.maintext}
+            questiontype={this.state.questiontype}
             />
               
-            <Text>
-              {this.state.pagecount}
-            </Text>
             <Button
             title='Done'
             onPress={() => navigate('QuestionFinal')}
