@@ -1,14 +1,14 @@
 from django.urls import path
 
 from rest_framework import routers
-from .api import QuestionViewSet, ReadingViewSet
+from .api import QuestionViewSet, ReadingViewSet, MultipleChoiceViewSet
 
 router = routers.DefaultRouter()
 
 urlpatterns = [
     path('api/questions', QuestionViewSet.as_view()),
     path('api/readings', ReadingViewSet.as_view()),
-
+    path('api/multiplechoice', MultipleChoiceViewSet.as_view()),
 ]
 
 urlpatterns += router.urls

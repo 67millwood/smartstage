@@ -127,8 +127,6 @@ render() {
       
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text>This is a Question page.
-            </Text>
             <MainQuestion
             questiontext={this.state.maintext}
             questiontype={this.state.questiontype}

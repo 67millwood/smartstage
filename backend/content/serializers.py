@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Question, Reading, Category
+from .models import Question, Reading, Category, MultipleChoice
 from users.serializers import CustomUserSerializer
 from django.contrib.auth import authenticate
 
@@ -17,13 +17,18 @@ class ReadingSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 # Question Serializer
-
 class QuestionSerializer(serializers.ModelSerializer):
-    # user = CustomUserSerializer()
-    # do i need all of the things serialized? belt_level = BeltLevelSerializer()
     class Meta:
         model = Question
         fields = ('__all__')
+
+# Multiple Choice Serializer
+class MultipleChoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MultipleChoice
+        fields = ('__all__')
+
+
 
 
 

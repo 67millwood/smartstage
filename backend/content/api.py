@@ -1,7 +1,7 @@
-from .models import Question, Reading
+from .models import Question, Reading, MultipleChoice
 from belts.models import UserBelts
 from rest_framework import viewsets, permissions, generics
-from .serializers import QuestionSerializer, ReadingSerializer
+from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer
 
 
 # Question Viewset
@@ -32,3 +32,15 @@ class ReadingViewSet(generics.ListAPIView):
         highest_belt = beltlist['highest_belt_level']
         return Reading.objects.filter(belt_level=highest_belt, category=category)
 
+# MultipleChoice Viewset
+class MultipleChoiceViewSet(generics.ListAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = MultipleChoiceSerializer
+    def get_queryset(self):
+        user = self.request.user
+        category = self.request.query_params.get('category')
+        beltlist = UserBelts.objects.all_belts(user=user)
+        highest_belt = beltlist['highest_belt_level']
+        return MultipleChoice.objects.filter(belt_level=highest_belt, category=category)
