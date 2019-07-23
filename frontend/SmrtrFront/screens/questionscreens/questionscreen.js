@@ -101,7 +101,8 @@ getQuestions = async () => {
 singleQuestion = () => {
   this.setState({
     maintext: this.state.questions[this.state.pagecount].question_text,
-    questionid: this.state.questions[this.state.pagecount].id
+    questionid: this.state.questions[this.state.pagecount].id,
+    pagecount: this.state.pagecount + 1,
   })
   }
 
