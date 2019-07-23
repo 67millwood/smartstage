@@ -100,7 +100,6 @@ singleQuestion = () => {
     const question = item.question_text
     listed.push(question)
   })
-  console.log(listed[this.state.pagecount])
   return listed[this.state.pagecount]
 }
 
@@ -150,6 +149,5 @@ render() {
         )
 }
 
-
-
 }
+
