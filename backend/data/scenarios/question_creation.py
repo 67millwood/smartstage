@@ -8,6 +8,9 @@ def question_set(user, category):
     belts = UserBelts.objects.all_belts(user=user)
 
     user_questions = Question.objects.one_level_questions(category, belts['highest_belt_level'])
+    
+    print(Question.objects.better_one_level_questions(category, belts['highest_belt_level']))
+    
     custom_question_query = user_questions['result']
     # previously answered questions that were correct=True
     answered = UserAnswer.objects.all_attempts(user=user)
