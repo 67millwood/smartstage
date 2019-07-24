@@ -10,6 +10,7 @@ class QuestionViewSet(generics.ListAPIView):
         permissions.IsAuthenticated,
     ]
     serializer_class = QuestionSerializer
+    
     def get_queryset(self):
         user = self.request.user
         category = self.request.query_params.get('category')
@@ -31,7 +32,7 @@ class ReadingViewSet(generics.ListAPIView):
         beltlist = UserBelts.objects.all_belts(user=user)
         highest_belt = beltlist['highest_belt_level']
         return Reading.objects.filter(belt_level=highest_belt, category=category)
-
+'''
 # MultipleChoice Viewset
 class MultipleChoiceViewSet(generics.ListAPIView):
     permission_classes = [
@@ -44,6 +45,17 @@ class MultipleChoiceViewSet(generics.ListAPIView):
         beltlist = UserBelts.objects.all_belts(user=user)
         highest_belt = beltlist['highest_belt_level']
         return MultipleChoice.objects.filter(belt_level=highest_belt, category=category)
+'''
+# MultipleChoice Viewset2
+class MultipleChoiceViewSet(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = MultipleChoiceSerializer
+    def get_object(self):
+        questionid = self.request.query_params.get('questionid')
+        return MultipleChoice.objects.get(pk=questionid)
+
 
 # TrueFalse Viewset
 class TrueFalseViewSet(generics.ListAPIView):
