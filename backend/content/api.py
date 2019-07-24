@@ -1,7 +1,7 @@
-from .models import Question, Reading, MultipleChoice, TrueFalse
+from .models import Question, Reading, MultipleChoice, TrueFalse, Rating, Ranking
 from belts.models import UserBelts
 from rest_framework import viewsets, permissions, generics
-from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer, TrueFalseSerializer
+from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer, TrueFalseSerializer, RatingSerializer, RankingSerializer
 
 
 # Question Viewset
@@ -34,6 +34,8 @@ class ReadingViewSet(generics.ListAPIView):
         return Reading.objects.filter(belt_level=highest_belt, category=category)
 '''
 # MultipleChoice Viewset
+# Returns a queryset of all Multiple Choice questions for a given belt level and category
+# Can be used for any of the question types
 class MultipleChoiceViewSet(generics.ListAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
@@ -46,7 +48,8 @@ class MultipleChoiceViewSet(generics.ListAPIView):
         highest_belt = beltlist['highest_belt_level']
         return MultipleChoice.objects.filter(belt_level=highest_belt, category=category)
 '''
-# MultipleChoice Viewset2
+# MultipleChoice Viewset 
+# Pulls one Mulitple Choice question if the question_ptr_id (postgres) is provided
 class MultipleChoiceViewSet(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
@@ -58,14 +61,31 @@ class MultipleChoiceViewSet(generics.RetrieveAPIView):
 
 
 # TrueFalse Viewset
-class TrueFalseViewSet(generics.ListAPIView):
+class TrueFalseViewSet(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
     serializer_class = TrueFalseSerializer
-    def get_queryset(self):
-        user = self.request.user
-        category = self.request.query_params.get('category')
-        beltlist = UserBelts.objects.all_belts(user=user)
-        highest_belt = beltlist['highest_belt_level']
-        return TrueFalse.objects.filter(belt_level=highest_belt, category=category)
+    def get_object(self):
+        questionid = self.request.query_params.get('questionid')
+        return TrueFalse.objects.get(pk=questionid)
+
+# Rating Viewset
+class RatingViewSet(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = RatingSerializer
+    def get_object(self):
+        questionid = self.request.query_params.get('questionid')
+        return Rating.objects.get(pk=questionid)
+
+# Ranking Viewset
+class RankingViewSet(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = RankingSerializer
+    def get_object(self):
+        questionid = self.request.query_params.get('questionid')
+        return Ranking.objects.get(pk=questionid)

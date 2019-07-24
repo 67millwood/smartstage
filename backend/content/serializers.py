@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Question, Reading, Category, MultipleChoice, TrueFalse
+from .models import Question, Reading, Category, MultipleChoice, TrueFalse, Rating, Ranking
 from users.serializers import CustomUserSerializer
 from django.contrib.auth import authenticate
 
@@ -28,12 +28,23 @@ class MultipleChoiceSerializer(serializers.ModelSerializer):
         model = MultipleChoice
         fields = ('__all__')
 
-# True/False Choice Serializer
+# True/False Serializer
 class TrueFalseSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrueFalse
         fields = ('__all__')
 
+# Rating Serializer
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = ('__all__')
+
+# Ranking Serializer
+class RankingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ranking
+        fields = ('__all__')
 
 
 
