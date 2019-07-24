@@ -112,19 +112,3 @@ def create_post(request):
 
     return HttpResponse()
 
-"""
-  def post(self, request):
-
-    form = UserAnswerForm(request.POST)
-
-    if form.is_valid():
-      post = form.save(commit=False)
-      post.user = request.user
-      post.question_id = next_question.id
-      post.save()
-      return redirect('/')
-
-    args = {'form': form, 'user_answer': user_answer}
-    return render(request, self.template_name, args)
-"""
-# testing...not important
