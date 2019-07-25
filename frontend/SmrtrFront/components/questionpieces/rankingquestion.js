@@ -12,7 +12,7 @@ import {
 
 
 
-export default class MultipleChoiceQuestion extends Component {
+export default class RankingQuestion extends Component {
 
 
     render() {
@@ -20,7 +20,7 @@ export default class MultipleChoiceQuestion extends Component {
         return (
             <View>
                 <Text>
-                    MULTY BITCHES!!!
+                    RANK THIS BITCHES!!!
                 </Text>
                 <Text>
                     {question.question_text}

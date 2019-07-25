@@ -7,6 +7,7 @@ import {
     StyleSheet,
     AsyncStorage,
     Button,
+    Fragment
 } from 'react-native';
 import HomeIcon from '../../navigation/HomeIcon';
 import MainQuestion from '../../components/questionpieces/thequestion';
