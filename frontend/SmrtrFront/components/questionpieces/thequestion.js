@@ -14,7 +14,7 @@ import {
 export default class MultipleChoiceQuestion extends Component {
 
     questionType = () => {
-        const qtype = this.props.questiontype
+        const qtype = this.props.questiondata.qtype_id
         switch (qtype) {
             case 1:
                 return 'Multiple Choice'
@@ -35,7 +35,7 @@ export default class MultipleChoiceQuestion extends Component {
                     {this.questionType()}
                 </Text>
                 <Text>
-                    {this.props.questiontext}
+                    {this.props.questiondata.question_text}
                 </Text>
             </View>
         )

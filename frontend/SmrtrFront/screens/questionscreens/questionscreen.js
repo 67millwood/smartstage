@@ -19,9 +19,7 @@ export default class QuestionScreen extends Component {
       questions: [],
       category: '',
       pagecount: 0,
-      maintext: '',
-      questionid: null,
-      questiontype: null,
+      currentquestion: '',
 
     }
 }
@@ -100,9 +98,7 @@ getQuestions = async () => {
 // sets the various required states
 singleQuestion = () => {
   this.setState({
-    maintext: this.state.questions[this.state.pagecount].question_text,
-    questionid: this.state.questions[this.state.pagecount].id,
-    questiontype: this.state.questions[this.state.pagecount].qtype_id,
+    currentquestion: this.state.questions[this.state.pagecount],
     pagecount: this.state.pagecount + 1,
   })
   }
@@ -129,8 +125,7 @@ render() {
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
             <MainQuestion
-            questiontext={this.state.maintext}
-            questiontype={this.state.questiontype}
+            questiondata={this.state.currentquestion}
             />
             <Button
             title='Done'
