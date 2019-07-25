@@ -11,7 +11,7 @@ import {
 
 
 
-export default class MainQuestion extends Component {
+export default class MultipleChoiceQuestion extends Component {
 
     questionType = () => {
         const qtype = this.props.questiontype

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import HomeIcon from '../../navigation/HomeIcon';
 import MainQuestion from '../../components/questionpieces/thequestion';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class QuestionScreen extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class QuestionScreen extends Component {
       pagecount: 0,
       maintext: '',
       questionid: null,
-      questiontype: '',
+      questiontype: null,
 
     }
 }
@@ -87,7 +88,6 @@ getQuestions = async () => {
             }
             )
             this.singleQuestion()
-            //console.log(this.state.questions[0].question_text)
           })
       }
     })
@@ -102,7 +102,7 @@ singleQuestion = () => {
   this.setState({
     maintext: this.state.questions[this.state.pagecount].question_text,
     questionid: this.state.questions[this.state.pagecount].id,
-    questiontype: this.state.questions[this.state.pagecount].qtype,
+    questiontype: this.state.questions[this.state.pagecount].qtype_id,
     pagecount: this.state.pagecount + 1,
   })
   }
@@ -111,7 +111,7 @@ singleQuestion = () => {
 // ends after questions are done by navigating to final page of review
 pageTurn = () => {
   const { navigate } = this.props.navigation        
-  if (this.state.pagecount == 4) {
+  if (this.state.pagecount == (this.state.questions).length) {
     navigate('QuestionFinal')
   } else {
     this.setState({ 
@@ -123,15 +123,15 @@ pageTurn = () => {
 
 
 render() {
-    const { navigate } = this.props.navigation
-      
+    const { navigate } = this.props.navigation;
+
+
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
             <MainQuestion
             questiontext={this.state.maintext}
             questiontype={this.state.questiontype}
             />
-              
             <Button
             title='Done'
             onPress={() => navigate('QuestionFinal')}
