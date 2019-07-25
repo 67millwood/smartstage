@@ -62,3 +62,6 @@ class MegaDeskSerializer(serializers.Serializer):
     category_id = serializers.IntegerField(max_value=None, min_value=None)
     qtype_id = serializers.IntegerField(max_value=None, min_value=None)
 
+    #multiple choice fields
+    
+

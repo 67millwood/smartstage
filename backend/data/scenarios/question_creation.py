@@ -48,7 +48,7 @@ def question_set(user, category):
         print('not')
  
       web_questions.append(Question.objects.get(pk=item))
-    print(question_session)
+    #print(question_session)
     #for item in shuffled_ids:
 
 
@@ -62,7 +62,7 @@ def app_question_set(user, category):
     user_questions = Question.objects.one_level_questions(category, belts['highest_belt_level'])
         
     custom_question_query = user_questions['result']
-    # print(custom_question_query.values('qtype'))
+    #print(custom_question_query.values())
     # previously answered questions that were correct=True
     answered = UserAnswer.objects.all_attempts(user=user)
 
@@ -73,8 +73,37 @@ def app_question_set(user, category):
     question_id_list = []
     for question in question_ids:
       question_id_list.append(question['id'])
+    # this creates a shuffled list of objects...currently contains question ids
     shuffled_questions = random.sample(list(question_ids), len(question_ids))
     
-    print(shuffled_questions)
+    print(question_id_list)
+    #print(shuffled_questions)
+
+
+    question_session = []
+    for item in question_id_list:
+      try:
+        nice = MultipleChoice.objects.get(pk=item)
+        question_session.append(nice)
+      except:
+        print('not')
+      try:
+        nice = TrueFalse.objects.get(pk=item)
+        question_session.append(nice)
+      except:
+        print('not')
+      try:
+        nice = Rating.objects.get(pk=item)
+        question_session.append(nice)
+      except:
+        print('not')
+      try:
+        nice = Ranking.objects.get(pk=item)
+        question_session.append(nice)
+      except:
+        print('not')
+    print(question_session)
+    for thing in question_session:
+      print(thing.id)
     return shuffled_questions
 

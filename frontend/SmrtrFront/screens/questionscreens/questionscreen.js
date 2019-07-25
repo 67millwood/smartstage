@@ -102,7 +102,7 @@ singleQuestion = () => {
   this.setState({
     maintext: this.state.questions[this.state.pagecount].question_text,
     questionid: this.state.questions[this.state.pagecount].id,
-    questiontype: this.state.questions[this.state.pagecount].qtype,
+    questiontype: this.state.questions[this.state.pagecount].qtype_id,
     pagecount: this.state.pagecount + 1,
   })
   }

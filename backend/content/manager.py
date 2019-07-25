@@ -9,7 +9,7 @@ class QuestionManager(models.Manager):
     result = super().get_queryset().filter(category=category, belt_level=level)
     question_list = list(result)
     question_info = {'result': result, 'question_list': question_list}
-    print(question_info['result'].values())
+    #print(question_info['result'].values())
     return question_info
 
 
