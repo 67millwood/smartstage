@@ -16,7 +16,7 @@ def question_set(user, category):
 
     # create a subset of all available questions for that belt level MINUS all correctly answered questions
     question_ids = custom_question_query.values('id').difference(custom_answer_query.values('question_id'))
-    #print(question_ids)
+    print(question_ids)
     question_id_list = []
     for question in question_ids:
       question_id_list.append(question['id'])
@@ -24,35 +24,10 @@ def question_set(user, category):
     #print(shuffled_ids)
     
     web_questions = []
-    question_session = []
     for item in shuffled_ids:
-      try:
-        nice = MultipleChoice.objects.get(pk=item)
-        question_session.append(nice)
-      except:
-        print('not')
-      try:
-        nice = TrueFalse.objects.get(pk=item)
-        question_session.append(nice)
-      except:
-        print('not')
-      try:
-        nice = Rating.objects.get(pk=item)
-        question_session.append(nice)
-      except:
-        print('not')
-      try:
-        nice = Ranking.objects.get(pk=item)
-        question_session.append(nice)
-      except:
-        print('not')
- 
       web_questions.append(Question.objects.get(pk=item))
-    #print(question_session)
-    #for item in shuffled_ids:
 
-
-    #print(question_session[:4])
+    print(web_questions[:4])
     return web_questions[:4]
 
 def app_question_set(user, category):
@@ -74,10 +49,13 @@ def app_question_set(user, category):
     for question in question_ids:
       question_id_list.append(question['id'])
     
-    print(question_id_list)
+    # Shuffle all available question ids and send a list of max 4 to get questions
+    shuffled_questions_final = random.sample(list(question_id_list), len(question_id_list))
+    four_questions = shuffled_questions_final[:4]
 
+    # build a list of questions from the available types based on the four_questions list of ids
     question_session = []
-    for item in question_id_list:
+    for item in four_questions:
       try:
         nice = MultipleChoice.objects.get(pk=item)
         question_session.append(nice)
@@ -98,8 +76,6 @@ def app_question_set(user, category):
         question_session.append(nice)
       except:
         pass
-    
-    shuffled_questions_final = random.sample(list(question_session), len(question_session))
-    
-    return shuffled_questions_final
+        
+    return question_session
 
