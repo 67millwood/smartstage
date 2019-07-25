@@ -4,12 +4,11 @@ import {
     TextInput,
     View,
     TouchableOpacity,
-    StyleSheet,
-    AsyncStorage,
     Button,
     Fragment
 } from 'react-native';
 
+import { styles } from './questionstyles';
 
 
 export default class RatingQuestion extends Component {
@@ -22,7 +21,7 @@ export default class RatingQuestion extends Component {
                 <Text>
                     RATE THIS BITCHES!!!
                 </Text>
-                <Text>
+                <Text style={styles.questionText}>
                     {question.question_text}
                 </Text>
             </View>
