@@ -11,7 +11,7 @@ class QuestionViewSet(generics.ListAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
-    serializer_class = MegaDeskSerializer
+    serializer_class = QuestionSerializer
     
     def get_queryset(self):
         user = self.request.user
@@ -20,7 +20,7 @@ class QuestionViewSet(generics.ListAPIView):
         highest_belt = beltlist['highest_belt_level']
 
         questionlist = Question.objects.one_level_questions(category=category, level=highest_belt)
-        return questionlist['result'].values()
+        return questionlist['result']
 
 # Reading Viewset
 class ReadingViewSet(generics.ListAPIView):
@@ -97,7 +97,7 @@ class ShuffleSetViewSet(generics.ListAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
-    serializer_class = IdSerializer
+    serializer_class = MegaDeskSerializer
     
     def get_queryset(self):
         user = self.request.user

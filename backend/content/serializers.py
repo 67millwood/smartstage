@@ -62,6 +62,16 @@ class MegaDeskSerializer(serializers.Serializer):
     category_id = serializers.IntegerField(max_value=None, min_value=None)
     qtype_id = serializers.IntegerField(max_value=None, min_value=None)
 
-    #multiple choice fields
-    
+    #multiple choice & ranking fields
+    choice_1 = serializers.CharField(required=False, max_length=600)
+    choice_2 = serializers.CharField(required=False, max_length=600)
+    choice_3 = serializers.CharField(required=False, max_length=600)
+    choice_4 = serializers.CharField(required=False, max_length=600)
 
+    #need to fix model for correct answer for multiplechoice and ranking
+
+    #truefalse fields
+    is_it_true = serializers.BooleanField(required=False)
+
+    #rating fields
+    score = serializers.IntegerField(required=False, max_value=None, min_value=None)

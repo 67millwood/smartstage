@@ -62,7 +62,7 @@ def app_question_set(user, category):
     user_questions = Question.objects.one_level_questions(category, belts['highest_belt_level'])
         
     custom_question_query = user_questions['result']
-    #print(custom_question_query.values())
+    # print(custom_question_query)
     # previously answered questions that were correct=True
     answered = UserAnswer.objects.all_attempts(user=user)
 
@@ -77,7 +77,7 @@ def app_question_set(user, category):
     shuffled_questions = random.sample(list(question_ids), len(question_ids))
     
     print(question_id_list)
-    #print(shuffled_questions)
+    print(shuffled_questions)
 
 
     question_session = []
@@ -105,5 +105,5 @@ def app_question_set(user, category):
     print(question_session)
     for thing in question_session:
       print(thing.id)
-    return shuffled_questions
+    return question_session
 
