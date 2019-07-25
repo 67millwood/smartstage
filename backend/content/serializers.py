@@ -50,3 +50,15 @@ class RankingSerializer(serializers.ModelSerializer):
 class IdSerializer(serializers.Serializer):
     id = serializers.IntegerField(max_value=None, min_value=None)
 
+# MegaDesk Serializer
+class MegaDeskSerializer(serializers.Serializer):
+    #standard Question fields
+    id = serializers.IntegerField(max_value=None, min_value=None)
+    question_text = serializers.CharField(max_length=600)
+    correct_response = serializers.CharField(max_length=600)
+    incorrect_response = serializers.CharField(max_length=600)
+    pub_date = serializers.DateTimeField(input_formats=None, default_timezone=None)
+    belt_level_id = serializers.IntegerField(max_value=None, min_value=None)
+    category_id = serializers.IntegerField(max_value=None, min_value=None)
+    qtype_id = serializers.IntegerField(max_value=None, min_value=None)
+

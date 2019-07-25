@@ -1,7 +1,7 @@
 from .models import Question, Reading, MultipleChoice, TrueFalse, Rating, Ranking
 from belts.models import UserBelts
 from rest_framework import viewsets, permissions, generics
-from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer, TrueFalseSerializer, RatingSerializer, RankingSerializer, IdSerializer
+from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer, TrueFalseSerializer, RatingSerializer, RankingSerializer, IdSerializer, MegaDeskSerializer
 
 from data.scenarios.question_creation import app_question_set
 
@@ -11,7 +11,7 @@ class QuestionViewSet(generics.ListAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
-    serializer_class = QuestionSerializer
+    serializer_class = MegaDeskSerializer
     
     def get_queryset(self):
         user = self.request.user
@@ -20,7 +20,7 @@ class QuestionViewSet(generics.ListAPIView):
         highest_belt = beltlist['highest_belt_level']
 
         questionlist = Question.objects.one_level_questions(category=category, level=highest_belt)
-        return questionlist['result']
+        return questionlist['result'].values()
 
 # Reading Viewset
 class ReadingViewSet(generics.ListAPIView):
