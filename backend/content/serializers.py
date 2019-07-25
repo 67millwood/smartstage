@@ -46,5 +46,7 @@ class RankingSerializer(serializers.ModelSerializer):
         model = Ranking
         fields = ('__all__')
 
-
+# ID Serializer
+class IdSerializer(serializers.Serializer):
+    id = serializers.IntegerField(max_value=None, min_value=None)
 

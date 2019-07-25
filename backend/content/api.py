@@ -1,7 +1,7 @@
 from .models import Question, Reading, MultipleChoice, TrueFalse, Rating, Ranking
 from belts.models import UserBelts
 from rest_framework import viewsets, permissions, generics
-from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer, TrueFalseSerializer, RatingSerializer, RankingSerializer
+from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer, TrueFalseSerializer, RatingSerializer, RankingSerializer, IdSerializer
 
 from data.scenarios.question_creation import app_question_set
 
@@ -97,7 +97,7 @@ class ShuffleSetViewSet(generics.ListAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
-    serializer_class = QuestionSerializer
+    serializer_class = IdSerializer
     
     def get_queryset(self):
         user = self.request.user
