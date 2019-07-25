@@ -3,6 +3,8 @@ from belts.models import UserBelts
 from rest_framework import viewsets, permissions, generics
 from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer, TrueFalseSerializer, RatingSerializer, RankingSerializer
 
+from data.scenarios.question_creation import app_question_set
+
 
 # Question Viewset
 class QuestionViewSet(generics.ListAPIView):
@@ -89,3 +91,17 @@ class RankingViewSet(generics.RetrieveAPIView):
     def get_object(self):
         questionid = self.request.query_params.get('questionid')
         return Ranking.objects.get(pk=questionid)
+
+# ShuffleViewset
+class ShuffleSetViewSet(generics.ListAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = QuestionSerializer
+    
+    def get_queryset(self):
+        user = self.request.user
+        category = self.request.query_params.get('category')
+
+        questionlist = app_question_set(user=user, category=category)
+        return questionlist
