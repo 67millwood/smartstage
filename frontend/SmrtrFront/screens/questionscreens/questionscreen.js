@@ -69,7 +69,7 @@ getQuestions = async () => {
   console.log(userToken)
 
   try {
-      return fetch(('http://localhost:8080/api/questions?category=' + category_id), {
+      return fetch(('http://localhost:8080/api/shuffleset?category=' + category_id), {
         method: 'GET',
         headers: {
           Accept: 'application/json',

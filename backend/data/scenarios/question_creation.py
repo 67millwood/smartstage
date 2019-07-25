@@ -73,12 +73,8 @@ def app_question_set(user, category):
     question_id_list = []
     for question in question_ids:
       question_id_list.append(question['id'])
-    # this creates a shuffled list of objects...currently contains question ids
-    shuffled_questions = random.sample(list(question_ids), len(question_ids))
     
     print(question_id_list)
-    print(shuffled_questions)
-
 
     question_session = []
     for item in question_id_list:
@@ -86,24 +82,24 @@ def app_question_set(user, category):
         nice = MultipleChoice.objects.get(pk=item)
         question_session.append(nice)
       except:
-        print('not')
+        pass
       try:
         nice = TrueFalse.objects.get(pk=item)
         question_session.append(nice)
       except:
-        print('not')
+        pass
       try:
         nice = Rating.objects.get(pk=item)
         question_session.append(nice)
       except:
-        print('not')
+        pass
       try:
         nice = Ranking.objects.get(pk=item)
         question_session.append(nice)
       except:
-        print('not')
-    print(question_session)
-    for thing in question_session:
-      print(thing.id)
-    return question_session
+        pass
+    
+    shuffled_questions_final = random.sample(list(question_session), len(question_session))
+    
+    return shuffled_questions_final
 
