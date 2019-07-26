@@ -12,6 +12,16 @@ import { styles } from './questionstyles';
 
 
 export default class MultipleChoiceQuestion extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            picked: false,
+        }
+    }
+
+    selectedChoice = () => {
+        this.state.picked == true ? this.setState({ picked: false}) : this.setState({ picked: true})
+    }
 
 
     render() {
@@ -24,7 +34,12 @@ export default class MultipleChoiceQuestion extends Component {
                 <Text style={styles.questionText}>
                     {question.question_text}
                 </Text>
-                <TouchableOpacity style={styles.choice1}>
+                <TouchableOpacity 
+                    style={this.state.picked ? {...styles.choice1, ...{backgroundColor: 'blue'}} : styles.choice1}
+                    onPress={() => {
+                        this.selectedChoice()
+                    }}
+                >
                     <Text>
                     {question.choice_1}
                     </Text>

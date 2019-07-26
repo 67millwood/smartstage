@@ -9,6 +9,8 @@ import {
     Slider
 } from 'react-native';
 
+//import Slider from '@react-native-community/slider';
+
 import { styles } from './questionstyles';
 
 
