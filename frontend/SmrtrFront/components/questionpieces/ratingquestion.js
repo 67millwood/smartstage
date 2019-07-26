@@ -5,14 +5,21 @@ import {
     View,
     TouchableOpacity,
     Button,
-    Fragment
+    Fragment,
+    Slider
 } from 'react-native';
 
 import { styles } from './questionstyles';
 
 
 export default class RatingQuestion extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+          value: 0,
+        }
+    }
+            
 
     render() {
         const question = this.props.info
@@ -24,6 +31,19 @@ export default class RatingQuestion extends Component {
                 <Text style={styles.questionText}>
                     {question.question_text}
                 </Text>
+                <Text style={{ fontSize: 20, color: 'blue'}}>
+                    Rating: {this.state.value} out of 7
+                </Text>
+                <Slider
+                    value={this.state.value}
+                    onValueChange={value => this.setState({ value })}
+                    style={styles.slider}
+                    minimumValue={0}
+                    maximumValue={7}
+                    step={1}
+                    minimumTrackTintColor="green"
+                    maximumTrackTintColor="red"
+                />
             </View>
         )
     }

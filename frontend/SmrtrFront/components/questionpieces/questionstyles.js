@@ -61,6 +61,12 @@ const styles = StyleSheet.create({
     },
     sections: {
       fontSize: 20
+    },
+    slider: {
+        alignItems: "stretch",
+        justifyContent: "center"
+
+    
     }
   });
   
