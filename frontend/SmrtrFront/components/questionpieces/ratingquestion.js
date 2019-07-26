@@ -18,8 +18,8 @@ export default class RatingQuestion extends Component {
         const question = this.props.info
         return (
             <View>
-                <Text>
-                    RATE THIS BITCHES!!!
+                <Text style={styles.title}>
+                    Rate this statement...
                 </Text>
                 <Text style={styles.questionText}>
                     {question.question_text}
