@@ -5,7 +5,8 @@ import {
     View,
     TouchableOpacity,
     Button,
-    Fragment
+    Fragment,
+    ScrollView,
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -15,9 +16,9 @@ import DraggableFlatList from 'react-native-draggable-flatlist';
 export default class RankingQuestion extends Component {
     state = {
 
-        data: [this.props.info.choice_1, this.props.info.choice_2, this.props.info.choice_3, this.props.info.choice_4].map((d, index) => ({
+        data: [this.props.info.choice_1, this.props.info.choice_2, this.props.info.choice_3, this.props.info.choice_4].map((choice, index) => ({
           key: `item-${index}`,
-          label: d,
+          label: choice,
         }))
       }
 
@@ -42,7 +43,6 @@ export default class RankingQuestion extends Component {
             <Text style={{ 
               fontSize: 15,
             }}>{item.label}</Text>
-            <Text>{index}</Text>
           </TouchableOpacity>
         )
       }
@@ -60,6 +60,7 @@ export default class RankingQuestion extends Component {
                     {question.question_text}
                 </Text>
                 <DraggableFlatList
+                    contentContainerStyle={{ flexGrow: 1 }}
                     data={this.state.data}
                     renderItem={this.renderItem}
                     keyExtractor={(item, index) => `draggable-item-${item.key}`}

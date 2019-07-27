@@ -125,19 +125,21 @@ render() {
 
     return (
         <View style={{ flex: 1, paddingTop: 25, justifyContent: "flex-start", alignItems: "center" }}>
-            <MainQuestion
+            <MainQuestion 
             questiondata={this.state.currentquestion}
             />
-            <Button
-            title='Done'
-            onPress={() => navigate('QuestionFinal')}
-            />
-            <Button
-            title='Next'
-            onPress={() => {
-              this.pageTurn()}
-            }
-            />
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Button 
+              title='Done'
+              onPress={() => navigate('QuestionFinal')}
+              />
+              <Button
+              title='Next'
+              onPress={() => {
+                this.pageTurn()}
+              }
+              />
+            </View>
         </View>
         )
 }
