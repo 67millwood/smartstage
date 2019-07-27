@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     questionText: {
-      fontSize: 20,
+      fontSize: 17,
       color: 'black',
     },
     sections: {

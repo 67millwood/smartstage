@@ -29,7 +29,6 @@ export default class RankingQuestion extends Component {
           <TouchableOpacity
             
             style={{ 
-              height: 100, 
               backgroundColor: isActive ? 'blue' : `${schemes[index]}`,
               marginLeft: 5,
               marginRight: 5,
@@ -41,7 +40,7 @@ export default class RankingQuestion extends Component {
             onPressOut={moveEnd}
           >
             <Text style={{ 
-              fontSize: 17,
+              fontSize: 15,
             }}>{item.label}</Text>
             <Text>{index}</Text>
           </TouchableOpacity>
@@ -64,7 +63,7 @@ export default class RankingQuestion extends Component {
                     data={this.state.data}
                     renderItem={this.renderItem}
                     keyExtractor={(item, index) => `draggable-item-${item.key}`}
-                    
+                    scrollPercent={5}
                     onMoveEnd={({ data }) => this.setState({ data })}
                     />
 
