@@ -5,7 +5,8 @@ import {
     View,
     TouchableOpacity,
     Button,
-    Fragment
+    Fragment,
+    FlatList
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -15,17 +16,30 @@ export default class MultipleChoiceQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            picked: false,
+            choice1picked: false,
+            choice2picked: false,
+            choice3picked: false,
+            choice4picked: false,
+
         }
     }
 
-    selectedChoice = () => {
-        this.state.picked == true ? this.setState({ picked: false}) : this.setState({ picked: true})
+    selectedChoice = (choice) => {
+        this.setState({ 
+            choice1picked: false,
+            choice2picked: false,
+            choice3picked: false,
+            choice4picked: false,
+        })
+        this.setState({ [`${choice}`]: true}) 
+        
     }
 
 
+
     render() {
-        const question = this.props.info
+        const question = this.props.info        
+        
         return (
             <View>
                 <Text style={styles.title}>
@@ -34,27 +48,43 @@ export default class MultipleChoiceQuestion extends Component {
                 <Text style={styles.questionText}>
                     {question.question_text}
                 </Text>
+
                 <TouchableOpacity 
-                    style={this.state.picked ? {...styles.choice1, ...{backgroundColor: 'blue'}} : styles.choice1}
+                    style={this.state.choice1picked ? {...styles.choice1, ...styles.selected} : styles.choice1}
                     onPress={() => {
-                        this.selectedChoice()
+                        this.selectedChoice('choice1picked')
                     }}
                 >
                     <Text>
                     {question.choice_1}
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.choice2}>
+                <TouchableOpacity 
+                    style={this.state.choice2picked ? {...styles.choice2, ...styles.selected} : styles.choice2}
+                    onPress={() => {
+                        this.selectedChoice('choice2picked')
+                    }}
+                    >
                     <Text>
                     {question.choice_2}
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.choice3}>
+                <TouchableOpacity 
+                    style={this.state.choice3picked ? {...styles.choice3, ...styles.selected} : styles.choice3}
+                    onPress={() => {
+                        this.selectedChoice('choice3picked')
+                    }}
+                    >
                     <Text>
                     {question.choice_3}
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.choice4}>
+                <TouchableOpacity 
+                    style={this.state.choice4picked ? {...styles.choice4, ...styles.selected} : styles.choice4}
+                    onPress={() => {
+                        this.selectedChoice('choice4picked')
+                    }}
+                    >
                     <Text>
                     {question.choice_4}
                     </Text>

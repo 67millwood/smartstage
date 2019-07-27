@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
 
 
     },
+    selected: {
+      borderColor: 'blue',
+      borderStyle: 'solid',
+      borderWidth: 5
+    },
 
     item: {
       height: 450,
