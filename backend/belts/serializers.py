@@ -45,8 +45,8 @@ class AnswerSerializer(serializers.Serializer):
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=False)
 
         if validated_data['qtype_id'] == 3:
-            is_it_true = Rating.objects.values('is_it_true').get(pk=validated_data['id'])
-            if validated_data['trueFalseAnswer'] == is_it_true['is_it_true']:
+            answer = Rating.objects.values('score').get(pk=validated_data['id'])
+            if validated_data['ratingAnswer'] == answer['score']:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
             else:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=False)
