@@ -59,14 +59,19 @@ export default class RankingQuestion extends Component {
                 <Text style={styles.questionText}>
                     {question.question_text}
                 </Text>
+  
+                <View style={{ height: 300 }}>
+                  {/* setting the hard 300 height not great but works 
+                  otherwise the DraggableFlatList eats all things below*/}
                 <DraggableFlatList
-                    contentContainerStyle={{ flexGrow: 1 }}
+                    contentContainerStyle={{ flex: 1 }}
                     data={this.state.data}
                     renderItem={this.renderItem}
                     keyExtractor={(item, index) => `draggable-item-${item.key}`}
                     scrollPercent={5}
                     onMoveEnd={({ data }) => this.setState({ data })}
                     />
+                </View>
 
                 
             </View>

@@ -79,6 +79,7 @@ export default class MultipleChoiceQuestion extends Component {
                     {question.choice_3}
                     </Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity 
                     style={this.state.choice4picked ? {...styles.choice4, ...styles.selected} : styles.choice4}
                     onPress={() => {
