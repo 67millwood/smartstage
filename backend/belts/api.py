@@ -30,14 +30,16 @@ class SingleUserBeltViewSet(generics.ListAPIView):
 
 # AnswerViewSet
 class AnswerViewSet(generics.RetrieveAPIView):
+
     serializer_class = AnswerSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
+        user = self.request.user
+        serializer.fun(request.data, user)
         return Response({
-        "result": 'great',
+        'whatever',
         })
 
 

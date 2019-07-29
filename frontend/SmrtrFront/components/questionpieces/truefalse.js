@@ -28,6 +28,14 @@ export default class TrueFalseQuestion extends Component {
         
     }
 
+    userAnswer = () => {
+        if (this.state.choiceTrue == true) {
+            return 'true'
+        } else {
+            return 'false'
+        }
+    }
+
     checkanswer () {
         const { navigate } = this.props.navigation        
   
@@ -38,8 +46,8 @@ export default class TrueFalseQuestion extends Component {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            userAnsweredTrue: this.state.choiceTrue,
-            userAnsweredFalse: this.state.choiceFalse,
+            questionid: 333,
+            userAnswer: this.userAnswer(),
             }),
           })
           .then(response => {
