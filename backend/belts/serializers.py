@@ -18,6 +18,16 @@ class UserBeltsSerializer(serializers.ModelSerializer):
         model = UserBelts
         fields = ('__all__')
 
+# Answer Serializer
+class AnswerSerializer(serializers.Serializer):
+    TrueFalseAnswer = serializers.CharField(required=False)
+
+    def create(self, validated_data):
+        answer = UserAnswer.objects.create(
+            email=validated_data['email'],
+            )
+        
+        return user
 
 
 

@@ -28,6 +28,37 @@ export default class TrueFalseQuestion extends Component {
         
     }
 
+    checkanswer () {
+        const { navigate } = this.props.navigation        
+  
+        fetch('http://localhost:8080/api/useranswer', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userAnsweredTrue: this.state.choiceTrue,
+            userAnsweredFalse: this.state.choiceFalse,
+            }),
+          })
+          .then(response => {
+            if(!response.ok) {
+              response.json().then(data => {
+                this.login_error(data)
+              })        
+              } else {
+                response.json().then(data => {
+                  console.log('got the answer')
+                })
+              }
+          })
+          .catch(() => {
+            console.log('this is bad');
+          });
+      }
+  
+
     render() {
         const question = this.props.info
         return (
