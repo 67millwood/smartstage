@@ -99,8 +99,11 @@ class Ranking(Question):
   choice_2 = models.TextField(max_length=300)
   choice_3 = models.TextField(max_length=300)
   choice_4 = models.TextField(max_length=300)
-  correct_answer = [choice_1, choice_2, choice_3, choice_4]
-
+  
+  @property
+  def correct_answer(self):
+    return self.choice_1 + self.choice_2 + self.choice_3 + self.choice_4
+    
   class Meta:
     verbose_name_plural = "Ranking Questions"
 

@@ -5,8 +5,8 @@ import {
     View,
     TouchableOpacity,
     Button,
-    Fragment,
-    ScrollView,
+    AsyncStorage,
+    Alert,
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -17,10 +17,77 @@ export default class RankingQuestion extends Component {
     state = {
 
         data: [this.props.info.choice_1, this.props.info.choice_2, this.props.info.choice_3, this.props.info.choice_4].map((choice, index) => ({
-          key: `item-${index}`,
+          key: `${index}`,
           label: choice,
-        }))
+        })),
+        useranswer: this.props.info.choice_1 + this.props.info.choice_2 + this.props.info.choice_3 + this.props.info.choice_4
       }
+
+    useranswer = () => {
+        console.log(this.state.useranswer)
+        console.log('-----')
+        //console.log(this.state.useranswer)
+        answer_list = ''
+        this.state.data.forEach(function(item) {
+          const x = item.label
+          answer_list += x
+        })
+        console.log(answer_list)
+        console.log('-----')
+
+        this.setState({ useranswer: answer_list})
+        console.log(this.state.useranswer)
+        console.log('-----')
+        finalrank = this.state.useranswer
+        return finalrank
+
+        }
+
+      checkanswer = async () => {
+        //const { navigate } = this.props.navigation   
+        const userToken = await AsyncStorage.getItem('LoginToken');
+      
+  
+        fetch('http://localhost:8080/api/useranswer', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${userToken}`,
+          },
+          body: JSON.stringify({
+            id: this.props.info.id,
+            qtype_id: this.props.info.qtype_id,
+            rankingAnswer: this.userAnswer()
+            
+            }),
+          })
+          .then(response => {
+            if(!response.ok) {
+              response.json().then(data => {
+                console.log('error')
+              })        
+              } else {
+                response.json().then(data => {
+                  const user_message = data.feedback[Object.keys(data.feedback)[0]]
+                  console.log(user_message)
+                  this.howDidIDo(user_message)
+                })
+              }
+          })
+          .catch(() => {
+            console.log('this is bad');
+          });
+      }
+
+      howDidIDo = (message) => {
+          Alert.alert(message)
+
+      }
+  
+
+    
+
 
 
 
@@ -44,8 +111,11 @@ export default class RankingQuestion extends Component {
               fontSize: 15,
             }}>{item.label}</Text>
           </TouchableOpacity>
+          
         )
+        
       }
+
 
 
     render() {
@@ -60,7 +130,7 @@ export default class RankingQuestion extends Component {
                     {question.question_text}
                 </Text>
   
-                <View style={{ height: 300 }}>
+                <View style={{ height: 350 }}>
                   {/* setting the hard 300 height not great but works 
                   otherwise the DraggableFlatList eats all things below*/}
                 <DraggableFlatList
@@ -72,32 +142,15 @@ export default class RankingQuestion extends Component {
                     onMoveEnd={({ data }) => this.setState({ data })}
                     />
                 </View>
+                <TouchableOpacity
+                    style={{backgroundColor: 'aqua' }} 
+                    onPress={this.useranswer}
+                      >
+                        <Text>Submit</Text>
 
+                </TouchableOpacity>
                 
             </View>
         )
     }
 }
-
-/* old view
-                <TouchableOpacity style={styles.choice1}>
-                    <Text>
-                    {question.choice_1}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.choice2}>
-                    <Text>
-                    {question.choice_2}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.choice3}>
-                    <Text>
-                    {question.choice_3}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.choice4}>
-                    <Text>
-                    {question.choice_4}
-                    </Text>
-                </TouchableOpacity>
-*/

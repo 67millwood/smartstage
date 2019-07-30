@@ -27,7 +27,7 @@ class AnswerSerializer(serializers.Serializer):
     multipleChoiceAnswer = serializers.CharField(required=False, max_length=600)
     trueFalseAnswer = serializers.BooleanField(required=False)
     ratingAnswer = serializers.IntegerField(required=False, max_value=None, min_value=None)
-    rankingAnswer = serializers.CharField(required=False, max_length=600)
+    rankingAnswer = serializers.CharField(required=False, max_length=2000)
     
 
     def evaluate(self, validated_data, user):
@@ -63,8 +63,8 @@ class AnswerSerializer(serializers.Serializer):
                 return incorrect_feedback
 
         if validated_data['qtype_id'] == 4:
-            answer = Ranking.objects.values('XXX').get(pk=validated_data['id'])
-            if validated_data['rankingAnswer'] == answer['XXX']:
+            answer = Ranking.objects.get(pk=validated_data['id']).correct_answer
+            if validated_data['rankingAnswer'] == answer:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
                 return correct_feedback
             else:
