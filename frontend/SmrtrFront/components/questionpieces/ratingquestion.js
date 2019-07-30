@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
     Text,
-    TextInput,
     View,
     TouchableOpacity,
-    Button,
-    Fragment,
+    AsyncStorage,
+    Alert,
     Slider
 } from 'react-native';
 
@@ -21,6 +20,49 @@ export default class RatingQuestion extends Component {
           value: 0,
         }
     }
+
+    checkanswer = async () => {
+        //const { navigate } = this.props.navigation   
+        const userToken = await AsyncStorage.getItem('LoginToken');
+     
+  
+        fetch('http://localhost:8080/api/useranswer', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${userToken}`,
+          },
+          body: JSON.stringify({
+            id: this.props.info.id,
+            qtype_id: this.props.info.qtype_id,
+            ratingAnswer: this.state.value
+            
+            }),
+          })
+          .then(response => {
+            if(!response.ok) {
+              response.json().then(data => {
+                console.log('error')
+              })        
+              } else {
+                response.json().then(data => {
+                  const user_message = data.feedback[Object.keys(data.feedback)[0]]
+                  console.log(user_message)
+                  this.howDidIDo(user_message)
+                })
+              }
+          })
+          .catch(() => {
+            console.log('this is bad');
+          });
+      }
+
+      howDidIDo = (message) => {
+          Alert.alert(message)
+
+      }
+
             
 
     render() {
@@ -46,6 +88,14 @@ export default class RatingQuestion extends Component {
                     minimumTrackTintColor="green"
                     maximumTrackTintColor="red"
                 />
+                <TouchableOpacity
+                    style={{backgroundColor: 'aqua' }} 
+                    onPress={this.checkanswer}
+                      >
+                    <Text>Submit</Text>
+
+                </TouchableOpacity>
+
             </View>
         )
     }
