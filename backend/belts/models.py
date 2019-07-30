@@ -70,6 +70,16 @@ class UserBelts(models.Model):
   def __str__(self):
     return '{}: {}: {} notches complete.'.format(self.user, self.belt_level, self.notches_complete)
 
+  # method to set notches to correct answers @ belt level AND allow override via admin tool
+  def notches_in_belt_new(user, belt_level ):
+    correct_answers = UserAnswer.objects.filter(user=user, question__belt_level=belt_level, correct=True).count()
+    if self.notches_override:
+      self.notches_complete = self.notches_override
+    else:
+      self.notches_complete = correct_answers
+    self.save()
+    return self.notches_complete
+
   class Meta:
     verbose_name_plural = "User Belts"
 
