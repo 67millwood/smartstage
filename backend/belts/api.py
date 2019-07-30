@@ -30,16 +30,19 @@ class SingleUserBeltViewSet(generics.ListAPIView):
 
 # AnswerViewSet
 class AnswerViewSet(generics.RetrieveAPIView):
-
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    
     serializer_class = AnswerSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = self.request.user
-        serializer.fun(request.data, user)
+        
         return Response({
-        'whatever',
+        "feedback": serializer.evaluate(request.data, user),
         })
 
 

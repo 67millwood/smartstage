@@ -5,6 +5,8 @@ from content.models import BeltLevel
 from users.serializers import CustomUserSerializer
 from django.contrib.auth import authenticate
 
+import json
+
 # User Serializer
 
 class BeltLevelSerializer(serializers.ModelSerializer):
@@ -29,35 +31,45 @@ class AnswerSerializer(serializers.Serializer):
     rankingAnswer = serializers.CharField(required=False, max_length=600)
     
 
-    def fun(self, validated_data, user):
+    def evaluate(self, validated_data, user):
+        correct_feedback = Question.objects.values('correct_response').get(pk=validated_data['id'])
+        incorrect_feedback = Question.objects.values('incorrect_response').get(pk=validated_data['id'])
+
         if validated_data['qtype_id'] == 1:
             answer = MultipleChoice.objects.values('correct_answer').get(pk=validated_data['id'])
             if validated_data['multipleChoiceAnswer'] == answer['correct_answer']:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
+                return correct_feedback
             else:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=False)
-
+                return incorrect_feedback
+        
         if validated_data['qtype_id'] == 2:
             answer = TrueFalse.objects.values('is_it_true').get(pk=validated_data['id'])
             if validated_data['trueFalseAnswer'] == answer['is_it_true']:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
+                return correct_feedback
             else:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=False)
+                return incorrect_feedback
 
         if validated_data['qtype_id'] == 3:
             answer = Rating.objects.values('score').get(pk=validated_data['id'])
             if validated_data['ratingAnswer'] == answer['score']:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
+                return correct_feedback
             else:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=False)
+                return incorrect_feedback
 
         if validated_data['qtype_id'] == 4:
-            is_it_true = Ranking.objects.values('is_it_true').get(pk=validated_data['id'])
-            if validated_data['trueFalseAnswer'] == is_it_true['is_it_true']:
+            answer = Ranking.objects.values('XXX').get(pk=validated_data['id'])
+            if validated_data['rankingAnswer'] == answer['XXX']:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
+                return correct_feedback
             else:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=False)
-
+                return incorrect_feedback
 
         
 

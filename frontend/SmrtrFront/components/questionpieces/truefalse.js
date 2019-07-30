@@ -5,7 +5,8 @@ import {
     View,
     TouchableOpacity,
     Button,
-    Fragment
+    Fragment,
+    AsyncStorage,
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -17,6 +18,7 @@ export default class TrueFalseQuestion extends Component {
             choiceTrue: false,
             choiceFalse: false,
         }
+        this.checkanswer=this.checkanswer.bind(this)
     }
 
     selectedChoice = (choice) => {
@@ -30,34 +32,39 @@ export default class TrueFalseQuestion extends Component {
 
     userAnswer = () => {
         if (this.state.choiceTrue == true) {
-            return 'true'
+            return true
         } else {
-            return 'false'
+            return false
         }
     }
 
-    checkanswer () {
-        const { navigate } = this.props.navigation        
+    checkanswer = async () => {
+        //const { navigate } = this.props.navigation   
+        const userToken = await AsyncStorage.getItem('LoginToken');
+     
   
         fetch('http://localhost:8080/api/useranswer', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': `Token ${userToken}`,
           },
           body: JSON.stringify({
-            questionid: 333,
-            userAnswer: this.userAnswer(),
+            id: 272,
+            qtype_id: 2,
+            trueFalseAnswer: this.userAnswer()
+            
             }),
           })
           .then(response => {
             if(!response.ok) {
               response.json().then(data => {
-                this.login_error(data)
+                console.log('error')
               })        
               } else {
                 response.json().then(data => {
-                  console.log('got the answer')
+                  console.log('good')
                 })
               }
           })
@@ -94,6 +101,13 @@ export default class TrueFalseQuestion extends Component {
                     }}
                       >
                     <Text style={styles.sections}>FALSE</Text>
+
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{backgroundColor: 'aqua' }} 
+                    onPress={this.checkanswer}
+                      >
+                        <Text>Submit</Text>
 
                 </TouchableOpacity>
 
