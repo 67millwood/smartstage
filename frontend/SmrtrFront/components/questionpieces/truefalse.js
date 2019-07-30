@@ -51,8 +51,8 @@ export default class TrueFalseQuestion extends Component {
             'Authorization': `Token ${userToken}`,
           },
           body: JSON.stringify({
-            id: 272,
-            qtype_id: 2,
+            id: this.props.info.id,
+            qtype_id: this.props.info.qtype_id,
             trueFalseAnswer: this.userAnswer()
             
             }),
