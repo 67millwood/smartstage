@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models import Max
 
-
 class BeltManager(models.Manager):
 
   def highest_belt(self, user):

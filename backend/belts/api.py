@@ -24,6 +24,7 @@ class SingleUserBeltViewSet(generics.ListAPIView):
     # always check methods.  get_queryset expects a QuerySet in return.
     # create that from model managers (or at least check)
     def get_queryset(self):
+        #UserBelts.notches_in_belt(self)
         user = self.request.user
         beltlist = UserBelts.objects.all_belts(user=user)
         return beltlist['belts']

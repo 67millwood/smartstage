@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import {
     Text,
-    TextInput,
     View,
     TouchableOpacity,
-    Button,
-    Fragment,
     AsyncStorage,
     Alert,
 } from 'react-native';

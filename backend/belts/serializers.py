@@ -5,7 +5,6 @@ from content.models import BeltLevel
 from users.serializers import CustomUserSerializer
 from django.contrib.auth import authenticate
 
-import json
 
 # User Serializer
 
