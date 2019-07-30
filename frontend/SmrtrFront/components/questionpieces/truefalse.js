@@ -7,6 +7,7 @@ import {
     Button,
     Fragment,
     AsyncStorage,
+    Alert,
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -64,13 +65,20 @@ export default class TrueFalseQuestion extends Component {
               })        
               } else {
                 response.json().then(data => {
-                  console.log('good')
+                  const user_message = data.feedback[Object.keys(data.feedback)[0]]
+                  console.log(user_message)
+                  this.howDidIDo(user_message)
                 })
               }
           })
           .catch(() => {
             console.log('this is bad');
           });
+      }
+
+      howDidIDo = (message) => {
+          Alert.alert(message)
+
       }
   
 
