@@ -5,8 +5,8 @@ import {
     View,
     TouchableOpacity,
     Button,
-    Fragment,
-    FlatList
+    AsyncStorage,
+    Alert,
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -34,6 +34,60 @@ export default class MultipleChoiceQuestion extends Component {
         this.setState({ [`${choice}`]: true}) 
         
     }
+
+    userAnswer = () => {
+        if (this.state.choice1picked == true) {
+            return this.props.info.choice_1
+        } else if (this.state.choice2picked == true) {
+            return this.props.info.choice_2
+        } else if (this.state.choice3picked == true) {
+            return this.props.info.choice_3
+        } else (this.state.choice4picked == true) 
+            return this.props.info.choice_4
+      
+    }
+
+    checkanswer = async () => {
+        //const { navigate } = this.props.navigation   
+        const userToken = await AsyncStorage.getItem('LoginToken');
+     
+  
+        fetch('http://localhost:8080/api/useranswer', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${userToken}`,
+          },
+          body: JSON.stringify({
+            id: this.props.info.id,
+            qtype_id: this.props.info.qtype_id,
+            multipleChoiceAnswer: this.userAnswer()
+            
+            }),
+          })
+          .then(response => {
+            if(!response.ok) {
+              response.json().then(data => {
+                console.log('error')
+              })        
+              } else {
+                response.json().then(data => {
+                  const user_message = data.feedback[Object.keys(data.feedback)[0]]
+                  console.log(user_message)
+                  this.howDidIDo(user_message)
+                })
+              }
+          })
+          .catch(() => {
+            console.log('this is bad');
+          });
+      }
+
+      howDidIDo = (message) => {
+          Alert.alert(message)
+
+      }
 
 
 
@@ -90,6 +144,14 @@ export default class MultipleChoiceQuestion extends Component {
                     {question.choice_4}
                     </Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={{backgroundColor: 'aqua' }} 
+                    onPress={this.checkanswer}
+                      >
+                        <Text>Submit</Text>
+
+                </TouchableOpacity>
+
 
             </View>
         )

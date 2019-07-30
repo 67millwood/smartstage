@@ -67,7 +67,7 @@ class MegaDeskSerializer(serializers.Serializer):
     choice_2 = serializers.CharField(required=False, max_length=600)
     choice_3 = serializers.CharField(required=False, max_length=600)
     choice_4 = serializers.CharField(required=False, max_length=600)
-
+    correct_answer = serializers.CharField(required=False, max_length=600)
     #need to fix model for correct answer for multiplechoice and ranking
 
     #truefalse fields

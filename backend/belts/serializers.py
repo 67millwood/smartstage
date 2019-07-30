@@ -36,6 +36,7 @@ class AnswerSerializer(serializers.Serializer):
 
         if validated_data['qtype_id'] == 1:
             answer = MultipleChoice.objects.values('correct_answer').get(pk=validated_data['id'])
+            print(answer)
             if validated_data['multipleChoiceAnswer'] == answer['correct_answer']:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
                 return correct_feedback
