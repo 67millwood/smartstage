@@ -58,7 +58,7 @@ export default class RankingQuestion extends Component {
           body: JSON.stringify({
             id: this.props.info.id,
             qtype_id: this.props.info.qtype_id,
-            rankingAnswer: this.userAnswer()
+            rankingAnswer: this.useranswer()
             
             }),
           })
@@ -144,7 +144,7 @@ export default class RankingQuestion extends Component {
                 </View>
                 <TouchableOpacity
                     style={{backgroundColor: 'aqua' }} 
-                    onPress={this.useranswer}
+                    onPress={this.checkanswer}
                       >
                         <Text>Submit</Text>
 
