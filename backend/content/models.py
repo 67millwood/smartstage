@@ -88,8 +88,11 @@ class MultipleChoice(Question):
   choice_2 = models.TextField(max_length=300)
   choice_3 = models.TextField(max_length=300)
   choice_4 = models.TextField(max_length=300)
-  correct_answer = models.TextField(max_length=300, default='text')
-
+  # correct_answer = models.TextField(max_length=300, default='text')
+  @property
+  def correct_answer(self):
+    return self.choice_1
+    
   class Meta:
     verbose_name_plural = "Multiple Choice Questions"
 

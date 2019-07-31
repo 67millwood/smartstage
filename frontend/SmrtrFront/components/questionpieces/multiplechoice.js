@@ -35,7 +35,7 @@ export default class MultipleChoiceQuestion extends Component {
         
     }
 
-    userAnswer = () => {
+    useranswer = () => {
         if (this.state.choice1picked == true) {
             return this.props.info.choice_1
         } else if (this.state.choice2picked == true) {
@@ -62,7 +62,7 @@ export default class MultipleChoiceQuestion extends Component {
           body: JSON.stringify({
             id: this.props.info.id,
             qtype_id: this.props.info.qtype_id,
-            multipleChoiceAnswer: this.userAnswer()
+            multipleChoiceAnswer: this.useranswer()
             
             }),
           })
