@@ -66,9 +66,19 @@ class UserBelts(models.Model):
   @receiver(post_save, sender=UserAnswer)
   def update_belts_with_answers(sender, instance, **kwargs):
     if kwargs.get('created'):
-      correct_answers = UserAnswer.objects.filter(user=instance.user_id, correct=True).count()
       the_belt = Question.objects.filter(pk=instance.question_id).values('belt_level_id')
       update_this_belt = the_belt[0]['belt_level_id']
+
+      userbelt_id = UserBelts.objects.filter(user=instance.user_id, belt_level=update_this_belt).values()
+      print('userbelt specific id: ' + str(userbelt_id[0]['id']))
+      print('notches for this belt : ' + str(userbelt_id[0]['notches_complete']))
+      correct_answers_for_belt = UserAnswer.objects.filter(user=instance.user_id, question__belt_level=update_this_belt, correct=True).count()
+      print('correct answers at this belt level: ' + str(correct_answers_for_belt))
+      print('notches override: ' + str(userbelt_id[0]['notches_override']))
+
+      funtime = UserBelts.objects.get(id=userbelt_id[0]['id'])
+      funtime.notches_complete = correct_answers_for_belt
+      funtime.save()
 
   # method to set notches to correct answers @ belt level AND allow override via admin tool
   def notches_in_belt(self):
