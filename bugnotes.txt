@@ -1,0 +1,5 @@
+aug 1:  need to remove lower nav bar during quiz as it will break quiz
+aug 1:  need to move forward one page after user answers question.
+aug 1:  show alert if Questions is clicked on a category that has no questions left
+aug 1:  show score for the session at end of session
+aug 1:  format ranking and multiple choice to have consistent feel not dependent on length of string.

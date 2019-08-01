@@ -45,7 +45,7 @@ class UserBelts(models.Model):
   belt_level = models.ForeignKey(BeltLevel, on_delete=models.CASCADE)
   notches_complete = models.PositiveSmallIntegerField(null=True, default=0)
   percent_complete = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True)
-  notches_override = models.PositiveSmallIntegerField(null=True, default=0)
+  notch_bonus = models.PositiveSmallIntegerField(null=True, default=0)
   belt_complete_date = models.DateTimeField('Completion date:', blank=True, null=True)
   belt_complete = models.BooleanField('Belt complete?', default=False)
 
@@ -72,11 +72,11 @@ class UserBelts(models.Model):
       #print('notches for this belt : ' + str(userbelt_id[0]['notches_complete']))
       correct_answers_for_belt = UserAnswer.objects.filter(user=instance.user_id, question__belt_level=update_this_belt, correct=True).count()
       #print('correct answers at this belt level: ' + str(correct_answers_for_belt))
-      #print('notches override: ' + str(userbelt_id[0]['notches_override']))
+      #print('notches override: ' + str(userbelt_id[0]['notch_bonus']))
 
       updated_belt_notches = UserBelts.objects.get(id=userbelt_id[0]['id'])
-      print(updated_belt_notches.notches_override)
-      updated_belt_notches.notches_complete = correct_answers_for_belt + updated_belt_notches.notches_override
+      print(updated_belt_notches.notch_bonus)
+      updated_belt_notches.notches_complete = correct_answers_for_belt + updated_belt_notches.notch_bonus
       updated_belt_notches.save()
   
   
