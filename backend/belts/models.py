@@ -61,6 +61,12 @@ class UserBelts(models.Model):
   def user_answered(sender, **kwargs):
     print('User answered.')
 
+# signal to listen for UserAnswer being created, adding a white belt to their profile
+  @receiver(post_save, sender=UserAnswer)
+  def update_belts_with_answers(sender, instance, **kwargs):
+    if kwargs.get('created'):
+      correct_answers = UserAnswer.objects.filter(user=instance.user_id, correct=True).count()
+      print(correct_answers)
 
   # method to set notches to correct answers @ belt level AND allow override via admin tool
   def notches_in_belt(self):
