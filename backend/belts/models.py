@@ -5,6 +5,7 @@ from content.models import *
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from users.models import CustomUser
+from content.models import Question
 
 from .manager import BeltManager, UserAnswerManager
 
@@ -66,7 +67,8 @@ class UserBelts(models.Model):
   def update_belts_with_answers(sender, instance, **kwargs):
     if kwargs.get('created'):
       correct_answers = UserAnswer.objects.filter(user=instance.user_id, correct=True).count()
-      print(correct_answers)
+      the_belt = Question.objects.filter(pk=instance.question_id).values('belt_level_id')
+      update_this_belt = the_belt[0]['belt_level_id']
 
   # method to set notches to correct answers @ belt level AND allow override via admin tool
   def notches_in_belt(self):
