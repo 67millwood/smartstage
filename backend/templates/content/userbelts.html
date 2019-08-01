@@ -8,7 +8,7 @@
     <ul>
 
       {% for belt in belt_list %}
-        <li style="background-color: {{ belt.belt_level.belt_color }}">{{ belt.belt_level }}...notches: {{ belt.notches_in_belt }}</li>
+        <li style="background-color: {{ belt.belt_level.belt_color }}">{{ belt.belt_level }}...notches: {{ belt.notches_complete }}</li>
         <ul>
           <li>Required notches: {{ belt.belt_level.belt_notches }}
           {% if belt.belt_complete == True %}
