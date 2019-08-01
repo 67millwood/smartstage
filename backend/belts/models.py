@@ -57,6 +57,11 @@ class UserBelts(models.Model):
     if kwargs.get('created', False):
       UserBelts.objects.get_or_create(user_id=instance.id, belt_level_id=1)
 
+  @receiver(post_save, sender=UserAnswer)
+  def user_answered(sender, **kwargs):
+    print('User answered.')
+
+
   # method to set notches to correct answers @ belt level AND allow override via admin tool
   def notches_in_belt(self):
     correct_answers = UserAnswer.objects.filter(user=self.user, question__belt_level=self.belt_level, correct=True).count()
@@ -69,20 +74,6 @@ class UserBelts(models.Model):
 
   def __str__(self):
     return '{}: {}: {} notches complete.'.format(self.user, self.belt_level, self.notches_complete)
-
-  # method to set notches to correct answers @ belt level AND allow override via admin tool
-  def notches_in_belt_new(user, belt_level ):
-    correct_answers = UserAnswer.objects.filter(user=user, question__belt_level=belt_level, correct=True).count()
-    if self.notches_override:
-      self.notches_complete = self.notches_override
-    else:
-      self.notches_complete = correct_answers
-    self.save()
-    return self.notches_complete
-
-  class Meta:
-    verbose_name_plural = "User Belts"
-
 # Create signal to calculate % of Userbelt complete and  if belt is complete
 @receiver(post_save, sender=UserBelts)
 def is_complete(sender, instance, **kwargs):
