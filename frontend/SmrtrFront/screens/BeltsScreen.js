@@ -46,7 +46,7 @@ export default class BeltsScreen extends Component {
           console.log('crap')      
           } else {
             response.json().then(data => {
-              console.log(data)
+              //console.log(data)
               this.setState({
                 datasource: data
               }

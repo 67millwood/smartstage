@@ -20,9 +20,15 @@ export default class MultipleChoiceQuestion extends Component {
             choice2picked: false,
             choice3picked: false,
             choice4picked: false,
+            userresponse: '',
+            randomchoicelist: [],
 
         }
     }
+
+    componentDidMount() {
+        this.shuffle();
+      };
 
     selectedChoice = (choice) => {
         this.setState({ 
@@ -33,18 +39,6 @@ export default class MultipleChoiceQuestion extends Component {
         })
         this.setState({ [`${choice}`]: true}) 
         
-    }
-
-    useranswer = () => {
-        if (this.state.choice1picked == true) {
-            return this.props.info.choice_1
-        } else if (this.state.choice2picked == true) {
-            return this.props.info.choice_2
-        } else if (this.state.choice3picked == true) {
-            return this.props.info.choice_3
-        } else (this.state.choice4picked == true) 
-            return this.props.info.choice_4
-      
     }
 
     checkanswer = async () => {
@@ -62,7 +56,7 @@ export default class MultipleChoiceQuestion extends Component {
           body: JSON.stringify({
             id: this.props.info.id,
             qtype_id: this.props.info.qtype_id,
-            multipleChoiceAnswer: this.useranswer()
+            multipleChoiceAnswer: this.state.userresponse
             
             }),
           })
@@ -89,6 +83,17 @@ export default class MultipleChoiceQuestion extends Component {
 
       }
 
+      shuffle = () => {
+        const questions = this.props.info
+        const array = [questions.choice_1, questions.choice_2, questions.choice_3, questions.choice_4]
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+          [array[i], array[j]] = [array[j], array[i]]; // swap elements
+        }
+        this.setState({ randomchoicelist: array})
+        console.log(array)
+      }
+
 
 
     render() {
@@ -107,30 +112,33 @@ export default class MultipleChoiceQuestion extends Component {
                     style={this.state.choice1picked ? {...styles.choice1, ...styles.selected} : styles.choice1}
                     onPress={() => {
                         this.selectedChoice('choice1picked')
+                        this.setState({ userresponse: this.state.randomchoicelist[0]})
                     }}
-                >
+                    >
                     <Text>
-                    {question.choice_1}
+                    {this.state.randomchoicelist[0]}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={this.state.choice2picked ? {...styles.choice2, ...styles.selected} : styles.choice2}
                     onPress={() => {
                         this.selectedChoice('choice2picked')
+                        this.setState({ userresponse: this.state.randomchoicelist[1]})
                     }}
                     >
                     <Text>
-                    {question.choice_2}
+                    {this.state.randomchoicelist[1]}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={this.state.choice3picked ? {...styles.choice3, ...styles.selected} : styles.choice3}
                     onPress={() => {
                         this.selectedChoice('choice3picked')
+                        this.setState({ userresponse: this.state.randomchoicelist[2]})
                     }}
                     >
                     <Text>
-                    {question.choice_3}
+                    {this.state.randomchoicelist[2]}
                     </Text>
                 </TouchableOpacity>
 
@@ -138,10 +146,11 @@ export default class MultipleChoiceQuestion extends Component {
                     style={this.state.choice4picked ? {...styles.choice4, ...styles.selected} : styles.choice4}
                     onPress={() => {
                         this.selectedChoice('choice4picked')
+                        this.setState({ userresponse: this.state.randomchoicelist[3]})
                     }}
                     >
                     <Text>
-                    {question.choice_4}
+                    {this.state.randomchoicelist[3]}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
