@@ -15,13 +15,14 @@ import DraggableFlatList from 'react-native-draggable-flatlist';
 
 export default class RankingQuestion extends Component {
     state = {
-
-        data: [this.props.info.choice_1, this.props.info.choice_2, this.props.info.choice_3, this.props.info.choice_4].map((choice, index) => ({
-          key: `${index}`,
-          label: choice,
-        })),
+        data: {},
         useranswer: this.props.info.choice_1 + this.props.info.choice_2 + this.props.info.choice_3 + this.props.info.choice_4
       }
+
+      componentDidMount() {
+        this.shuffle();
+      };
+
 
     useranswer = () => {
         console.log(this.state.useranswer)
@@ -84,6 +85,20 @@ export default class RankingQuestion extends Component {
           Alert.alert(message)
 
       }
+
+      shuffle = () => {
+        const questions = this.props.info
+        const array = [questions.choice_1, questions.choice_2, questions.choice_3, questions.choice_4]
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+          [array[i], array[j]] = [array[j], array[i]]; // swap elements
+        }
+        this.setState({ data: array.map((choice, index) => ({
+          key: `${index}`,
+          label: choice,
+        }))})
+      }
+
   
 
     
