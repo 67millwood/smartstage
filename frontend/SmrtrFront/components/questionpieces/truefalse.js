@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import { styles } from './questionstyles';
-import { AnswerModal } from './answermodal';
+import AnswerModal from './answermodal';
 
 export default class TrueFalseQuestion extends Component {
     constructor(props) {
@@ -122,34 +122,11 @@ export default class TrueFalseQuestion extends Component {
                         <Text>Submit</Text>
 
                 </TouchableOpacity>
-                <Modal
-                  animationType="slide"
-                  transparent={true}
-                  visible={this.state.modalVisible}
-                  >
-                  <View style={styles.bigAnswerModal}>
-                    <View style={styles.answerShadeModal} />
-                    <View
-                    style={this.state.usercorrect ? styles.correctAnswerModal : styles.incorrectAnswerModal}>
-                    <TouchableHighlight
-                        onPress={() => {
-                          this.setModalVisible(!this.state.modalVisible);
-                        }}>
-                        <Text style={styles.correctAnswerText}>
-                        {this.state.response}</Text>
-                      </TouchableHighlight>
-                    </View>
-                    <View style={styles.answerModalContinue}>
-                      <TouchableHighlight
-                        onPress={() => {
-                          this.setModalVisible(!this.state.modalVisible);
-                        }}>
-                        <Text style={{ fontSize: 25 }}>Continue</Text>
-                      </TouchableHighlight>
-                    </View>
-
-                  </View>
-                </Modal>
+                <AnswerModal 
+                visiblemodal={this.state.modalVisible}
+                useriscorrect={this.state.usercorrect}
+                response={this.state.response}
+                />
 
             </View>
         )

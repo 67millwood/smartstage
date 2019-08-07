@@ -1,31 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Modal, TouchableHighlight, View, Text,   } from 'react-native-elements';
 
 import { styles } from './questionstyles';
 
-export default class AnswerModal extends React.Component {
+export default class AnswerModal extends Component {
   render() {
-                <Modal
+        return (  <Modal
                 animationType="slide"
                 transparent={true}
-                visible={this.state.modalVisible}
+                visible={this.props.visiblemodal}
                 >
                 <View style={styles.bigAnswerModal}>
                   <View style={styles.answerShadeModal} />
                   <View
-                  style={this.state.usercorrect ? styles.correctAnswerModal : styles.incorrectAnswerModal}>
+                  style={this.props.useriscorrect ? styles.correctAnswerModal : styles.incorrectAnswerModal}>
                   <TouchableHighlight
                       onPress={() => {
-                        this.setModalVisible(!this.state.modalVisible);
+                        this.setModalVisible(!this.props.visiblemodal);
                       }}>
                       <Text style={styles.correctAnswerText}>
-                      {this.state.response}</Text>
+                      {this.props.response}</Text>
                     </TouchableHighlight>
                   </View>
                   <View style={styles.answerModalContinue}>
                     <TouchableHighlight
                       onPress={() => {
-                        this.setModalVisible(!this.state.modalVisible);
+                        null
                       }}>
                       <Text style={{ fontSize: 25 }}>Continue</Text>
                     </TouchableHighlight>
@@ -33,5 +33,8 @@ export default class AnswerModal extends React.Component {
 
                 </View>
               </Modal>
-  }
+        ) 
+    }
 }
+
+
