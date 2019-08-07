@@ -29,6 +29,7 @@ export default class MainQuestion extends Component {
             case 1:
                 return <MultipleChoiceQuestion
                             info={this.props.questiondata}
+                            pageturnbutton={this.props.pageturnbutton}
                             />
             case 2:
                 return <TrueFalseQuestion
@@ -38,10 +39,13 @@ export default class MainQuestion extends Component {
             case 3:
                 return <RatingQuestion
                             info={this.props.questiondata}
+                            pageturnbutton={this.props.pageturnbutton}
                             />
             case 4:
                 return <RankingQuestion
                             info={this.props.questiondata}
+                            pageturnbutton={this.props.pageturnbutton}
+
                             />
         }
     }
