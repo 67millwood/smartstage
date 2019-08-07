@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { styles } from './questionstyles';
-
+import AnswerModal from './answermodal';
 
 export default class MultipleChoiceQuestion extends Component {
     constructor(props) {
@@ -22,7 +22,9 @@ export default class MultipleChoiceQuestion extends Component {
             choice4picked: false,
             userresponse: '',
             randomchoicelist: [],
-
+            modalVisible: false,
+            response: '',
+            usercorrect: false,
         }
     }
 
@@ -68,8 +70,13 @@ export default class MultipleChoiceQuestion extends Component {
               } else {
                 response.json().then(data => {
                   const user_message = data.feedback[Object.keys(data.feedback)[0]]
+                  const rightwrong = Object.keys(data.feedback)[0]
+                  if (rightwrong == 'correct_response') {
+                    this.setState({ usercorrect: true})
+                  }
                   console.log(user_message)
-                  this.howDidIDo(user_message)
+                  this.setState({ response: user_message })
+                  this.setModalVisible(true)
                 })
               }
           })
@@ -78,9 +85,8 @@ export default class MultipleChoiceQuestion extends Component {
           });
       }
 
-      howDidIDo = (message) => {
-          Alert.alert(message)
-
+      setModalVisible = (visible) => {
+        this.setState({ modalVisible: visible })
       }
 
       shuffle = () => {
@@ -159,7 +165,13 @@ export default class MultipleChoiceQuestion extends Component {
                         <Text>Submit</Text>
 
                 </TouchableOpacity>
-
+                <AnswerModal 
+                visiblemodal={this.state.modalVisible}
+                useriscorrect={this.state.usercorrect}
+                response={this.state.response}
+                closemodal={this.setModalVisible}
+                pageturnbutton={this.props.pageturnbutton}
+                />
 
             </View>
         )
