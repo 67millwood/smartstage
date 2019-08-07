@@ -18,6 +18,7 @@ export default class TrueFalseQuestion extends Component {
             choiceTrue: false,
             choiceFalse: false,
             modalVisible: false,
+            response: '',
         }
         this.checkanswer=this.checkanswer.bind(this)
     }
@@ -66,8 +67,8 @@ export default class TrueFalseQuestion extends Component {
               } else {
                 response.json().then(data => {
                   const user_message = data.feedback[Object.keys(data.feedback)[0]]
-                  console.log(user_message)
-                  this.howDidIDo(user_message)
+                  this.setState({ response: user_message })
+                  this.setModalVisible(true)
                 })
               }
           })
@@ -75,17 +76,10 @@ export default class TrueFalseQuestion extends Component {
             console.log('this is bad');
           });
       }
-
-      howDidIDo = (message) => {
-          Alert.alert(message)
-
-      }
-
       setModalVisible = (visible) => {
         this.setState({ modalVisible: visible })
       }
   
-
     render() {
         const question = this.props.info
         return (
@@ -126,26 +120,28 @@ export default class TrueFalseQuestion extends Component {
                   animationType="slide"
                   transparent={true}
                   visible={this.state.modalVisible}
-                  onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                  }}>
-                  <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'stretch'}}>
-                    <View style={styles.answerModel}>
+                  >
+                  <View style={styles.bigAnswerModal}>
+                    <View style={styles.answerShadeModal} />
+                    <View style={styles.answerModal}>
                       <TouchableHighlight
                         onPress={() => {
                           this.setModalVisible(!this.state.modalVisible);
                         }}>
-                        <Text>Hide Modal</Text>
+                        <Text>{this.state.response}</Text>
                       </TouchableHighlight>
                     </View>
+                    <View style={styles.answerModalContinue}>
+                      <TouchableHighlight
+                        onPress={() => {
+                          this.setModalVisible(!this.state.modalVisible);
+                        }}>
+                        <Text>Continue</Text>
+                      </TouchableHighlight>
+                    </View>
+
                   </View>
                 </Modal>
-                <TouchableHighlight
-                  onPress={() => {
-                    this.setModalVisible(true);
-                  }}>
-                  <Text>Show Modal</Text>
-                </TouchableHighlight>
 
             </View>
         )

@@ -73,12 +73,34 @@ const styles = StyleSheet.create({
 
     
     },
-    answerModel: {
+    bigAnswerModal: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+      alignItems: 'stretch',
+      
+    },
+    answerShadeModal: {
+      flex: 6,
+      backgroundColor: '#D3D3D385',
+
+    },
+
+    answerModal: {
       flexDirection: 'row',
-      height: 200,
-      //flex: 1,
+      //height: 200,
+      flex: 2,
       backgroundColor: 'aqua',
       //position: 'absolute'
+    },
+    answerModalContinue: {
+      flexDirection: 'row',
+      //height: 200,
+      flex: 1,
+      backgroundColor: 'brown',
+      //position: 'absolute'
+
+
     }
   });
   
