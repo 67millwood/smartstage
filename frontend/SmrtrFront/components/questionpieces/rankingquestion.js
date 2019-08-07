@@ -11,12 +11,17 @@ import {
 
 import { styles } from './questionstyles';
 import DraggableFlatList from 'react-native-draggable-flatlist';
+import AnswerModal from './answermodal';
 
 
 export default class RankingQuestion extends Component {
     state = {
         data: {},
-        useranswer: this.props.info.choice_1 + this.props.info.choice_2 + this.props.info.choice_3 + this.props.info.choice_4
+        useranswer: this.props.info.choice_1 + this.props.info.choice_2 + this.props.info.choice_3 + this.props.info.choice_4,
+        modalVisible: false,
+        response: '',
+        usercorrect: false,
+
       }
 
       componentDidMount() {
@@ -71,8 +76,13 @@ export default class RankingQuestion extends Component {
               } else {
                 response.json().then(data => {
                   const user_message = data.feedback[Object.keys(data.feedback)[0]]
+                  const rightwrong = Object.keys(data.feedback)[0]
+                  if (rightwrong == 'correct_response') {
+                    this.setState({ usercorrect: true})
+                  }
                   console.log(user_message)
-                  this.howDidIDo(user_message)
+                  this.setState({ response: user_message })
+                  this.setModalVisible(true)
                 })
               }
           })
@@ -81,9 +91,8 @@ export default class RankingQuestion extends Component {
           });
       }
 
-      howDidIDo = (message) => {
-          Alert.alert(message)
-
+      setModalVisible = (visible) => {
+        this.setState({ modalVisible: visible })
       }
 
       shuffle = () => {
@@ -164,6 +173,14 @@ export default class RankingQuestion extends Component {
                         <Text>Submit</Text>
 
                 </TouchableOpacity>
+                <AnswerModal 
+                visiblemodal={this.state.modalVisible}
+                useriscorrect={this.state.usercorrect}
+                response={this.state.response}
+                closemodal={this.setModalVisible}
+                pageturnbutton={this.props.pageturnbutton}
+                />
+
                 
             </View>
         )
