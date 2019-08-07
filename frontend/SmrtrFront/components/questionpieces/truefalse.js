@@ -126,6 +126,8 @@ export default class TrueFalseQuestion extends Component {
                 visiblemodal={this.state.modalVisible}
                 useriscorrect={this.state.usercorrect}
                 response={this.state.response}
+                closemodal={this.setModalVisible}
+                pageturnbutton={this.props.pageturnbutton}
                 />
 
             </View>

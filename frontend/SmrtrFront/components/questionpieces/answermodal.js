@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, TouchableHighlight, View, Text,   } from 'react-native-elements';
+import { Modal, TouchableHighlight, View, Text,   } from 'react-native';
 
 import { styles } from './questionstyles';
 
@@ -16,7 +16,7 @@ export default class AnswerModal extends Component {
                   style={this.props.useriscorrect ? styles.correctAnswerModal : styles.incorrectAnswerModal}>
                   <TouchableHighlight
                       onPress={() => {
-                        this.setModalVisible(!this.props.visiblemodal);
+                        this.props.closemodal(!this.props.visiblemodal);
                       }}>
                       <Text style={styles.correctAnswerText}>
                       {this.props.response}</Text>
@@ -25,7 +25,7 @@ export default class AnswerModal extends Component {
                   <View style={styles.answerModalContinue}>
                     <TouchableHighlight
                       onPress={() => {
-                        null
+                        this.props.pageturnbutton()
                       }}>
                       <Text style={{ fontSize: 25 }}>Continue</Text>
                     </TouchableHighlight>

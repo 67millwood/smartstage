@@ -33,6 +33,7 @@ export default class MainQuestion extends Component {
             case 2:
                 return <TrueFalseQuestion
                             info={this.props.questiondata}
+                            pageturnbutton={this.props.pageturnbutton}
                             />
             case 3:
                 return <RatingQuestion

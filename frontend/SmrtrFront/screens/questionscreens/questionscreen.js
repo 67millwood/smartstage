@@ -127,6 +127,7 @@ render() {
             <View style={{ flex: 1, paddingTop: 25, justifyContent: "flex-start", alignItems: "center" }}>
             <MainQuestion 
             questiondata={this.state.currentquestion}
+            pageturnbutton={this.pageTurn}
             />
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
               <Button 
