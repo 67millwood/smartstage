@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
 
     
     },
+
     bigAnswerModal: {
       flex: 1,
       flexDirection: 'column',
@@ -86,21 +87,30 @@ const styles = StyleSheet.create({
 
     },
 
-    answerModal: {
-      flexDirection: 'row',
-      //height: 200,
+    correctAnswerModal: {
       flex: 2,
       backgroundColor: 'aqua',
-      //position: 'absolute'
     },
-    answerModalContinue: {
+    
+    correctAnswerText: {
+      fontSize: 25,
+      
+    },
+    
+    incorrectAnswerModal: {
       flexDirection: 'row',
-      //height: 200,
+      flex: 2,
+      backgroundColor: 'coral',
+    },
+    
+    incorrectAnswerText: {
+      fontSize: 25,
+    },
+
+
+    answerModalContinue: {
       flex: 1,
       backgroundColor: 'brown',
-      //position: 'absolute'
-
-
     }
   });
   

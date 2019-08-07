@@ -19,6 +19,7 @@ export default class TrueFalseQuestion extends Component {
             choiceFalse: false,
             modalVisible: false,
             response: '',
+            usercorrect: false,
         }
         this.checkanswer=this.checkanswer.bind(this)
     }
@@ -67,6 +68,11 @@ export default class TrueFalseQuestion extends Component {
               } else {
                 response.json().then(data => {
                   const user_message = data.feedback[Object.keys(data.feedback)[0]]
+                  const rightwrong = Object.keys(data.feedback)[0]
+                  if (rightwrong == 'correct_response') {
+                    this.setState({ usercorrect: true})
+                  }
+                  console.log(user_message)
                   this.setState({ response: user_message })
                   this.setModalVisible(true)
                 })
@@ -123,12 +129,14 @@ export default class TrueFalseQuestion extends Component {
                   >
                   <View style={styles.bigAnswerModal}>
                     <View style={styles.answerShadeModal} />
-                    <View style={styles.answerModal}>
-                      <TouchableHighlight
+                    <View
+                    style={this.state.usercorrect ? styles.correctAnswerModal : styles.incorrectAnswerModal}>
+                    <TouchableHighlight
                         onPress={() => {
                           this.setModalVisible(!this.state.modalVisible);
                         }}>
-                        <Text>{this.state.response}</Text>
+                        <Text style={styles.correctAnswerText}>
+                        {this.state.response}</Text>
                       </TouchableHighlight>
                     </View>
                     <View style={styles.answerModalContinue}>
@@ -136,7 +144,7 @@ export default class TrueFalseQuestion extends Component {
                         onPress={() => {
                           this.setModalVisible(!this.state.modalVisible);
                         }}>
-                        <Text>Continue</Text>
+                        <Text style={{ fontSize: 25 }}>Continue</Text>
                       </TouchableHighlight>
                     </View>
 

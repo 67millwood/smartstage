@@ -91,7 +91,6 @@ export default class MultipleChoiceQuestion extends Component {
           [array[i], array[j]] = [array[j], array[i]]; // swap elements
         }
         this.setState({ randomchoicelist: array})
-        console.log(array)
       }
 
 
