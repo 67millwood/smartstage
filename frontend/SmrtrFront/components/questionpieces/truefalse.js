@@ -5,6 +5,8 @@ import {
     TouchableOpacity,
     AsyncStorage,
     Alert,
+    Modal,
+    TouchableHighlight
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -15,6 +17,7 @@ export default class TrueFalseQuestion extends Component {
         this.state = {
             choiceTrue: false,
             choiceFalse: false,
+            modalVisible: false,
         }
         this.checkanswer=this.checkanswer.bind(this)
     }
@@ -77,6 +80,10 @@ export default class TrueFalseQuestion extends Component {
           Alert.alert(message)
 
       }
+
+      setModalVisible = (visible) => {
+        this.setState({ modalVisible: visible })
+      }
   
 
     render() {
@@ -115,6 +122,30 @@ export default class TrueFalseQuestion extends Component {
                         <Text>Submit</Text>
 
                 </TouchableOpacity>
+                <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={this.state.modalVisible}
+                  onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'stretch'}}>
+                    <View style={styles.answerModel}>
+                      <TouchableHighlight
+                        onPress={() => {
+                          this.setModalVisible(!this.state.modalVisible);
+                        }}>
+                        <Text>Hide Modal</Text>
+                      </TouchableHighlight>
+                    </View>
+                  </View>
+                </Modal>
+                <TouchableHighlight
+                  onPress={() => {
+                    this.setModalVisible(true);
+                  }}>
+                  <Text>Show Modal</Text>
+                </TouchableHighlight>
 
             </View>
         )

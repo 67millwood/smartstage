@@ -72,6 +72,13 @@ const styles = StyleSheet.create({
         justifyContent: "center"
 
     
+    },
+    answerModel: {
+      flexDirection: 'row',
+      height: 200,
+      //flex: 1,
+      backgroundColor: 'aqua',
+      //position: 'absolute'
     }
   });
   
