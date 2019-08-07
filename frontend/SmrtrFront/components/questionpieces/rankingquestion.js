@@ -30,20 +30,20 @@ export default class RankingQuestion extends Component {
 
 
     useranswer = () => {
-        console.log(this.state.useranswer)
-        console.log('-----')
+        //console.log(this.state.useranswer)
+        //console.log('-----')
         //console.log(this.state.useranswer)
         answer_list = ''
         this.state.data.forEach(function(item) {
           const x = item.label
           answer_list += x
         })
-        console.log(answer_list)
-        console.log('-----')
+        //console.log(answer_list)
+        //console.log('-----')
 
         this.setState({ useranswer: answer_list})
-        console.log(this.state.useranswer)
-        console.log('-----')
+        //console.log(this.state.useranswer)
+        //console.log('-----')
         finalrank = this.state.useranswer
         return finalrank
 

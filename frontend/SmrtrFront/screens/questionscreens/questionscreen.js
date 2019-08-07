@@ -129,18 +129,6 @@ render() {
             questiondata={this.state.currentquestion}
             pageturnbutton={this.pageTurn}
             />
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Button 
-              title='Done'
-              onPress={() => navigate('QuestionFinal')}
-              />
-              <Button
-              title='Next'
-              onPress={() => {
-                this.pageTurn()}
-              }
-              />
-            </View>
         </View>
         )
 }
