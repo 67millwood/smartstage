@@ -4,12 +4,12 @@ import {
     View,
     TouchableOpacity,
     AsyncStorage,
-    Alert,
     Modal,
     TouchableHighlight
 } from 'react-native';
 
 import { styles } from './questionstyles';
+import { AnswerModal } from './answermodal';
 
 export default class TrueFalseQuestion extends Component {
     constructor(props) {
