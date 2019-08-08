@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import {
-    Text,
-    TextInput,
     View,
-    TouchableOpacity,
-    StyleSheet,
     AsyncStorage,
-    Button,
-    Fragment
+    Alert,
+
 } from 'react-native';
+
 import HomeIcon from '../../navigation/HomeIcon';
 import MainQuestion from '../../components/questionpieces/thequestion';
-import { ScrollView } from 'react-native-gesture-handler';
 
 export default class QuestionScreen extends Component {
   constructor(props) {
@@ -59,11 +55,13 @@ componentWillUnmount() {
 
 // gets the readings via the api
 getQuestions = async () => {
+  const { navigate } = this.props.navigation        
+
   const category = await AsyncStorage.getItem('category');
   this.setState({category: category})
 
   const category_id = await AsyncStorage.getItem('category_id');
-  console.log(category_id)
+  //console.log(category_id)
 
   const userToken = await AsyncStorage.getItem('LoginToken');
   console.log(userToken)
@@ -86,7 +84,14 @@ getQuestions = async () => {
               questions: data
             }
             )
-            this.singleQuestion()
+            console.log(data)
+            console.log(data.length)
+            if (data.length == 0) {
+              Alert.alert(this.state.category, '\nThere are no questions left\nat this level.', onPress= () => navigate('Home')
+              )
+            } else {
+              this.singleQuestion()
+            }
           })
       }
     })
