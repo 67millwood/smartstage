@@ -43,6 +43,15 @@ export default class MultipleChoiceQuestion extends Component {
         
     }
 
+    checkForSelection = () => {
+      if (this.state.choice1picked == true || this.state.choice2picked == true || this.state.choice3picked == true || this.state.choice4picked == true) {
+        this.checkanswer();
+      } else {
+        Alert.alert('You must make a selection.')
+      }
+    }
+
+
     checkanswer = async () => {
         //const { navigate } = this.props.navigation   
         const userToken = await AsyncStorage.getItem('LoginToken');
@@ -160,7 +169,9 @@ export default class MultipleChoiceQuestion extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{backgroundColor: 'aqua' }} 
-                    onPress={this.checkanswer}
+                    onPress={() => {
+                      this.checkForSelection()
+                    }}
                       >
                         <Text>Submit</Text>
 

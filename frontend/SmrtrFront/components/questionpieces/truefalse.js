@@ -4,8 +4,7 @@ import {
     View,
     TouchableOpacity,
     AsyncStorage,
-    Modal,
-    TouchableHighlight
+    Alert,
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -31,6 +30,14 @@ export default class TrueFalseQuestion extends Component {
         })
         this.setState({ [`${choice}`]: true}) 
         
+    }
+
+    checkForSelection = () => {
+      if (this.state.choiceTrue == true || this.state.choiceFalse == true) {
+        this.checkanswer();
+      } else {
+        Alert.alert('You must make a selection.')
+      }
     }
 
     userAnswer = () => {
@@ -117,7 +124,9 @@ export default class TrueFalseQuestion extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{backgroundColor: 'aqua' }} 
-                    onPress={this.checkanswer}
+                    onPress={() => {
+                      this.checkForSelection()
+                    }}
                       >
                         <Text>Submit</Text>
 
