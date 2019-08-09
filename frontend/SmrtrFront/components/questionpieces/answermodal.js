@@ -21,6 +21,7 @@ export default class AnswerModal extends Component {
                     <TouchableHighlight
                       onPress={() => {
                         this.props.pageturnbutton()
+                        this.props.closemodal(false)
                       }}>
                       <Text style={{ fontSize: 25 }}>Continue</Text>
                     </TouchableHighlight>
