@@ -15,6 +15,8 @@ export default class QuestionFinalScreen extends Component {
     constructor(props) {
         super(props)
     }
+
+    
     render() {
         const { navigate } = this.props.navigation        
         return (
@@ -26,7 +28,9 @@ export default class QuestionFinalScreen extends Component {
             </View>
         )
     }
+}
 
-
-
+QuestionFinalScreen.navigationOptions = {
+    title: 'Your Stats',
+    headerLeft: null,
 }

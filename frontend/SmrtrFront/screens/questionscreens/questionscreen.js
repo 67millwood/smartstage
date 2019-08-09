@@ -28,15 +28,18 @@ static navigationOptions = ({ navigation }) => {
         backgroundColor: navigation.getParam('color', 'white'),
       },
       headerTintColor: '#fff',
-    headerTitleStyle: {
+      headerTitleStyle: {
       fontWeight: 'bold',
-    },
-    headerLeft: (
+      },
+      headerLeft: (
       <View>
         <HomeIcon />
       </View>
-    )
-    }}
+      ),
+      
+    }
+  }
+
 
 // getCategory sets the state.category
 // getQuestions calls the api and gets an object with 4 readings in the correct Category
@@ -84,8 +87,6 @@ getQuestions = async () => {
               questions: data
             }
             )
-            console.log(data)
-            console.log(data.length)
             if (data.length == 0) {
               Alert.alert(this.state.category, '\nThere are no questions left\nat this level.', onPress= () => navigate('Home')
               )
@@ -139,4 +140,8 @@ render() {
 }
 
 }
+
+
+
+
 
