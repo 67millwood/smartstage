@@ -108,7 +108,7 @@ export default class ReviewScreen extends Component {
       const { navigate } = this.props.navigation        
 
       if (this.state.pagecount == 3) {
-        navigate('ReviewFinal')
+        navigate('ReviewFinal', {title: this.state.category})
       } else {
         this.setState({ pagecount: this.state.pagecount + 1})
         
@@ -122,20 +122,9 @@ export default class ReviewScreen extends Component {
           
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <Text>This is a Review page.
-                      {"\n"}
-                      {this.state.category}
-                </Text>
                 <Text>
                   {this.singleReading()}
                 </Text>
-                <Text>
-                  {this.state.pagecount}
-                </Text>
-                <Button
-                title='Done'
-                onPress={() => navigate('ReviewFinal')}
-                />
                 <Button
                 title='Next'
                 onPress={() => {

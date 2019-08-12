@@ -4,7 +4,7 @@ import {
   } from 'react-navigation';
   
   import ReviewScreen from '../screens/reviewscreens/reviewscreen';
-  import ReviewFinalScreen from '../screens/questionscreens/questionfinalscreen';
+  import ReviewFinalScreen from '../screens/reviewscreens/reviewfinalscreen';
   
   
   const ReviewStack = createStackNavigator(
