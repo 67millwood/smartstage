@@ -20,6 +20,24 @@ export default class QuestionScreen extends Component {
 
     }
 }
+static navigationOptions = ({ navigation }) => {
+  return {
+    title: navigation.getParam('otherParam', 'A Nested Details Screen'),
+    headerStyle: {
+      backgroundColor: navigation.getParam('color', 'white'),
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+    fontWeight: 'bold',
+    },
+    headerLeft: (
+    <View>
+      <HomeIcon />
+    </View>
+    ),
+    
+  }
+}
 
 
 
