@@ -46,7 +46,7 @@ getQuestions = async () => {
   this.setState({category: category})
 
   const category_id = await AsyncStorage.getItem('category_id');
-  //console.log(category_id)
+  console.log(category_id)
 
   const userToken = await AsyncStorage.getItem('LoginToken');
   console.log(userToken)

@@ -14,7 +14,6 @@ import {
     }
   );
 
-  
     
   
   export default createAppContainer(QuestionStack);

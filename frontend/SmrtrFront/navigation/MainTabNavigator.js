@@ -9,24 +9,44 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import BeltsScreen from '../screens/BeltsScreen';
 import Analytics from '../screens/AnalyticsScreen';
+import ReviewScreen from '../screens/reviewscreens/reviewscreen';
+import QuestionScreen from '../screens/questionscreens/questionscreen';
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-})
+  Review: ReviewScreen,
+  Question: QuestionScreen,
+    
+  
+});
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Home',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={
+          Platform.OS === 'ios'
+            ? `ios-information-circle${focused ? '' : '-outline'}`
+            : 'md-information-circle'
+        }
+      />
+    ),
+  
+
+  };
 };
+
+
 
 const BeltStack = createStackNavigator({
   Belts: BeltsScreen,
