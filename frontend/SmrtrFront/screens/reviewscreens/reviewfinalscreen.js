@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     Button,
+    Text,
 } from 'react-native';
 
 
@@ -13,13 +14,11 @@ export default class ReviewFinalScreen extends Component {
 
     render() {
         
-        const { navigate } = this.props.navigation        
         return (
             <View>
-                <Button
-                title='Home'
-                onPress={() => navigate('Home')}
-                />
+                <Text>
+                    Good reading.
+                </Text>
             </View>
         )
     }

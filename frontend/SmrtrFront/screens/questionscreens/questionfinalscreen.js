@@ -4,6 +4,8 @@ import {
     Button,
 } from 'react-native';
 
+import HomeIcon from '../../navigation/HomeIcon';
+
 
 
 export default class QuestionFinalScreen extends Component {
@@ -14,7 +16,7 @@ export default class QuestionFinalScreen extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.getParam('title', 'a rando title'),
-            headerLeft: null,
+            headerLeft: <HomeIcon />,
         }
     }
 

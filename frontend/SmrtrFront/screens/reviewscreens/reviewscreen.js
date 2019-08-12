@@ -102,14 +102,6 @@ export default class ReviewScreen extends Component {
       return listed[this.state.pagecount]
     }
     
-    /*
-    // get category from device storage.  commented out as it was pulled into getReadings()
-    getCategory = async () => {
-      const category = await AsyncStorage.getItem('category');
-      this.setState({category: category})
-    }
-    */
-
     // click handler when user clicks 'next' increases state.pagecount
     // ends after readings are done by navigating to final page of review
     pageTurn = () => {
