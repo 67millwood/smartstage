@@ -30,21 +30,27 @@ export default class MainQuestion extends Component {
                 return <MultipleChoiceQuestion
                             info={this.props.questiondata}
                             pageturnbutton={this.props.pageturnbutton}
+                            scorekeeper={this.props.scorekeeper}
                             />
             case 2:
                 return <TrueFalseQuestion
                             info={this.props.questiondata}
                             pageturnbutton={this.props.pageturnbutton}
+                            scorekeeper={this.props.scorekeeper}
+
                             />
             case 3:
                 return <RatingQuestion
                             info={this.props.questiondata}
                             pageturnbutton={this.props.pageturnbutton}
+                            scorekeeper={this.props.scorekeeper}
+
                             />
             case 4:
                 return <RankingQuestion
                             info={this.props.questiondata}
                             pageturnbutton={this.props.pageturnbutton}
+                            scorekeeper={this.props.scorekeeper}
 
                             />
         }

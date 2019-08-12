@@ -82,6 +82,9 @@ export default class MultipleChoiceQuestion extends Component {
                   const rightwrong = Object.keys(data.feedback)[0]
                   if (rightwrong == 'correct_response') {
                     this.setState({ usercorrect: true})
+                    this.props.scorekeeper(true)
+                  } else {
+                    this.props.scorekeeper(false)
                   }
                   console.log(user_message)
                   this.setState({ response: user_message })

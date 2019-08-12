@@ -17,6 +17,8 @@ export default class QuestionScreen extends Component {
       category: '',
       pagecount: 0,
       currentquestion: '',
+      right: 0,
+      wrong: 0,
 
     }
 }
@@ -115,7 +117,7 @@ singleQuestion = () => {
 pageTurn = () => {
   const { navigate } = this.props.navigation        
   if (this.state.pagecount == (this.state.questions).length) {
-    navigate('QuestionFinal', {title: this.state.category})
+    navigate('QuestionFinal', {title: this.state.category })
   } else {
     this.setState({ 
       pagecount: this.state.pagecount + 1,
@@ -124,9 +126,23 @@ pageTurn = () => {
   }
 }
 
+sessionScore = (answer) => {
+  if (answer == true) {
+    this.setState({
+      right: this.state.right + 1,
+    })
+  } else {
+    this.setState({
+      wrong: this.state.wrong + 1,
+    })
 
+  }
+}
 render() {
     const { navigate } = this.props.navigation;
+    console.log(this.state.right)
+    console.log(this.state.wrong)
+
 
 
     return (
@@ -134,7 +150,9 @@ render() {
             <MainQuestion 
             questiondata={this.state.currentquestion}
             pageturnbutton={this.pageTurn}
+            scorekeeper={this.sessionScore}
             />
+
         </View>
         )
 }
