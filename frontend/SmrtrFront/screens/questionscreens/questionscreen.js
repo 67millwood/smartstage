@@ -21,24 +21,6 @@ export default class QuestionScreen extends Component {
     }
 }
 
-static navigationOptions = ({ navigation }) => {
-    return {
-      title: navigation.getParam('otherParam', 'A Nested Details Screen'),
-      headerStyle: {
-        backgroundColor: navigation.getParam('color', 'white'),
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-      fontWeight: 'bold',
-      },
-      headerLeft: (
-      <View>
-        <HomeIcon />
-      </View>
-      ),
-      
-    }
-  }
 
 
 // getCategory sets the state.category
@@ -115,7 +97,7 @@ singleQuestion = () => {
 pageTurn = () => {
   const { navigate } = this.props.navigation        
   if (this.state.pagecount == (this.state.questions).length) {
-    navigate('QuestionFinal')
+    navigate('QuestionFinal', {title: this.state.category})
   } else {
     this.setState({ 
       pagecount: this.state.pagecount + 1,

@@ -11,6 +11,13 @@ export default class QuestionFinalScreen extends Component {
         super(props)
     }
 
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: navigation.getParam('title', 'a rando title'),
+            headerLeft: null,
+        }
+    }
+
     
     render() {
         const { navigate } = this.props.navigation        
@@ -25,7 +32,4 @@ export default class QuestionFinalScreen extends Component {
     }
 }
 
-QuestionFinalScreen.navigationOptions = {
-    title: 'Your Stats',
-    headerLeft: null,
-}
+
