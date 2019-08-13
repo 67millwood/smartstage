@@ -25,6 +25,15 @@ export default class RatingQuestion extends Component {
 
         }
     }
+    componentDidUpdate(prevProp) {
+      if (this.props.currentquestion.question_text !== prevProp.currentquestion.question_text) {
+        this.setState({ 
+          value: 0,
+          usercorrect: false,
+      })
+      }
+    };
+
 
     checkanswer = async () => {
         //const { navigate } = this.props.navigation   

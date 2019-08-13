@@ -31,9 +31,12 @@ export default class RankingQuestion extends Component {
       componentDidUpdate(prevProp) {
         if (this.props.currentquestion.question_text !== prevProp.currentquestion.question_text) {
           this.shuffle();
-        }
+          this.setState({
+            usercorrect: false,
+          })
         
       };
+    }
 
 
 

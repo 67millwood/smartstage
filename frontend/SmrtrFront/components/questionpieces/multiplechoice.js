@@ -35,8 +35,14 @@ export default class MultipleChoiceQuestion extends Component {
     componentDidUpdate(prevProp) {
       if (this.props.currentquestion.question_text !== prevProp.currentquestion.question_text) {
         this.shuffle();
+        this.setState({ 
+          choice1picked: false,
+          choice2picked: false,
+          choice3picked: false,
+          choice4picked: false,
+          usercorrect: false,
+      })
       }
-      
     };
 
 

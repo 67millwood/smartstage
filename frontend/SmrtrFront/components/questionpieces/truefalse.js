@@ -32,6 +32,17 @@ export default class TrueFalseQuestion extends Component {
         
     }
 
+    componentDidUpdate(prevProp) {
+      if (this.props.currentquestion.question_text !== prevProp.currentquestion.question_text) {
+        this.setState({ 
+          choiceTrue: false,
+          choiceFalse: false,
+          usercorrect: false,
+      })
+    }
+    };
+
+
     checkForSelection = () => {
       if (this.state.choiceTrue == true || this.state.choiceFalse == true) {
         this.checkanswer();
