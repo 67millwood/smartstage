@@ -131,14 +131,14 @@ export default class MultipleChoiceQuestion extends Component {
         const question = this.props.currentquestion        
         
         return (
-            <View>
+            <View style={styles.questionContainer}>
                 <Text style={styles.title}>
                     Multiple Choice
                 </Text>
                 <Text style={styles.questionText}>
                     {question.question_text}
                 </Text>
-
+                <View style={styles.choicesBox}>
                 <TouchableOpacity 
                     style={this.state.choice1picked ? {...styles.choice1, ...styles.selected} : styles.choice1}
                     onPress={() => {
@@ -184,15 +184,17 @@ export default class MultipleChoiceQuestion extends Component {
                     {this.state.randomchoicelist[3]}
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
+                </View>
+                <View style={styles.submit}>
+                <Button
+                    style={{ backgroundColor: 'aqua' }}
+                    title='Submit'
                     onPress={() => {
                       this.checkForSelection()
                     }}
-                      >
-                        <Text>Submit</Text>
+                      />
+                </View>
 
-                </TouchableOpacity>
                 <AnswerModal 
                 visiblemodal={this.state.modalVisible}
                 useriscorrect={this.state.usercorrect}

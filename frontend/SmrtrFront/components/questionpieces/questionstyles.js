@@ -3,6 +3,10 @@ import { StyleSheet } from 'react-native'
 
 
 const styles = StyleSheet.create({
+    questionContainer: {
+      flex: 1,
+    },
+
     title: {
       fontSize: 25,
       color: 'red',
@@ -20,7 +24,15 @@ const styles = StyleSheet.create({
         marginBottom: 5,
 
     },
+    choicesBox: {
+      flex: 4,
+      marginLeft: 5,
+      marginRight: 5,
+    },
+
     choice1: {
+        flex: 2,
+        alignSelf: 'stretch',
         backgroundColor: 'burlywood',
         marginBottom: 7,
         marginTop: 10,
@@ -29,6 +41,7 @@ const styles = StyleSheet.create({
 
     },
     choice2: {
+        flex: 2,
         backgroundColor: 'coral',
         marginBottom: 7,
         fontSize: 17,
@@ -36,6 +49,7 @@ const styles = StyleSheet.create({
 
     },
     choice3: {
+        flex: 2,
         backgroundColor: 'lavender',
         marginBottom: 7,
         fontSize: 17,
@@ -43,6 +57,7 @@ const styles = StyleSheet.create({
 
     },
     choice4: {
+        flex: 2,
         backgroundColor: 'khaki',
         fontSize: 17,
 
@@ -60,6 +75,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center'
     },
+
     questionText: {
       fontSize: 17,
       color: 'black',
@@ -72,6 +88,12 @@ const styles = StyleSheet.create({
         justifyContent: "center"
 
     
+    },
+
+    submit: {
+      flex: 2,
+      alignContent: 'flex-start'
+
     },
 
     bigAnswerModal: {
