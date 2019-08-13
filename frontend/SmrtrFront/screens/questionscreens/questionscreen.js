@@ -112,6 +112,7 @@ singleQuestion = () => {
     currentquestion: this.state.questions[this.state.pagecount],
     pagecount: this.state.pagecount + 1,
   })
+  console.log(this.state.pagecount)
   console.log(this.state.currentquestion)
   }
 
@@ -126,9 +127,11 @@ pageTurn = () => {
       wrong: this.state.wrong
     });
   } else {
+    /*
     this.setState({ 
       pagecount: this.state.pagecount + 1,
     })
+    */
     this.singleQuestion()
   }
 }
