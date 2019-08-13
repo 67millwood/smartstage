@@ -10,7 +10,7 @@ class HomeIcon extends React.Component {
             name='home'
             type='font-awesome'
             color='#f5f'
-            size={17}
+            size={13}
             onPress={() => { this.props.navigation.navigate('Home') }} />;
   }
 }

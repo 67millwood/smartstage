@@ -117,7 +117,11 @@ singleQuestion = () => {
 pageTurn = () => {
   const { navigate } = this.props.navigation        
   if (this.state.pagecount == (this.state.questions).length) {
-    navigate('QuestionFinal', {title: this.state.category })
+    navigate('QuestionFinal', {
+      title: this.state.category,
+      right: this.state.right,
+      wrong: this.state.wrong
+    });
   } else {
     this.setState({ 
       pagecount: this.state.pagecount + 1,
@@ -140,8 +144,6 @@ sessionScore = (answer) => {
 }
 render() {
     const { navigate } = this.props.navigation;
-    console.log(this.state.right)
-    console.log(this.state.wrong)
 
 
 
