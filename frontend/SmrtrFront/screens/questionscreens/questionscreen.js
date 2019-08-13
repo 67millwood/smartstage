@@ -154,7 +154,7 @@ render() {
 
 
     return (
-            <View style={{ flex: 1, paddingTop: 25, justifyContent: "flex-start", alignItems: "center" }}>
+            <View style={{ paddingTop: 25}}>
             <MainQuestion 
             currentquestion={this.state.currentquestion}
             pageturnbutton={this.pageTurn}

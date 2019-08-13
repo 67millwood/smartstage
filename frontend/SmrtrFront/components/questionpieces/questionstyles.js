@@ -25,14 +25,11 @@ const styles = StyleSheet.create({
 
     },
     choicesBox: {
-      flex: 4,
       marginLeft: 5,
       marginRight: 5,
     },
 
     choice1: {
-        flex: 2,
-        alignSelf: 'stretch',
         backgroundColor: 'burlywood',
         marginBottom: 7,
         marginTop: 10,
@@ -41,7 +38,6 @@ const styles = StyleSheet.create({
 
     },
     choice2: {
-        flex: 2,
         backgroundColor: 'coral',
         marginBottom: 7,
         fontSize: 17,
@@ -49,7 +45,6 @@ const styles = StyleSheet.create({
 
     },
     choice3: {
-        flex: 2,
         backgroundColor: 'lavender',
         marginBottom: 7,
         fontSize: 17,
@@ -57,7 +52,6 @@ const styles = StyleSheet.create({
 
     },
     choice4: {
-        flex: 2,
         backgroundColor: 'khaki',
         fontSize: 17,
 
@@ -91,7 +85,6 @@ const styles = StyleSheet.create({
     },
 
     submit: {
-      flex: 2,
       alignContent: 'flex-start'
 
     },

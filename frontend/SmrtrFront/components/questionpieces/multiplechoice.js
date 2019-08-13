@@ -131,7 +131,7 @@ export default class MultipleChoiceQuestion extends Component {
         const question = this.props.currentquestion        
         
         return (
-            <View style={styles.questionContainer}>
+            <View >
                 <Text style={styles.title}>
                     Multiple Choice
                 </Text>
