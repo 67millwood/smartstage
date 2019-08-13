@@ -58,8 +58,8 @@ class Question(models.Model):
 
 
   question_text = models.TextField(max_length=600)
-  correct_response = models.TextField(max_length=300)
-  incorrect_response = models.TextField(max_length=300)
+  correct_response = models.TextField(max_length=300, default='Great!')
+  incorrect_response = models.TextField(max_length=300, default='Not Great...')
 
 
   pub_date = models.DateTimeField('date published', default=datetime.now, blank=True, null=True)
