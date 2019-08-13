@@ -22,11 +22,19 @@ export default class RankingQuestion extends Component {
         response: '',
         usercorrect: false,
 
-      }
-
+      }      
+      
       componentDidMount() {
         this.shuffle();
       };
+
+      componentDidUpdate(prevProp) {
+        if (this.props.currentquestion.question_text !== prevProp.currentquestion.question_text) {
+          this.shuffle();
+        }
+        
+      };
+
 
 
     useranswer = () => {
