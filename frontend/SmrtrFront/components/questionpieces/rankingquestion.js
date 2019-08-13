@@ -17,7 +17,7 @@ import AnswerModal from './answermodal';
 export default class RankingQuestion extends Component {
     state = {
         data: {},
-        useranswer: this.props.info.choice_1 + this.props.info.choice_2 + this.props.info.choice_3 + this.props.info.choice_4,
+        useranswer: this.props.currentquestion.choice_1 + this.props.currentquestion.choice_2 + this.props.currentquestion.choice_3 + this.props.currentquestion.choice_4,
         modalVisible: false,
         response: '',
         usercorrect: false,
@@ -62,8 +62,8 @@ export default class RankingQuestion extends Component {
             'Authorization': `Token ${userToken}`,
           },
           body: JSON.stringify({
-            id: this.props.info.id,
-            qtype_id: this.props.info.qtype_id,
+            id: this.props.currentquestion.id,
+            qtype_id: this.props.currentquestion.qtype_id,
             rankingAnswer: this.useranswer()
             
             }),
@@ -99,7 +99,7 @@ export default class RankingQuestion extends Component {
       }
 
       shuffle = () => {
-        const questions = this.props.info
+        const questions = this.props.currentquestion
         const array = [questions.choice_1, questions.choice_2, questions.choice_3, questions.choice_4]
         for (let i = array.length - 1; i > 0; i--) {
           let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
@@ -146,7 +146,7 @@ export default class RankingQuestion extends Component {
 
 
     render() {
-        const question = this.props.info
+        const question = this.props.currentquestion
         return (
             <View>
                 <Text style={styles.title}>

@@ -65,8 +65,8 @@ export default class MultipleChoiceQuestion extends Component {
             'Authorization': `Token ${userToken}`,
           },
           body: JSON.stringify({
-            id: this.props.info.id,
-            qtype_id: this.props.info.qtype_id,
+            id: this.props.currentquestion.id,
+            qtype_id: this.props.currentquestion.qtype_id,
             multipleChoiceAnswer: this.state.userresponse
             
             }),
@@ -102,7 +102,7 @@ export default class MultipleChoiceQuestion extends Component {
       }
 
       shuffle = () => {
-        const questions = this.props.info
+        const questions = this.props.currentquestion
         const array = [questions.choice_1, questions.choice_2, questions.choice_3, questions.choice_4]
         for (let i = array.length - 1; i > 0; i--) {
           let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
@@ -114,7 +114,7 @@ export default class MultipleChoiceQuestion extends Component {
 
 
     render() {
-        const question = this.props.info        
+        const question = this.props.currentquestion        
         
         return (
             <View>

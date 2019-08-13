@@ -20,35 +20,35 @@ export default class MainQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          currentquestion: this.props.questiondata,
+          currentquestion: this.props.currentquestion,
         }
     }
         questionType = () => {
-        const qtype = this.props.questiondata.qtype_id
+        const qtype = this.props.currentquestion.qtype_id
         switch (qtype) {
             case 1:
                 return <MultipleChoiceQuestion
-                            info={this.props.questiondata}
+                            currentquestion={this.props.currentquestion}
                             pageturnbutton={this.props.pageturnbutton}
                             scorekeeper={this.props.scorekeeper}
                             />
             case 2:
                 return <TrueFalseQuestion
-                            info={this.props.questiondata}
+                            currentquestion={this.props.currentquestion}
                             pageturnbutton={this.props.pageturnbutton}
                             scorekeeper={this.props.scorekeeper}
 
                             />
             case 3:
                 return <RatingQuestion
-                            info={this.props.questiondata}
+                            currentquestion={this.props.currentquestion}
                             pageturnbutton={this.props.pageturnbutton}
                             scorekeeper={this.props.scorekeeper}
 
                             />
             case 4:
                 return <RankingQuestion
-                            info={this.props.questiondata}
+                            currentquestion={this.props.currentquestion}
                             pageturnbutton={this.props.pageturnbutton}
                             scorekeeper={this.props.scorekeeper}
 
@@ -57,7 +57,7 @@ export default class MainQuestion extends Component {
     }
 
     render() {
-        const question = this.props.questiondata
+        const question = this.props.currentquestion
         return (
             <View>
                     {this.questionType()}

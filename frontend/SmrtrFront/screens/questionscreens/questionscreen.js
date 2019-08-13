@@ -89,6 +89,8 @@ getQuestions = async () => {
               questions: data
             }
             )
+            //console.log(data)
+            //console.log(this.state.questions)
             if (data.length == 0) {
               Alert.alert(this.state.category, '\nThere are no questions left\nat this level.', onPress= () => navigate('Home')
               )
@@ -110,6 +112,7 @@ singleQuestion = () => {
     currentquestion: this.state.questions[this.state.pagecount],
     pagecount: this.state.pagecount + 1,
   })
+  console.log(this.state.currentquestion)
   }
 
 // click handler when user clicks 'next' increases state.pagecount
@@ -150,7 +153,7 @@ render() {
     return (
             <View style={{ flex: 1, paddingTop: 25, justifyContent: "flex-start", alignItems: "center" }}>
             <MainQuestion 
-            questiondata={this.state.currentquestion}
+            currentquestion={this.state.currentquestion}
             pageturnbutton={this.pageTurn}
             scorekeeper={this.sessionScore}
             />

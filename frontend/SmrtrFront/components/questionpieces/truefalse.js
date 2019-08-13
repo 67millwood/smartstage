@@ -61,8 +61,8 @@ export default class TrueFalseQuestion extends Component {
             'Authorization': `Token ${userToken}`,
           },
           body: JSON.stringify({
-            id: this.props.info.id,
-            qtype_id: this.props.info.qtype_id,
+            id: this.props.currentquestion.id,
+            qtype_id: this.props.currentquestion.qtype_id,
             trueFalseAnswer: this.userAnswer()
             
             }),
@@ -97,7 +97,7 @@ export default class TrueFalseQuestion extends Component {
       }
   
     render() {
-        const question = this.props.info
+        const question = this.props.currentquestion
         return (
             <View >
                 <Text style={styles.title}>
