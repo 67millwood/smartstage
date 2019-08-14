@@ -20,13 +20,11 @@ from django.contrib.auth.views import LoginView
 from django.views.generic import TemplateView
 
 from content import views
-from api.urls import router
 
 
 urlpatterns = [
     path('content/', include('content.urls')),
     path('admin/', admin.site.urls),
-    #path('api/', include(router.urls)),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/login', LoginView.as_view(authentication_form=AuthenticationForm), name='login'),
     path('register/', views.register, name='register'),
