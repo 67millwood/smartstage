@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import ProfileIcon from '../navigation/ProfileIcon';
+
 //import Carousel from 'react-native-anchor-carousel';
 import Carousel from 'react-native-snap-carousel';
 
@@ -152,8 +154,18 @@ printMyToken = async () => {
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
-};
+  headerStyle: {
+    borderBottomWidth: 0,
+  },  
+  headerRight: (
+    <View>
+      <ProfileIcon />
+
+    </View>
+  )
+  }
+
+
 
 const styles = StyleSheet.create({
   container: {
