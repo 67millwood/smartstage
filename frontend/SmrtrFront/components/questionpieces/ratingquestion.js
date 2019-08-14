@@ -4,7 +4,8 @@ import {
     View,
     TouchableOpacity,
     AsyncStorage,
-    Slider
+    Slider,
+    Button,
 } from 'react-native';
 
 //import Slider from '@react-native-community/slider';
@@ -109,13 +110,15 @@ export default class RatingQuestion extends Component {
                     minimumTrackTintColor="green"
                     maximumTrackTintColor="red"
                 />
-                <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
-                    onPress={this.checkanswer}
-                      >
-                    <Text>Submit</Text>
 
-                </TouchableOpacity>
+                <View style={styles.submit}>
+                <Button
+                    style={{ backgroundColor: 'aqua' }}
+                    title='Submit'
+                    onPress={this.checkanswer}
+                    />
+                </View>
+
                 <AnswerModal 
                 visiblemodal={this.state.modalVisible}
                 useriscorrect={this.state.usercorrect}
