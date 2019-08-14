@@ -173,12 +173,14 @@ const styles = StyleSheet.create({
       height: 500,
       flex:1
   },
+  
   item: {
     height: 450,
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
+  
 
   text: {
     fontSize: 30,

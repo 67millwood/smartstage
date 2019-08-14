@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     AsyncStorage,
     Alert,
+    Button,
 } from 'react-native';
 
 import { styles } from './questionstyles';
@@ -123,7 +124,7 @@ export default class TrueFalseQuestion extends Component {
                         this.selectedChoice('choiceTrue')
                     }}
                       >
-                    <Text style={styles.sections}>TRUE</Text>
+                    <Text style={styles.tf}>TRUE</Text>
 
                 </TouchableOpacity>
 
@@ -133,18 +134,19 @@ export default class TrueFalseQuestion extends Component {
                         this.selectedChoice('choiceFalse')
                     }}
                       >
-                    <Text style={styles.sections}>FALSE</Text>
+                    <Text style={styles.tf}>FALSE</Text>
 
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
+                <View style={styles.submit}>
+                <Button
+                    style={{ backgroundColor: 'aqua' }}
+                    title='Submit'
                     onPress={() => {
                       this.checkForSelection()
                     }}
-                      >
-                        <Text>Submit</Text>
+                      />
+                </View>
 
-                </TouchableOpacity>
                 <AnswerModal 
                 visiblemodal={this.state.modalVisible}
                 useriscorrect={this.state.usercorrect}
