@@ -3,7 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import AuthNavigator from './AuthNavigator';
-import ProfilePage from '../screens/authscreens/ProfilePage';
+import ProfileNavigator from './ProfileNavigator';
 import AuthLoadingScreen from '../screens/authscreens/AuthLoadingScreen';
 import QuestionNavigator from './QuestionNavigator';
 import ReviewNavigator from './ReviewNavigator';
@@ -15,7 +15,7 @@ export default createAppContainer(
     Auth: AuthLoadingScreen,
     Main: MainTabNavigator,
     Authnav: AuthNavigator,
-    Profile: ProfilePage,
+    Profile: ProfileNavigator,
     Question: QuestionNavigator,
     Review: ReviewNavigator,
   },

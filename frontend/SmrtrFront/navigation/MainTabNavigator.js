@@ -11,6 +11,7 @@ import BeltsScreen from '../screens/BeltsScreen';
 import Analytics from '../screens/AnalyticsScreen';
 import ReviewScreen from '../screens/reviewscreens/reviewscreen';
 import QuestionScreen from '../screens/questionscreens/questionscreen';
+import ProfileStack from './ProfileNavigator';
 
 
 const HomeStack = createStackNavigator({

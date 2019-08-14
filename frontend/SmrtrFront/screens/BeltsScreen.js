@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, AsyncStorage, FlatList } from 'react-native';
 import ProfileIcon from '../navigation/ProfileIcon';
 

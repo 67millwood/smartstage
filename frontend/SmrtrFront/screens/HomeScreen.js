@@ -112,15 +112,11 @@ export default class HomeScreen extends Component {
 
   render() {
       return (
-          <ScrollView
-            style={styles.container}
-            contentContainerStyle={styles.contentContainer}>
-
-            <View style={styles.contentContainer}>
+            <View style={styles.container}>
               <Text style={styles.getStartedText}>
                 Smrtr.life
               </Text>
-            </View>
+            
             <View style={{backgroundColor: '#fff', marginTop: 50}}>
                 <Carousel  style={styles.carousel}
                     data={data}
@@ -133,10 +129,8 @@ export default class HomeScreen extends Component {
                     }}
                 />
             </View>
-
-          </ScrollView>
-
-      );
+            </View>
+      )
     }
 }
 
@@ -175,9 +169,10 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
+    marginTop: 15,
+    fontSize: 25,
+    fontFamily: 'open-sans-regular',
+    color: 'blueviolet',
     textAlign: 'center',
   },
     carousel: {

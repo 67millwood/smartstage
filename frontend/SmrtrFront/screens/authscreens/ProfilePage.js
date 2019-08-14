@@ -1,8 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet, Text, Button, AsyncStorage } from 'react-native';
 
+import HomeIcon from '../../navigation/HomeIcon';
 
 export default class ProfilePage extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  /* render function, etc */
+
+
     logout = async () => {
       const userToken = await AsyncStorage.getItem('LoginToken');
       console.log(userToken)
@@ -23,10 +31,9 @@ export default class ProfilePage extends Component {
     }
 
     render() {
-        const { navigate, goBack } = this.props.navigation
+        const { navigate } = this.props.navigation
         return (
              
-            <Fragment>
                 <View style={styles.container}>
                     <Text>
                         Profile Page
@@ -38,19 +45,28 @@ export default class ProfilePage extends Component {
                             navigate('Login')
                          }
                          } />
-                    <Button 
-                        title="Go Back"
-                        onPress={() => {
-                            
-                            navigate('Belts')
-                         }
-                         } />
 
                 </View>
-            </Fragment>
         );
     }
   }
+  
+  ProfilePage.navigationOptions = {
+    title: 'Profile Page',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    headerRight: (
+      <View>
+        <HomeIcon />
+  
+      </View>
+    )
+  };
   
 
 
@@ -60,9 +76,4 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    userinput: {
-      flex: 1,
-      paddingTop: 20,
-
-    }
   });
