@@ -28,9 +28,10 @@ export default class QuestionFinalScreen extends Component {
         const right = this.props.navigation.getParam('right', 'fuck it');
         const wrong = this.props.navigation.getParam('wrong', 'also fuck it')        
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
-                <Text style={styles.title}>Right: {JSON.stringify(right)}</Text>
-                <Text style={styles.title}>Wrong: {JSON.stringify(wrong)}</Text>
+            <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+                <Text style={{...styles.title, textAlign: 'center'}}>Today's Stats...</Text>
+                <Text style={styles.scoreRight}>Right: {JSON.stringify(right)}</Text>
+                <Text style={styles.scoreWrong}>Wrong: {JSON.stringify(wrong)}</Text>
                 <Button
                     title="See My Belts"
                     onPress={() => navigate('Belts')}

@@ -134,6 +134,20 @@ const styles = StyleSheet.create({
     answerModalContinue: {
       flex: 1,
       backgroundColor: 'brown',
+    },
+
+    scoreRight: {
+      fontSize: 25,
+      color: 'blue',
+      textAlign: 'center'
+
+    },
+
+    scoreWrong: {
+      fontSize: 25,
+      color: 'red',
+      textAlign: 'center'
+
     }
   });
   
