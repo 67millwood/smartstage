@@ -170,13 +170,13 @@ export default class RankingQuestion extends Component {
                     onMoveEnd={({ data }) => this.setState({ data })}
                     />
                 </View>
-                <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
+                <View style={styles.submit}>
+                <Button
+                    style={{ backgroundColor: 'aqua' }}
+                    title='Submit'
                     onPress={this.checkanswer}
-                      >
-                        <Text>Submit</Text>
-
-                </TouchableOpacity>
+                    />
+                </View>
                 <AnswerModal 
                 visiblemodal={this.state.modalVisible}
                 useriscorrect={this.state.usercorrect}
