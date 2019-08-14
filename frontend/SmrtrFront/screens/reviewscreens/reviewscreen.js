@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import HomeIcon from '../../navigation/HomeIcon';
-
+import { styles } from './reviewstyles';
 
 export default class ReviewScreen extends Component {
     constructor(props) {
@@ -108,7 +108,11 @@ export default class ReviewScreen extends Component {
       const { navigate } = this.props.navigation        
 
       if (this.state.pagecount == 3) {
-        navigate('ReviewFinal', {title: this.state.category})
+        navigate('ReviewFinal', {
+          title: this.state.category,
+          headercolor: this.props.navigation.getParam('color', 'white'),
+          }
+        )
       } else {
         this.setState({ pagecount: this.state.pagecount + 1})
         
@@ -121,8 +125,8 @@ export default class ReviewScreen extends Component {
         const { navigate } = this.props.navigation
           
         return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <Text>
+            <View style={styles.readingBox}>
+                <Text style={styles.readingText}>
                   {this.singleReading()}
                 </Text>
                 <Button

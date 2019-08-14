@@ -18,6 +18,14 @@ export default class QuestionFinalScreen extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.getParam('title', 'a rando title'),
+            headerStyle: {
+                backgroundColor: navigation.getParam('headercolor', 'white'),
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+              fontWeight: 'bold',
+              },
+          
             headerLeft: <HomeIcon />,
         }
     }

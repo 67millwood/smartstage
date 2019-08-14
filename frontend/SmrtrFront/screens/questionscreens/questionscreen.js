@@ -122,7 +122,8 @@ pageTurn = () => {
     navigate('QuestionFinal', {
       title: this.state.category,
       right: this.state.right,
-      wrong: this.state.wrong
+      wrong: this.state.wrong,
+      headercolor: this.props.navigation.getParam('color', 'white'),
     });
   } else {
     /*
