@@ -112,8 +112,6 @@ singleQuestion = () => {
     currentquestion: this.state.questions[this.state.pagecount],
     pagecount: this.state.pagecount + 1,
   })
-  console.log(this.state.pagecount)
-  console.log(this.state.currentquestion)
   }
 
 // click handler when user clicks 'next' increases state.pagecount
@@ -154,8 +152,8 @@ render() {
 
 
     return (
-            <View style={{ paddingTop: 25}}>
-            <MainQuestion 
+        <View style={{ flex: 1, paddingTop: 25, justifyContent: "flex-start", alignItems: 'stretch' }}>
+          <MainQuestion 
             currentquestion={this.state.currentquestion}
             pageturnbutton={this.pageTurn}
             scorekeeper={this.sessionScore}

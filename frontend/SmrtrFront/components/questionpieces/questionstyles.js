@@ -3,14 +3,13 @@ import { StyleSheet } from 'react-native'
 
 
 const styles = StyleSheet.create({
-    questionContainer: {
-      flex: 1,
-    },
-
     title: {
       fontSize: 25,
       color: 'red',
-      textAlign: 'center',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+
     },
     falseChoice: {
         width: 100,
@@ -27,6 +26,7 @@ const styles = StyleSheet.create({
     choicesBox: {
       marginLeft: 5,
       marginRight: 5,
+
     },
 
     choice1: {
@@ -73,6 +73,10 @@ const styles = StyleSheet.create({
     questionText: {
       fontSize: 17,
       color: 'black',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+
     },
     sections: {
       fontSize: 20
@@ -85,7 +89,9 @@ const styles = StyleSheet.create({
     },
 
     submit: {
-      alignContent: 'flex-start'
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
 
     },
 

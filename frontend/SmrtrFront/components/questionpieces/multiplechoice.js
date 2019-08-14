@@ -139,51 +139,51 @@ export default class MultipleChoiceQuestion extends Component {
                     {question.question_text}
                 </Text>
                 <View style={styles.choicesBox}>
-                <TouchableOpacity 
-                    style={this.state.choice1picked ? {...styles.choice1, ...styles.selected} : styles.choice1}
-                    onPress={() => {
-                        this.selectedChoice('choice1picked')
-                        this.setState({ userresponse: this.state.randomchoicelist[0]})
-                    }}
-                    >
-                    <Text>
-                    {this.state.randomchoicelist[0]}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={this.state.choice2picked ? {...styles.choice2, ...styles.selected} : styles.choice2}
-                    onPress={() => {
-                        this.selectedChoice('choice2picked')
-                        this.setState({ userresponse: this.state.randomchoicelist[1]})
-                    }}
-                    >
-                    <Text>
-                    {this.state.randomchoicelist[1]}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={this.state.choice3picked ? {...styles.choice3, ...styles.selected} : styles.choice3}
-                    onPress={() => {
-                        this.selectedChoice('choice3picked')
-                        this.setState({ userresponse: this.state.randomchoicelist[2]})
-                    }}
-                    >
-                    <Text>
-                    {this.state.randomchoicelist[2]}
-                    </Text>
-                </TouchableOpacity>
+                      <TouchableOpacity 
+                          style={this.state.choice1picked ? {...styles.choice1, ...styles.selected} : styles.choice1}
+                          onPress={() => {
+                              this.selectedChoice('choice1picked')
+                              this.setState({ userresponse: this.state.randomchoicelist[0]})
+                          }}
+                          >
+                          <Text>
+                          {this.state.randomchoicelist[0]}
+                          </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity 
+                          style={this.state.choice2picked ? {...styles.choice2, ...styles.selected} : styles.choice2}
+                          onPress={() => {
+                              this.selectedChoice('choice2picked')
+                              this.setState({ userresponse: this.state.randomchoicelist[1]})
+                          }}
+                          >
+                          <Text>
+                          {this.state.randomchoicelist[1]}
+                          </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity 
+                          style={this.state.choice3picked ? {...styles.choice3, ...styles.selected} : styles.choice3}
+                          onPress={() => {
+                              this.selectedChoice('choice3picked')
+                              this.setState({ userresponse: this.state.randomchoicelist[2]})
+                          }}
+                          >
+                          <Text>
+                          {this.state.randomchoicelist[2]}
+                          </Text>
+                      </TouchableOpacity>
 
-                <TouchableOpacity 
-                    style={this.state.choice4picked ? {...styles.choice4, ...styles.selected} : styles.choice4}
-                    onPress={() => {
-                        this.selectedChoice('choice4picked')
-                        this.setState({ userresponse: this.state.randomchoicelist[3]})
-                    }}
-                    >
-                    <Text>
-                    {this.state.randomchoicelist[3]}
-                    </Text>
-                </TouchableOpacity>
+                      <TouchableOpacity 
+                          style={this.state.choice4picked ? {...styles.choice4, ...styles.selected} : styles.choice4}
+                          onPress={() => {
+                              this.selectedChoice('choice4picked')
+                              this.setState({ userresponse: this.state.randomchoicelist[3]})
+                          }}
+                          >
+                          <Text>
+                          {this.state.randomchoicelist[3]}
+                          </Text>
+                      </TouchableOpacity>
                 </View>
                 <View style={styles.submit}>
                 <Button
