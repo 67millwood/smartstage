@@ -60,6 +60,7 @@ export default class BeltsScreen extends Component {
   }
 
   renderlist = ({ item }) => (
+    
     <View>
           <Text style={styles.percentCompleteText}>    
           {item.belt_level.belt_name} is {item.percent_complete} percent complete:
@@ -70,6 +71,10 @@ export default class BeltsScreen extends Component {
           <Text style={styles.percentCompleteText}>
             Notches Earned: {item.notches_complete}
             {"\n"}
+            {item.percent_complete >= 1 ? '🦋🦋Nice Work!🦋🦋' : ''}
+            {"\n"}
+            Completed: {item.belt_complete_date}
+
             {"\n"}
           </Text>
           <Text style={styles.smallerBeltText}>
