@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, AsyncStorage, FlatList } from 'react-native';
 import ProfileIcon from '../navigation/ProfileIcon';
 
-
+import { styles } from '../screens/Mainstyles/mainstyle';
 
 export default class BeltsScreen extends Component {
   constructor(){
@@ -86,7 +86,7 @@ export default class BeltsScreen extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.beltContainer}>
         <Text>
           Here are your belts:
         </Text>
@@ -117,10 +117,3 @@ BeltsScreen.navigationOptions = {
   )
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
-});

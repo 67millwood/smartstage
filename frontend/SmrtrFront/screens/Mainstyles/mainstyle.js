@@ -3,6 +3,16 @@ import { StyleSheet } from 'react-native'
 
 
 const styles = StyleSheet.create({
+    beltContainer: {
+      
+        flex: 1,
+        paddingTop: 15,
+        marginLeft: 5,
+        marginRight: 5,
+        backgroundColor: '#fff',
+    
+    },
+
     title: {
       fontSize: 25,
       color: 'red',
@@ -12,7 +22,7 @@ const styles = StyleSheet.create({
 
     },
     //the text for the actual question being asked
-    questionText: {
+    mainlineText: {
       fontSize: 17,
       color: 'black',
       flexDirection: 'row',
@@ -20,31 +30,27 @@ const styles = StyleSheet.create({
       alignItems: 'center'
 
     },
-    
-    //the 'false' option in True False questions
-    falseChoice: {
-        backgroundColor: 'aqua',
-        marginBottom: 5,
-        marginLeft: 5,
-        marginRight: 5,
-  
-      },
-    //the 'true' option in True False questions
-    trueChoice: {
-        backgroundColor: 'cadetblue',
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 5,
-        marginRight: 5,
-  
-    },
-    tf: {
-      fontSize: 20,
-      textAlign: 'center',
-    
 
+    percentCompleteText: {
+      fontSize: 17,
+      color: 'black',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
 
     },
+
+    belt: {
+      fontSize: 17,
+      color: 'black',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+
+    },
+
+
+    
     //style impacting the 4 mutliple choice options for a user
 
     choicesBox: {
