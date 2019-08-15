@@ -8,6 +8,7 @@ from users.models import CustomUser
 from content.models import Question
 
 from .manager import BeltManager, UserAnswerManager
+from .beltansweremailer import completedBeltEmail
 
 from datetime import datetime
 
@@ -75,7 +76,6 @@ class UserBelts(models.Model):
       #print('notches override: ' + str(userbelt_id[0]['notch_bonus']))
 
       updated_belt_notches = UserBelts.objects.get(id=userbelt_id[0]['id'])
-      print(updated_belt_notches.notch_bonus)
       updated_belt_notches.notches_complete = correct_answers_for_belt + updated_belt_notches.notch_bonus
       updated_belt_notches.save()
   
@@ -89,8 +89,11 @@ def is_complete(sender, instance, **kwargs):
   instance.percent_complete = round(100 * instance.notches_complete / instance.belt_level.belt_notches, 1)
   # mark userbelt complete if enough notches
   if instance.percent_complete >= 100:
+    person = CustomUser.objects.get(pk=instance.user_id)
+    print(person)
     instance.belt_complete = True
     instance.belt_complete_date = datetime.now()
+    completedBeltEmail(person)
     UserBelts.objects.get_or_create(user_id=instance.user_id, belt_level_id=(1 + instance.belt_level_id))
   # revert to not complete and no completion date (if admin wipes notches)
   else:
