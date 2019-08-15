@@ -3,6 +3,28 @@ import { StyleSheet } from 'react-native'
 
 
 const styles = StyleSheet.create({
+
+    // style for general user among Screens
+    mainlineText: {
+      fontSize: 17,
+
+    },
+
+    selected: {
+      borderColor: 'blue',
+      borderStyle: 'solid',
+      borderWidth: 5
+    },
+
+    submit: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+
+    },
+
+    //style BeltScreen
+
     beltContainer: {
       
         flex: 1,
@@ -11,24 +33,6 @@ const styles = StyleSheet.create({
         marginRight: 5,
         backgroundColor: '#fff',
     
-    },
-
-    title: {
-      fontSize: 25,
-      color: 'red',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center'
-
-    },
-    //the text for the actual question being asked
-    mainlineText: {
-      fontSize: 17,
-      color: 'black',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center'
-
     },
 
     percentCompleteText: {
@@ -51,61 +55,10 @@ const styles = StyleSheet.create({
       marginBottom: 5,
 
     },
-
-
     
-    //style impacting the 4 mutliple choice options for a user
+    //style AnalyticsScreen
 
-    choicesBox: {
-      marginLeft: 5,
-      marginRight: 5,
-
-    },
-    // for 4 multiple choice options
-    choice1: {
-        backgroundColor: 'burlywood',
-        marginBottom: 7,
-        marginTop: 10,
-        fontSize: 17,
-
-    },
-    choice2: {
-        backgroundColor: 'coral',
-        marginBottom: 7,
-        fontSize: 17,
-
-    },
-    choice3: {
-        backgroundColor: 'lavender',
-        marginBottom: 7,
-        fontSize: 17,
-
-    },
-    choice4: {
-        backgroundColor: 'khaki',
-        fontSize: 17,
-
-    //additional style to a multiple choice option if selected by a user
-    },
-    selected: {
-      borderColor: 'blue',
-      borderStyle: 'solid',
-      borderWidth: 5
-    },
-    //rating question
-    slider: {
-        alignItems: "stretch",
-        justifyContent: "center"
-
-    },
-    //submit button for answers
-    submit: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center'
-
-    },
-    //the modal when a question is answered
+    //if a full screen Modal with choices is needed
     bigAnswerModal: {
       flex: 1,
       flexDirection: 'column',
@@ -145,6 +98,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'brown',
     },
 
+    //large text for positive and negative results
     scoreRight: {
       fontSize: 25,
       color: 'blue',

@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { Text, View } from 'react-native';
 import ProfileIcon from '../navigation/ProfileIcon';
 
+import { styles } from '../screens/Mainstyles/mainstyle';
+
 export default class Analytics extends Component {
 
   static navigationOptions = () => {
@@ -26,7 +28,7 @@ export default class Analytics extends Component {
     return (
       <Fragment>
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>We'll test out here</Text>
+          <Text style={styles.mainlineText}>Coming Soon</Text>
         </View>
       </Fragment>
     );

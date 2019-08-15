@@ -44,7 +44,7 @@ class UserBelts(models.Model):
     )
   belt_level = models.ForeignKey(BeltLevel, on_delete=models.CASCADE)
   notches_complete = models.PositiveSmallIntegerField(null=True, default=0)
-  percent_complete = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True)
+  percent_complete = models.DecimalField(max_digits=4, decimal_places=0, null=True, blank=True)
   notch_bonus = models.PositiveSmallIntegerField(null=True, default=0)
   belt_complete_date = models.DateTimeField('Completion date:', blank=True, null=True)
   belt_complete = models.BooleanField('Belt complete?', default=False)

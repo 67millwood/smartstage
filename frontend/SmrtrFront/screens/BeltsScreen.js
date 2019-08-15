@@ -63,7 +63,7 @@ export default class BeltsScreen extends Component {
     
     <View>
           <Text style={styles.percentCompleteText}>    
-          {item.belt_level.belt_name} is {item.percent_complete} percent complete:
+          Your {item.belt_level.belt_name} belt is {item.percent_complete}% complete:
           </Text>
 
       <TouchableOpacity 
