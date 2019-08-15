@@ -71,9 +71,9 @@ export default class BeltsScreen extends Component {
           <Text style={styles.percentCompleteText}>
             Notches Earned: {item.notches_complete}
             {"\n"}
-            {item.percent_complete >= 1 ? '🦋🦋Nice Work!🦋🦋' : ''}
+            {item.percent_complete >= 100 ? `🦋🦋Nice Work!🦋🦋\nCompleted: ${item.belt_complete_date}` : ''}
             {"\n"}
-            Completed: {item.belt_complete_date}
+            
 
             {"\n"}
           </Text>
