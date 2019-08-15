@@ -33,19 +33,22 @@ const styles = StyleSheet.create({
 
     percentCompleteText: {
       fontSize: 17,
-      color: 'black',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center'
 
     },
 
+    smallerBeltText: {
+      fontSize: 12,
+    },
+
     belt: {
-      fontSize: 17,
-      color: 'black',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center'
+      borderColor: 'beige',
+      borderStyle: 'solid',
+      borderWidth: 5,
+      borderBottomLeftRadius: 5,
+      borderBottomRightRadius: 5,
+      borderTopRightRadius: 5,
+      borderTopLeftRadius: 5,
+      marginBottom: 5,
 
     },
 

@@ -61,17 +61,22 @@ export default class BeltsScreen extends Component {
 
   renderlist = ({ item }) => (
     <View>
+          <Text style={styles.percentCompleteText}>    
+          {item.belt_level.belt_name} is {item.percent_complete} percent complete:
+          </Text>
+
       <TouchableOpacity 
-        style={{backgroundColor: `${item.belt_level.belt_color}` }}>
-          <Text>
-            Belt: {item.belt_level.belt_name}...notches: {item.notches_complete}
+        style={ {...styles.belt, backgroundColor: `${item.belt_level.belt_color}`} }>
+          <Text style={styles.percentCompleteText}>
+            Notches Earned: {item.notches_complete}
+            {"\n"}
+            {"\n"}
           </Text>
+          <Text style={styles.smallerBeltText}>
+            (required: {item.belt_level.belt_notches})
+          </Text>
+          
       </TouchableOpacity>
-          <Text>    
-                  required notches: {item.belt_level.belt_notches}
-                {"\n"}
-                {this.finishedbelt(item.percent_complete)}
-          </Text>
     </View>
   );
 
@@ -87,9 +92,6 @@ export default class BeltsScreen extends Component {
   render() {
     return (
       <View style={styles.beltContainer}>
-        <Text>
-          Here are your belts:
-        </Text>
         <FlatList
         data={this.state.datasource}
         renderItem={this.renderlist}
