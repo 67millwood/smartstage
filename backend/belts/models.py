@@ -90,10 +90,12 @@ def is_complete(sender, instance, **kwargs):
   # mark userbelt complete if enough notches
   if instance.percent_complete >= 100:
     person = CustomUser.objects.get(pk=instance.user_id)
-    print(person)
+    belt_earned = BeltLevel.objects.filter(pk=instance.belt_level_id).values('belt_name')[0]
+    belt_earned_name = belt_earned['belt_name']
     instance.belt_complete = True
     instance.belt_complete_date = datetime.now()
-    completedBeltEmail(person)
+    # generates an email to congratulate person on earning their belt
+    completedBeltEmail(person, belt_earned_name)
     UserBelts.objects.get_or_create(user_id=instance.user_id, belt_level_id=(1 + instance.belt_level_id))
   # revert to not complete and no completion date (if admin wipes notches)
   else:
