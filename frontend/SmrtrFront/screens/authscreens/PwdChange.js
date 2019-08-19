@@ -7,6 +7,7 @@ import {
     StyleSheet,
     AsyncStorage,
     Button,
+    Alert,
 } from 'react-native';
 
 
@@ -15,6 +16,7 @@ export default class PwdChangeScreen extends Component {
         super(props)
         this.state = {
             password: '',
+            password2: '',
             }
         this.logintobackend=this.logintobackend.bind(this);
     }
@@ -104,8 +106,17 @@ export default class PwdChangeScreen extends Component {
         });
     }
 
-      extrafeature = () => {
-        this.logintobackend();
+    checkandchange = () => {
+      if (this.state.password == this.state.password2) {
+        Alert.alert('Pwd Match')
+      } else {
+        Alert.alert('Ooops!', 'Those passwords don\'t match');
+        this.setState({
+          password: '',
+          password2: '',
+        })
+      }
+        //this.logintobackend();
       }
 
     
@@ -121,7 +132,7 @@ export default class PwdChangeScreen extends Component {
                 
                 <TextInput 
                     style={styles.input}
-                    placeholder='Password'
+                    placeholder='NEW Password'
                     autoCapitalize = 'none'
                     onChangeText={(password)=>this.setState({password})}
                     value={this.state.password}
@@ -129,17 +140,17 @@ export default class PwdChangeScreen extends Component {
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder='Re-enter Password'
+                    placeholder='Re-enter NEW Password'
                     autoCapitalize = 'none'
-                    onChangeText={(password)=>this.setState({password})}
-                    value={this.state.password}
+                    onChangeText={(password2)=>this.setState({password2})}
+                    value={this.state.password2}
                     secureTextEntry={true}
                 />
 
                 <View style={{margin:7}}>
                 <TouchableOpacity
                     style={{backgroundColor: 'aqua' }} 
-                    onPress={this.extrafeature}
+                    onPress={this.checkandchange}
                       >
                         <Text>ENTER</Text>
 
