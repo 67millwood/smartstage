@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 
 
-export default class PwdChangeScreen extends Component {
+export default class EmailChangeScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            password: '',
-            password2: '',
+            email: '',
+            email2: '',
             }
     }
 
@@ -71,17 +71,17 @@ export default class PwdChangeScreen extends Component {
       console.log('Done.')
     }
 
-    pwdchange () {
+    emailchange () {
       const { navigate } = this.props.navigation        
 
-      fetch('http://localhost:8080/api/auth/pwdchange', {
+      fetch('http://localhost:8080/api/auth/emailchange', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          password: this.state.password,
+          email: this.state.email,
           }),
         })
         .then(response => {
@@ -105,14 +105,14 @@ export default class PwdChangeScreen extends Component {
     }
 
     checkandchange = () => {
-      if (this.state.password == this.state.password2) {
-        Alert.alert('Pwd Match')
-        //this.pwdchange();
+      if (this.state.email == this.state.email2) {
+        Alert.alert('Email Match')
+        //this.emailchange();
       } else {
-        Alert.alert('Ooops!', 'Those passwords don\'t match');
+        Alert.alert('Ooops!', 'Those addresses don\'t match');
         this.setState({
-          password: '',
-          password2: '',
+          email: '',
+          email2: '',
         })
       }
         
@@ -126,23 +126,23 @@ export default class PwdChangeScreen extends Component {
             <View style={styles.container} >
                 <Text style={styles.container}
                     style={{fontSize: 27}}>
-                    Change your password....
+                    Change your email....
                 </Text>
                 
                 <TextInput 
                     style={styles.input}
-                    placeholder='NEW Password'
+                    placeholder='NEW email address'
                     autoCapitalize = 'none'
-                    onChangeText={(password)=>this.setState({password})}
-                    value={this.state.password}
+                    onChangeText={(email)=>this.setState({email})}
+                    value={this.state.email}
                     secureTextEntry={true}
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder='Re-enter NEW Password'
+                    placeholder='Re-enter NEW email address'
                     autoCapitalize = 'none'
-                    onChangeText={(password2)=>this.setState({password2})}
-                    value={this.state.password2}
+                    onChangeText={(email2)=>this.setState({email2})}
+                    value={this.state.email2}
                     secureTextEntry={true}
                 />
 
