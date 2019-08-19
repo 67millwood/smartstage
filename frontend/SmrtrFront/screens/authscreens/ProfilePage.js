@@ -38,7 +38,13 @@ export default class ProfilePage extends Component {
                     <Text>
                         Profile Page
                     </Text>
-                    <Button 
+                    <Button
+                      title='Change my Password'
+                      onPress={() => {
+                        navigate('PwdChange')
+                     }
+                     } />
+                <Button 
                         title="This will log me out"
                         onPress={() => {
                             {this.logout()};
