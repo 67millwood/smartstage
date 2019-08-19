@@ -42,18 +42,9 @@ class LoginSerializer(serializers.Serializer):
 
 # PwdChange Serializer
 
-class PwdChangeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ('password',)
-        extra_kwargs = {'password': {'write_only': True}}
+class PwdChangeSerializer(serializers.Serializer):
+    
+    new_password = serializers.CharField(max_length=600)
 
 
-    def create(self, validated_data):
-        user = CustomUser.objects.create(
-            password=make_password(
-                validated_data['password']   
-            )
-        )
-        return user
 

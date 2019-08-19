@@ -35,22 +35,6 @@ class ReadingViewSet(generics.ListAPIView):
         beltlist = UserBelts.objects.all_belts(user=user)
         highest_belt = beltlist['highest_belt_level']
         return Reading.objects.filter(belt_level=highest_belt, category=category)
-'''
-# MultipleChoice Viewset
-# Returns a queryset of all Multiple Choice questions for a given belt level and category
-# Can be used for any of the question types
-class MultipleChoiceViewSet(generics.ListAPIView):
-    permission_classes = [
-        permissions.IsAuthenticated,
-    ]
-    serializer_class = MultipleChoiceSerializer
-    def get_queryset(self):
-        user = self.request.user
-        category = self.request.query_params.get('category')
-        beltlist = UserBelts.objects.all_belts(user=user)
-        highest_belt = beltlist['highest_belt_level']
-        return MultipleChoice.objects.filter(belt_level=highest_belt, category=category)
-'''
 # MultipleChoice Viewset 
 # Pulls one Mulitple Choice question if the question_ptr_id (postgres) is provided
 class MultipleChoiceViewSet(generics.RetrieveAPIView):

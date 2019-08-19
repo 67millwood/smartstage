@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
+from .models import CustomUser
 from .serializers import CustomUserSerializer, RegisterSerializer, LoginSerializer, PwdChangeSerializer
 
 
@@ -31,18 +32,28 @@ class LoginAPI(generics.GenericAPIView):
     })
 
 # PwdChange API
-class PwdChangeAPI(generics.GenericAPIView):
-  serializer_class = PwdChangeSerializer
+class PwdChangeAPI(generics.UpdateAPIView):
+        """
+        An endpoint for changing password.
+        """
+        serializer_class = PwdChangeSerializer
+        model = CustomUser
 
-  def post(self, request, *args, **kwargs):
-    serializer = self.get_serializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    user = serializer.save()
-    return Response({
-      "user": CustomUserSerializer(user, context=self.get_serializer_context()).data,
-      "token": AuthToken.objects.create(user)[1]
-    })
+        def get_object(self, queryset=None):
+            obj = self.request.user
+            return obj
 
+        def update(self, request, *args, **kwargs):
+            self.object = self.get_object()
+            serializer = self.get_serializer(data=request.data)
+
+            if serializer.is_valid():
+                # set_password also hashes the password that the user will get
+                self.object.set_password(serializer.data.get("new_password"))
+                self.object.save()
+                return Response("Success.")
+
+            return Response(serializer.errors)
 
 
 # Get User API

@@ -35,9 +35,6 @@ export default class ProfilePage extends Component {
         return (
              
                 <View style={styles.container}>
-                    <Text>
-                        Profile Page
-                    </Text>
                 <Button
                       title='Change my Password'
                       onPress={() => {
