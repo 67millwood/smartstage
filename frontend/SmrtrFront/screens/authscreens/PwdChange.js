@@ -45,7 +45,7 @@ export default class PwdChangeScreen extends Component {
             } else {
               response.json().then(data => {
                 console.log('good')
-                navigate('Login')
+                navigate('Home')
               })
             }
         })
@@ -56,7 +56,7 @@ export default class PwdChangeScreen extends Component {
 
     checkandchange = () => {
       if (this.state.password == this.state.password2) {
-        Alert.alert('Change Successful!', 'Please login again...')
+        Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
         this.pwdchange();
       } else {
         Alert.alert('Ooops!', 'Those passwords don\'t match');
