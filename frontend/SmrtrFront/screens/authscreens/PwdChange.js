@@ -17,32 +17,21 @@ export default class PwdChangeScreen extends Component {
         this.state = {
             password: '',
             password2: '',
-            token: '',
             }
     }
 
-    setToken= async () => {
-      try {
-        await AsyncStorage.setItem('LoginToken', (`${this.state.token}`))
-      } catch(e) {
-        console.log('didn\'t work')
-      }
-    
-      console.log('Done.')
-    }
 
-
-
-
-
-    pwdchange () {
-      const { navigate } = this.props.navigation        
+    pwdchange = async () => {
+      const { navigate } = this.props.navigation   
+      const userToken = await AsyncStorage.getItem('LoginToken');
+     
 
       fetch('http://localhost:8080/api/auth/pwdchange', {
         method: 'PUT',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': `Token ${userToken}`,
         },
         body: JSON.stringify({
           new_password: this.state.password,
@@ -51,14 +40,11 @@ export default class PwdChangeScreen extends Component {
         .then(response => {
           if(!response.ok) {
             response.json().then(data => {
-              this.login_error(data)
+              console.log('response bad')
             })        
             } else {
               response.json().then(data => {
-                console.log(data);
                 console.log('good')
-                this.setState({ token: data.token })
-                this.setToken();
                 navigate('Login')
               })
             }
@@ -70,7 +56,7 @@ export default class PwdChangeScreen extends Component {
 
     checkandchange = () => {
       if (this.state.password == this.state.password2) {
-        Alert.alert('Pwd Match')
+        Alert.alert('Change Successful!', 'Please login again...')
         this.pwdchange();
       } else {
         Alert.alert('Ooops!', 'Those passwords don\'t match');
