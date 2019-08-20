@@ -17,48 +17,8 @@ export default class PwdChangeScreen extends Component {
         this.state = {
             password: '',
             password2: '',
+            token: '',
             }
-    }
-
-    login_error = (response) => {
-      console.log(response)
-      
-      if(response.hasOwnProperty('email')) {
-      switch (response.email[0]) {
-        case 'This field may not be blank.':
-          alert('Missing email');
-          break;
-        case 'Enter a valid email address.':
-          alert('We need a valid email address')
-          break;
-        default:
-          console.log('all good')
-        }
-      }
-
-      if(response.hasOwnProperty('password')) {
-        switch (response.password[0]) {
-          case 'This field may not be blank.':
-            alert('Missing password');
-            break;
-          default:
-            console.log('all good')
-          }
-        }
-      
-      if(response.hasOwnProperty('non_field_errors')) {
-        switch (response.non_field_errors[0]) {
-          case 'Nope':
-            alert('Sorry.  That\'s not a valid email/password.');
-            break;
-          default:
-            console.log('all good')
-          }
-        }
-      this.setState({
-        email: '',
-        password: '',
-      });
     }
 
     setToken= async () => {
@@ -71,17 +31,21 @@ export default class PwdChangeScreen extends Component {
       console.log('Done.')
     }
 
+
+
+
+
     pwdchange () {
       const { navigate } = this.props.navigation        
 
       fetch('http://localhost:8080/api/auth/pwdchange', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          password: this.state.password,
+          new_password: this.state.password,
           }),
         })
         .then(response => {
@@ -91,11 +55,11 @@ export default class PwdChangeScreen extends Component {
             })        
             } else {
               response.json().then(data => {
-                //console.log(data.token);
+                console.log(data);
+                console.log('good')
                 this.setState({ token: data.token })
-                console.log(this.state.token)
-                this.setToken()
-                navigate('Home')
+                this.setToken();
+                navigate('Login')
               })
             }
         })
@@ -107,7 +71,7 @@ export default class PwdChangeScreen extends Component {
     checkandchange = () => {
       if (this.state.password == this.state.password2) {
         Alert.alert('Pwd Match')
-        //this.pwdchange();
+        this.pwdchange();
       } else {
         Alert.alert('Ooops!', 'Those passwords don\'t match');
         this.setState({
