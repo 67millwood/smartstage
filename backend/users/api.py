@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from knox.models import AuthToken
 from .models import CustomUser
@@ -37,6 +38,17 @@ class LoginAPI(generics.GenericAPIView):
       "user": CustomUserSerializer(user, context=self.get_serializer_context()).data,
       "token": AuthToken.objects.create(user)[1]
     })
+
+# DeleteAccount API
+class DeleteAccountAPI(APIView):
+  def get_object(self):
+    return self.request.user
+
+  def delete(self, request, *args, **kwargs):
+    self.object = self.get_object()
+    self.object.delete()
+    return Response('deleted')
+
 
 # PwdChange API
 class PwdChangeAPI(generics.UpdateAPIView):

@@ -7,6 +7,7 @@ from .api import (
     UserAPI, 
     PwdChangeAPI,
     EmailChangeAPI,
+    DeleteAccountAPI,
 )
 from knox import views as knox_views
 
@@ -16,6 +17,7 @@ urlpatterns = [
     path('api/auth/login', LoginAPI.as_view()),
     path('api/auth/pwdchange', PwdChangeAPI.as_view()),
     path('api/auth/emailchange', EmailChangeAPI.as_view()),
+    path('api/auth/deleteaccount', DeleteAccountAPI.as_view()),
     path('api/auth/user', UserAPI.as_view()),
     path('api/auth/allusers', UserList.as_view()),
     path('api/auth/logout', knox_views.LogoutView.as_view(), name='knox_logout'),
