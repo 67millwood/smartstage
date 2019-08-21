@@ -34,7 +34,7 @@ export default class EmailChangeScreen extends Component {
           'Authorization': `Token ${userToken}`,
         },
         body: JSON.stringify({
-          new_email: this.state.email,
+          email: this.state.email,
           }),
         })
         .then(response => {
@@ -77,6 +77,9 @@ export default class EmailChangeScreen extends Component {
                 <Text style={styles.container}
                     style={{fontSize: 27}}>
                     Change your email....
+                </Text>
+                <Text>
+                  Current email: 
                 </Text>
                 
                 <TextInput 

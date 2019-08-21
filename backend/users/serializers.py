@@ -48,9 +48,11 @@ class PwdChangeSerializer(serializers.Serializer):
 
 # EmailChange Serializer
 
-class EmailChangeSerializer(serializers.Serializer):
+class EmailChangeSerializer(serializers.ModelSerializer):
     
-    new_email = serializers.CharField(max_length=600)
+    class Meta:
+        model = CustomUser
+        fields = ('email', )
 
 
 

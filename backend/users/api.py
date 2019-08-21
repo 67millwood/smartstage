@@ -81,7 +81,7 @@ class EmailChangeAPI(generics.UpdateAPIView):
             serializer = self.get_serializer(data=request.data)
 
             if serializer.is_valid():
-                self.object.email = serializer.data.get("new_email")
+                self.object.email = serializer.data.get("email")
                 self.object.save()
                 return Response('email change success!!!!')
 
