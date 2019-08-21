@@ -27,7 +27,7 @@ export default class DeleteAccountScreen extends Component {
      
 
       fetch('http://localhost:8080/api/auth/deleteaccount', {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -42,6 +42,7 @@ export default class DeleteAccountScreen extends Component {
             } else {
               response.json().then(data => {
                 console.log('good')
+                this.logout()
                 navigate('Login')
               })
             }
@@ -50,6 +51,26 @@ export default class DeleteAccountScreen extends Component {
           console.log('this is bad');
         });
     }
+
+    logout = async () => {
+      const userToken = await AsyncStorage.getItem('LoginToken');
+      console.log(userToken)
+        try { 
+          return fetch('http://localhost:8080/api/auth/logout', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': `Token ${userToken}`,
+            },
+          })
+          .then( await AsyncStorage.removeItem('LoginToken'));
+        } 
+        catch (error) {
+          console.log('not removed')
+      };
+    }
+
 
     checkandchange = () => {
       if (this.state.email == this.state.email2) {
