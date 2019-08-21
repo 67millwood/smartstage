@@ -20,81 +20,31 @@ export default class EmailChangeScreen extends Component {
             }
     }
 
-    login_error = (response) => {
-      console.log(response)
-      
-      if(response.hasOwnProperty('email')) {
-      switch (response.email[0]) {
-        case 'This field may not be blank.':
-          alert('Missing email');
-          break;
-        case 'Enter a valid email address.':
-          alert('We need a valid email address')
-          break;
-        default:
-          console.log('all good')
-        }
-      }
 
-      if(response.hasOwnProperty('password')) {
-        switch (response.password[0]) {
-          case 'This field may not be blank.':
-            alert('Missing password');
-            break;
-          default:
-            console.log('all good')
-          }
-        }
-      
-      if(response.hasOwnProperty('non_field_errors')) {
-        switch (response.non_field_errors[0]) {
-          case 'Nope':
-            alert('Sorry.  That\'s not a valid email/password.');
-            break;
-          default:
-            console.log('all good')
-          }
-        }
-      this.setState({
-        email: '',
-        password: '',
-      });
-    }
-
-    setToken= async () => {
-      try {
-        await AsyncStorage.setItem('LoginToken', (`${this.state.token}`))
-      } catch(e) {
-        console.log('didn\'t work')
-      }
-    
-      console.log('Done.')
-    }
-
-    emailchange () {
-      const { navigate } = this.props.navigation        
+    emailchange = async () => {
+      const { navigate } = this.props.navigation   
+      const userToken = await AsyncStorage.getItem('LoginToken');
+     
 
       fetch('http://localhost:8080/api/auth/emailchange', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': `Token ${userToken}`,
         },
         body: JSON.stringify({
-          email: this.state.email,
+          new_email: this.state.email,
           }),
         })
         .then(response => {
           if(!response.ok) {
             response.json().then(data => {
-              this.login_error(data)
+              console.log('response bad')
             })        
             } else {
               response.json().then(data => {
-                //console.log(data.token);
-                this.setState({ token: data.token })
-                console.log(this.state.token)
-                this.setToken()
+                console.log('good')
                 navigate('Home')
               })
             }
@@ -106,10 +56,10 @@ export default class EmailChangeScreen extends Component {
 
     checkandchange = () => {
       if (this.state.email == this.state.email2) {
-        Alert.alert('Email Match')
-        //this.emailchange();
+        Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
+        this.emailchange();
       } else {
-        Alert.alert('Ooops!', 'Those addresses don\'t match');
+        Alert.alert('Ooops!', 'Those emails don\'t match');
         this.setState({
           email: '',
           email2: '',
@@ -131,19 +81,17 @@ export default class EmailChangeScreen extends Component {
                 
                 <TextInput 
                     style={styles.input}
-                    placeholder='NEW email address'
+                    placeholder='NEW email'
                     autoCapitalize = 'none'
                     onChangeText={(email)=>this.setState({email})}
                     value={this.state.email}
-                    secureTextEntry={true}
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder='Re-enter NEW email address'
+                    placeholder='Re-enter NEW email'
                     autoCapitalize = 'none'
                     onChangeText={(email2)=>this.setState({email2})}
                     value={this.state.email2}
-                    secureTextEntry={true}
                 />
 
                 <View style={{margin:7}}>

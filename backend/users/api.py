@@ -7,7 +7,8 @@ from .serializers import (
   CustomUserSerializer,
   RegisterSerializer, 
   LoginSerializer, 
-  PwdChangeSerializer
+  PwdChangeSerializer,
+  EmailChangeSerializer,
 )
 
 
@@ -53,6 +54,24 @@ class PwdChangeAPI(generics.UpdateAPIView):
                 self.object.set_password(serializer.data.get("new_password"))
                 self.object.save()
                 return Response('success!!!!')
+
+            return Response(serializer.errors)
+
+# EmailChange API
+class EmailChangeAPI(generics.UpdateAPIView):
+        serializer_class = EmailChangeSerializer
+
+        def get_object(self):
+            return self.request.user
+            
+        def update(self, request, *args, **kwargs):
+            self.object = self.get_object()
+            serializer = self.get_serializer(data=request.data)
+
+            if serializer.is_valid():
+                self.object.email = serializer.data.get("new_email")
+                self.object.save()
+                return Response('email change success!!!!')
 
             return Response(serializer.errors)
 

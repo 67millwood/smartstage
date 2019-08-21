@@ -46,5 +46,11 @@ class PwdChangeSerializer(serializers.Serializer):
     
     new_password = serializers.CharField(max_length=600)
 
+# EmailChange Serializer
+
+class EmailChangeSerializer(serializers.Serializer):
+    
+    new_email = serializers.CharField(max_length=600)
+
 
 
