@@ -60,10 +60,11 @@ class PwdChangeAPI(generics.UpdateAPIView):
         def update(self, request, *args, **kwargs):
             self.object = self.get_object()
             serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
 
             if serializer.is_valid():
                 # set_password also hashes the password that the user will get
-                self.object.set_password(serializer.data.get("new_password"))
+                self.object.set_password(serializer.data.get("password"))
                 self.object.save()
                 return Response('success!!!!')
 

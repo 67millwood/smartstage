@@ -20,6 +20,20 @@ export default class PwdChangeScreen extends Component {
             }
     }
 
+    pwd_error = (response) => {
+      
+      if(response.hasOwnProperty('password')) {
+        switch (response.password[0]) {
+          case 'This field may not be blank.':
+            alert('Missing password');
+            break;
+          default:
+            console.log('all good')
+          }
+        }
+      }
+
+
 
     pwdchange = async () => {
       const { navigate } = this.props.navigation   
@@ -34,17 +48,23 @@ export default class PwdChangeScreen extends Component {
           'Authorization': `Token ${userToken}`,
         },
         body: JSON.stringify({
-          new_password: this.state.password,
+          password: this.state.password,
           }),
         })
         .then(response => {
           if(!response.ok) {
             response.json().then(data => {
-              console.log('response bad')
+              this.pwd_error(data)
+              this.setState({
+                password: '',
+                password2: '',
+              })
+
             })        
             } else {
               response.json().then(data => {
                 console.log('good')
+                Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
                 navigate('Home')
               })
             }
@@ -56,7 +76,7 @@ export default class PwdChangeScreen extends Component {
 
     checkandchange = () => {
       if (this.state.password == this.state.password2) {
-        Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
+        //Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
         this.pwdchange();
       } else {
         Alert.alert('Ooops!', 'Those passwords don\'t match');

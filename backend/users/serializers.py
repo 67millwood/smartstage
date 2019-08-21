@@ -42,9 +42,11 @@ class LoginSerializer(serializers.Serializer):
 
 # PwdChange Serializer
 
-class PwdChangeSerializer(serializers.Serializer):
+class PwdChangeSerializer(serializers.ModelSerializer):
     
-    new_password = serializers.CharField(max_length=600)
+    class Meta:
+        model = CustomUser
+        fields = ('password', )
 
 # EmailChange Serializer
 
