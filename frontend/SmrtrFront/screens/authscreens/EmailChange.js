@@ -20,6 +20,26 @@ export default class EmailChangeScreen extends Component {
             }
     }
 
+    email_error = (response) => {
+      
+      if(response.hasOwnProperty('email')) {
+      switch (response.email[0]) {
+        case 'This field may not be blank.':
+          alert('Missing email');
+          break;
+        case 'A user with that email address already exists.':
+          alert('User exists')
+          break;
+        case 'Enter a valid email address.':
+          alert('We need a valid email address')
+          break;
+        default:
+          console.log('all good')
+        }
+      }
+    }
+
+
 
     emailchange = async () => {
       const { navigate } = this.props.navigation   
@@ -40,11 +60,17 @@ export default class EmailChangeScreen extends Component {
         .then(response => {
           if(!response.ok) {
             response.json().then(data => {
-              console.log('response bad')
+              this.email_error(data)
+              this.setState({
+                email: '',
+                email2: '',
+              })
+      
             })        
             } else {
               response.json().then(data => {
-                console.log('good')
+                console.log('good change')
+                Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
                 navigate('Home')
               })
             }
@@ -56,7 +82,7 @@ export default class EmailChangeScreen extends Component {
 
     checkandchange = () => {
       if (this.state.email == this.state.email2) {
-        Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
+        //Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
         this.emailchange();
       } else {
         Alert.alert('Ooops!', 'Those emails don\'t match');
