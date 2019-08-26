@@ -7,12 +7,14 @@ import {
 
 import Login from '../screens/authscreens/Login';
 import Register from '../screens/authscreens/Register';
+import ResetPasswordScreen from '../screens/authscreens/Forgot';
 
 
 const AuthStack = createStackNavigator(
   {
   Login: Login,
   Register: Register,
+  Forgot: ResetPasswordScreen,
   },
   {
     headerMode: 'none'

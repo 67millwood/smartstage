@@ -153,6 +153,15 @@ export default class Login extends Component {
                   <Text style={styles.register}>Register</Text>
                   </TouchableOpacity>
                 </View>
+                <View  style={{alignItems: 'flex-end'}}>
+                  <TouchableOpacity
+                  style={styles.register}
+                  onPress={() => navigate('Forgot')}
+                  >
+                  <Text style={styles.register}>Forgot?</Text>
+                  </TouchableOpacity>
+                </View>
+
                 
                 <View style={styles.container}>
                   <Button title="Pretend I'm Logged In" onPress={() => {navigate('Home')}} />
