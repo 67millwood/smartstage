@@ -10,6 +10,7 @@ django-extensions==2.1.7
 django-model-utils==3.1.2
 django-polymorphic==2.0.3
 django-rest-knox==4.1.0
+django-rest-passwordreset==1.0.0
 django-seed==0.1.9
 django-username-email==2.2.4
 djangorestframework==3.9.4

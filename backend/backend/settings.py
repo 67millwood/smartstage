@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'rest_framework',
     'knox',
+    'django_rest_passwordreset',
 ]
 
 MIDDLEWARE = [
