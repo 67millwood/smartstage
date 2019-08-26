@@ -104,9 +104,6 @@ export default class EmailChangeScreen extends Component {
                     style={{fontSize: 27}}>
                     Change your email....
                 </Text>
-                <Text>
-                  Current email: 
-                </Text>
                 
                 <TextInput 
                     style={styles.input}
