@@ -11,15 +11,17 @@ import {
 } from 'react-native';
 
 
-export default class ResetPasswordScreen extends Component {
+export default class ResetTokenScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: '',
+            token: '',
+            new_password: '',
+            new_password2: '',
             }
     }
 
-    email_error = (response) => {
+    reset_error = (response) => {
       
       if(response.hasOwnProperty('email')) {
       switch (response.email[0]) {
@@ -44,22 +46,23 @@ export default class ResetPasswordScreen extends Component {
       const { navigate } = this.props.navigation   
      
 
-      fetch('http://localhost:8080/api/password_reset/', {
+      fetch('http://localhost:8080/api/password_reset/confirm/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: this.state.email,
+          token: this.state.token,
+          password: this.state.new_password,
           }),
         })
         .then(response => {
           if(!response.ok) {
             response.json().then(data => {
-              this.email_error(data)
+              this.reset_error(data)
               this.setState({
-                email: '',
+                token: '',
               })
       
             })        
@@ -83,16 +86,32 @@ export default class ResetPasswordScreen extends Component {
             <View style={styles.container} >
                 <Text style={styles.container}
                     style={{fontSize: 27}}>
-                    Enter your email....
+                    Enter your token and new password....
                 </Text>
                 
                 <TextInput 
                     style={styles.input}
-                    placeholder='email registered with Smrtr.life'
+                    placeholder='token you received via email'
                     autoCapitalize = 'none'
-                    onChangeText={(email)=>this.setState({email})}
-                    value={this.state.email}
+                    onChangeText={(token)=>this.setState({token})}
+                    value={this.state.token}
                 />
+                <TextInput 
+                    style={styles.input}
+                    placeholder='enter your new password'
+                    autoCapitalize = 'none'
+                    onChangeText={(new_password)=>this.setState({new_password})}
+                    value={this.state.new_password}
+                />
+                <TextInput 
+                    style={styles.input}
+                    placeholder='re-enter your new password'
+                    autoCapitalize = 'none'
+                    onChangeText={(new_password2)=>this.setState({new_password2})}
+                    value={this.state.new_password2}
+                />
+
+
 
                 <View style={{margin:7}}>
                 <TouchableOpacity
@@ -103,15 +122,6 @@ export default class ResetPasswordScreen extends Component {
 
                 </TouchableOpacity>
                 </View>
-                <View  style={{alignItems: 'flex-end'}}>
-                  <TouchableOpacity
-                  style={styles.register}
-                  onPress={() => navigate('ResetToken')}
-                  >
-                  <Text style={styles.register}>Have token already?</Text>
-                  </TouchableOpacity>
-                </View>
-
                 
 
 
