@@ -5,10 +5,26 @@ import HomeIcon from '../../navigation/HomeIcon';
 
 export default class ProfilePage extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      email: '',
+    }
   }
 
-  /* render function, etc */
+  componentDidMount() {
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener("didFocus", () => {
+      // The screen is focused
+      this.getUserInfo();
+    });
+  }
+  
+  componentWillUnmount() {
+      // Remove the event listener
+      this.focusListener.remove();
+    }
+  
+
 
 
     logout = async () => {
@@ -30,11 +46,42 @@ export default class ProfilePage extends Component {
       };
     }
 
+    getUserInfo = async () => {
+      const userToken = await AsyncStorage.getItem('LoginToken');
+
+      fetch('http://localhost:8080/api/auth/user', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${userToken}`,
+        }
+        })
+        .then(response => {
+          if(!response.ok) {
+            console.log('not ok')      
+            } else {
+              response.json().then(data => {
+                this.setState({
+                  email: data['email']
+                })
+              })
+            }
+        })
+        .catch(() => {
+          console.log('this is bad');
+        });
+    }
+
+
     render() {
         const { navigate } = this.props.navigation
         return (
              
                 <View style={styles.container}>
+                <Text>
+                  {this.state.email}
+                </Text>
                 <Button
                       title='Change my Password'
                       onPress={() => {
