@@ -154,6 +154,15 @@ export default class ResetTokenScreen extends Component {
 
                 </TouchableOpacity>
                 </View>
+                <View  style={{alignItems: 'flex-end'}}>
+                  <TouchableOpacity
+                  style={styles.register}
+                  onPress={() => navigate('Login')}
+                  >
+                  <Text style={styles.register}>Return to Login</Text>
+                  </TouchableOpacity>
+                </View>
+
                 
 
 
