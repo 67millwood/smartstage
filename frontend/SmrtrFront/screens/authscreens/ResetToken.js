@@ -23,21 +23,39 @@ export default class ResetTokenScreen extends Component {
 
     reset_error = (response) => {
       
-      if(response.hasOwnProperty('email')) {
-      switch (response.email[0]) {
+      if(response.hasOwnProperty('password')) {
+      switch (response.password[0]) {
         case 'This field may not be blank.':
-          alert('Missing email');
+          alert('Missing password');
           break;
-        case 'There is no active user associated with this e-mail address or the password can not be changed':
-          alert('That email is not in our database.')
+        case 'This password is too short. It must contain at least 8 characters.':
+          alert('That password is too short')
           break;
-        case 'Enter a valid email address.':
-          alert('We need a valid email address.')
-          break;
+        case 'The password is too similar to the email address.':
+            alert('The password is too similar to the email address.')
+            break;
+  
         default:
           console.log('all good')
         }
       }
+
+      if(response.hasOwnProperty('status')) {
+            switch (response.status[0]) {
+                case 'notfound':
+                alert('We can\'t find that token', 'Please try again or check your email.');
+                break;
+                default:
+                console.log('all good')
+                }
+            }
+
+      this.setState({
+        token: '',
+        new_password: '',
+        new_password2: '',
+      })
+
     }
 
 
@@ -61,16 +79,12 @@ export default class ResetTokenScreen extends Component {
           if(!response.ok) {
             response.json().then(data => {
               this.reset_error(data)
-              this.setState({
-                token: '',
-              })
-      
             })        
             } else {
               response.json().then(data => {
                 console.log('token sent')
-                Alert.alert('Thanks', 'An email with instructions to reset your password has been sent.')
-                navigate('ResetToken')
+                Alert.alert('Great', 'Your password has been reset.  Please login.')
+                navigate('Login')
               })
             }
         })
@@ -78,6 +92,20 @@ export default class ResetTokenScreen extends Component {
           console.log('this is bad');
         });
     }
+
+    checkandchange = () => {
+        if (this.state.new_password == this.state.new_password2) {
+          this.resetPassword();
+        } else {
+          Alert.alert('Ooops!', 'Those passwords don\'t match');
+          this.setState({
+            new_password: '',
+            new_password2: '',
+          })
+        }
+          
+        }
+  
     
     render() {
         const { navigate } = this.props.navigation        
@@ -102,6 +130,8 @@ export default class ResetTokenScreen extends Component {
                     autoCapitalize = 'none'
                     onChangeText={(new_password)=>this.setState({new_password})}
                     value={this.state.new_password}
+                    secureTextEntry={true}
+
                 />
                 <TextInput 
                     style={styles.input}
@@ -109,6 +139,8 @@ export default class ResetTokenScreen extends Component {
                     autoCapitalize = 'none'
                     onChangeText={(new_password2)=>this.setState({new_password2})}
                     value={this.state.new_password2}
+                    secureTextEntry={true}
+
                 />
 
 
@@ -116,7 +148,7 @@ export default class ResetTokenScreen extends Component {
                 <View style={{margin:7}}>
                 <TouchableOpacity
                     style={{backgroundColor: 'aqua' }} 
-                    onPress={this.resetPassword}
+                    onPress={this.checkandchange}
                       >
                         <Text>ENTER</Text>
 
