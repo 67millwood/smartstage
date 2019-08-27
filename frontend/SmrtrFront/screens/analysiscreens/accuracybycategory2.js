@@ -70,7 +70,7 @@ export default class AccuracyDetails2Screen extends Component {
     
     <View>
           <Text style={styles.percentCompleteText}>    
-          Category: {item}
+          Category: {item.answered}
           </Text>
 
       <TouchableOpacity 
@@ -97,9 +97,6 @@ export default class AccuracyDetails2Screen extends Component {
 
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>
-              This is the list of categories:
-          </Text>
           <View style={styles.beltContainer}>
                 <FlatList
                 data={this.state.category_stats}
