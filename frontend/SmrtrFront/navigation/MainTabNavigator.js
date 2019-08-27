@@ -12,7 +12,6 @@ import Analytics from '../screens/AnalyticsScreen';
 import ReviewScreen from '../screens/reviewscreens/reviewscreen';
 import QuestionScreen from '../screens/questionscreens/questionscreen';
 import AccuracyDetailsScreen from '../screens/analysiscreens/accuracybycategory';
-import AccuracyDetails2Screen from '../screens/analysiscreens/accuracybycategory2';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -66,7 +65,6 @@ BeltStack.navigationOptions = {
 const AnalyticsStack = createStackNavigator({
   Analytics: Analytics,
   AccuracyDetails: AccuracyDetailsScreen,
-  AccuracyDetails2: AccuracyDetails2Screen,
 });
 
 AnalyticsStack.navigationOptions = {

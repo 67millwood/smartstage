@@ -108,13 +108,6 @@ export default class Analytics extends Component {
             }
 
           />
-          <Button
-            title="Test Accuracy by Category"
-            onPress={() => {
-              navigate('AccuracyDetails2')}
-            }
-
-          />
 
         </View>
     );

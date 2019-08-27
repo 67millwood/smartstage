@@ -5,7 +5,8 @@ import {
   Text, 
   TouchableOpacity, 
   AsyncStorage, 
-  Button, 
+  Button,
+  FlatList, 
 } from 'react-native';
 
 
@@ -15,9 +16,7 @@ export default class AccuracyDetailsScreen extends Component {
   constructor(){
     super();
     this.state = {
-      accuracy: 0,
-      attempts: 0,
-      correct: 0,
+        category_stats: [],
     
     }
   }
@@ -26,7 +25,7 @@ export default class AccuracyDetailsScreen extends Component {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", () => {
       // The screen is focused
-      this.getAnalytics();
+      this.getCategoryAccuracy();
   });
 }
 
@@ -37,11 +36,11 @@ export default class AccuracyDetailsScreen extends Component {
 
 
 
-  getAnalytics = async () => {
+  getCategoryAccuracy = async () => {
     const userToken = await AsyncStorage.getItem('LoginToken');
 
     try {
-        return fetch('http://localhost:8080/api/accuracy', {
+        return fetch('http://localhost:8080/api/accuracy/bycategory', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -56,18 +55,39 @@ export default class AccuracyDetailsScreen extends Component {
             response.json().then(data => {
               //console.log(data)
               this.setState({
-                accuracy: data.crticialaccuracy,
-                attempts: data.critical,
-                correct: data.criticalcorrect,
+                category_stats: data,
               }
               )
             })
         }
       })}
     catch(error) {
-      console.log('no analysis coming');
+      console.log('no details coming');
     };
   }
+
+  renderlist = ({ item }) => (
+    
+    <View>
+          <Text style={styles.percentCompleteText}>    
+          Category: {item.category}
+          </Text>
+
+      <TouchableOpacity 
+        >
+          <Text style={styles.percentCompleteText}>
+            Attempted: {item.answered}
+            {"\n"}
+            Correct: {item.correct}
+            {"\n"}
+            Accuracy:  {item.accuracy}%
+            {"\n"}
+          </Text>
+          
+      </TouchableOpacity>
+    </View>
+  );
+
 
 
 
@@ -77,13 +97,13 @@ export default class AccuracyDetailsScreen extends Component {
 
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text style={styles.mainlineText}>
-            Attempts: {this.state.attempts}
-            {"\n"}
-            Correct: {this.state.correct}
-            {"\n"}
-            Accuracy: {this.state.accuracy}%
-          </Text>
+          <View style={styles.beltContainer}>
+                <FlatList
+                data={this.state.category_stats}
+                renderItem={this.renderlist}
+                keyExtractor={(item) => String(item.category)}
+                />
+          </View>
         </View>
     );
   }
