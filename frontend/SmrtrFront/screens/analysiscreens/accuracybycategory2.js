@@ -70,17 +70,17 @@ export default class AccuracyDetails2Screen extends Component {
     
     <View>
           <Text style={styles.percentCompleteText}>    
-          Category: {item.answered}
+          Category: {item.category}
           </Text>
 
       <TouchableOpacity 
         >
           <Text style={styles.percentCompleteText}>
-            Attempted:
+            Attempted: {item.answered}
             {"\n"}
-            Correct:
+            Correct: {item.correct}
             {"\n"}
-            Accuracy:
+            Accuracy:  {item.accuracy}%
             {"\n"}
           </Text>
           
@@ -101,7 +101,7 @@ export default class AccuracyDetails2Screen extends Component {
                 <FlatList
                 data={this.state.category_stats}
                 renderItem={this.renderlist}
-                keyExtractor={(item) => String(item)}
+                keyExtractor={(item) => String(item.category)}
                 />
           </View>
         </View>

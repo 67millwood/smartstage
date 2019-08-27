@@ -28,21 +28,20 @@ class UserAnswerManager(models.Manager):
   # double __ allows foreign keys to get into other tables on .filter
   def category_attempts(self, user):
     cat_list = []
-    category_data = {}
+    
     for category in Category.objects.all():
-      
+      category_data = {}
       category_user_answers = super().get_queryset().filter(user=user).filter(question__category=category.id).count()
       correct_answers = super().get_queryset().filter(user=user).filter(question__category=category.id).filter(correct=True).distinct().count()
       accuracy = round(100*correct_answers/category_user_answers)
-      category_data[category.name] =  {
+      category_data =  {
+        "category": category.name,
         "answered": category_user_answers,
         "correct": correct_answers,
         "accuracy": accuracy,
       }
-      
-      print(category_user_answers)
-      print(correct_answers)
-    cat_list.append(category_data)
+      cat_list.append(category_data)
+    
 
     print(cat_list)
 

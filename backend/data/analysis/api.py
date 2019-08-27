@@ -30,5 +30,4 @@ class CategoryAccuracyAPI(generics.ListAPIView):
     def get(self, user):
         user = self.request.user
         answers = UserAnswer.objects.category_attempts(user=user)
-        print(answers)
         return Response(answers)
