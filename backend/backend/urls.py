@@ -49,6 +49,9 @@ urlpatterns = [
     # for the password reset
     path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 
+    # for analysis
+    path('', include('data.analysis.urlsapi')),
+
 
 
 ]
