@@ -70,22 +70,18 @@ export default class AccuracyDetails2Screen extends Component {
     
     <View>
           <Text style={styles.percentCompleteText}>    
-          Your {item.belt_level.belt_name} belt is {item.percent_complete}% complete:
+          Category: {item}
           </Text>
 
       <TouchableOpacity 
-        style={ {...styles.belt, backgroundColor: `${item.belt_level.belt_color}`} }>
+        >
           <Text style={styles.percentCompleteText}>
-            Notches Earned: {item.notches_complete}
+            Attempted:
             {"\n"}
-            {item.percent_complete >= 100 ? `🦋🦋Nice Work!🦋🦋\nCompleted: ${item.belt_complete_date}` : ''}
+            Correct:
             {"\n"}
-            
-
+            Accuracy:
             {"\n"}
-          </Text>
-          <Text style={styles.smallerBeltText}>
-            (required: {item.belt_level.belt_notches})
           </Text>
           
       </TouchableOpacity>
@@ -108,7 +104,7 @@ export default class AccuracyDetails2Screen extends Component {
                 <FlatList
                 data={this.state.category_stats}
                 renderItem={this.renderlist}
-                keyExtractor={(item) => String(item.id)}
+                keyExtractor={(item) => String(item)}
                 />
           </View>
         </View>
