@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import Max
+from content.models import Category
 
 class BeltManager(models.Manager):
 
@@ -25,8 +26,12 @@ class UserAnswerManager(models.Manager):
   # every category specific question the user has ever attempted right or wrong
   # double __ allows foreign keys to get into other tables on .filter
   def category_attempts(self, user):
-    category_user_answers = super().get_queryset().filter(user=user).filter(question__category=3)
-    correct_answers = super().get_queryset().filter(user=user).filter(question__category=3).filter(correct=True).distinct()
+    category_accuracy_list = []
+    categories = Category.objects.all()
+    for category in categories:
+      print(category)
+    category_user_answers = super().get_queryset().filter(user=user).filter(question__category=category)
+    correct_answers = super().get_queryset().filter(user=user).filter(question__category=category).filter(correct=True).distinct()
     category_attempts = {'category_answered': category_user_answers, 'category_correct_answers': correct_answers}
     return category_attempts
 
