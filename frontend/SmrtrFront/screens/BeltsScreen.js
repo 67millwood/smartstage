@@ -38,7 +38,6 @@ export default class BeltsScreen extends Component {
 
   getallbelts = async () => {
     const userToken = await AsyncStorage.getItem('LoginToken');
-    console.log(userToken)
 
     try {
         return fetch('http://localhost:8080/api/singleuserbelts', {

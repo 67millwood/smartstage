@@ -1,8 +1,6 @@
-from .serializers import AccuracySerializer
 from rest_framework import viewsets, permissions, generics
 from rest_framework.response import Response
 
-from belts.serializers import AnswerSerializer
 from belts.models import UserAnswer
 
 # Accuracy API
@@ -10,8 +8,6 @@ class AccuracyAPI(generics.GenericAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
-
-    # serializer_class = AccuracySerializer
 
     def get(self, user):
         user = self.request.user

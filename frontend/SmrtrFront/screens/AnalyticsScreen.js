@@ -40,7 +40,6 @@ export default class Analytics extends Component {
 
   getAnalytics = async () => {
     const userToken = await AsyncStorage.getItem('LoginToken');
-    console.log(userToken)
 
     try {
         return fetch('http://localhost:8080/api/accuracy', {
@@ -56,7 +55,7 @@ export default class Analytics extends Component {
           console.log('crap')      
           } else {
             response.json().then(data => {
-              console.log(data)
+              //console.log(data)
               this.setState({
                 accuracy: data.accuracy,
                 attempts: data.all_attempts,
