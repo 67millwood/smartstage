@@ -21,5 +21,5 @@ class AccuracyAPI(generics.GenericAPIView):
         accuracy = round(100*correct/all_attempts)
         print(correct)
         print(accuracy)
-        return Response({"correct": correct, "all attempts": all_attempts, "accuracy": accuracy})
+        return Response({"correct": correct, "all_attempts": all_attempts, "accuracy": accuracy})
 

@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, AsyncStorage, FlatList } from 'react-native';
+import { 
+  View, 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  AsyncStorage, 
+  FlatList 
+} from 'react-native';
+
 import ProfileIcon from '../navigation/ProfileIcon';
 
 import { styles } from '../screens/Mainstyles/mainstyle';
