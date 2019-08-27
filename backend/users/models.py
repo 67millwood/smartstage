@@ -36,7 +36,8 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     print('the password email')
     context = {
         'email': reset_password_token.user.email,
-        'reset_password_url': "http://localhost:8080{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
+        'reset_password_url': "http://localhost:8080{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key),
+        'token': reset_password_token.key,
     }
 
     # render email text

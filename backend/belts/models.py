@@ -9,6 +9,7 @@ from content.models import Question
 
 from .manager import BeltManager, UserAnswerManager
 from .beltansweremailer import completedBeltEmail
+from users.useremails import userSignUp
 
 from datetime import datetime
 
@@ -54,9 +55,13 @@ class UserBelts(models.Model):
   objects = BeltManager()
 
 # signal to listen for new users being created, adding a white belt to their profile
+# also if new user is created, welcome email is sent via userSignUp function
   @receiver(post_save, sender=CustomUser)
   def first_belt(sender, instance, **kwargs):
+    person = CustomUser.objects.get(pk=instance.id)
+    
     if kwargs.get('created', False):
+      userSignUp(person)
       UserBelts.objects.get_or_create(user_id=instance.id, belt_level_id=1)
 
 # signal to listen for UserAnswer being created, updates the belt level accordingly
