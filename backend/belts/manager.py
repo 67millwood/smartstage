@@ -10,7 +10,7 @@ class BeltManager(models.Manager):
 
   def all_belts(self, user):
     user_belts_list = super().get_queryset().filter(user=user).order_by('-belt_level')
-    print(user_belts_list)
+    # print(user_belts_list)
     highest_belt_name = user_belts_list.first().belt_level.belt_name
     highest_belt_level = user_belts_list.first().belt_level.belt_rank
     belt_info = {'belts': user_belts_list, 'highest_belt_name': highest_belt_name, 'highest_belt_level': highest_belt_level}
@@ -27,7 +27,7 @@ class UserAnswerManager(models.Manager):
   # every category specific question the user has ever attempted right or wrong
   # double __ allows foreign keys to get into other tables on .filter
   def category_attempts(self, user):
-    cat_list = []
+    category_accuracy_data = []
     
     for category in Category.objects.all():
       category_data = {}
@@ -36,14 +36,12 @@ class UserAnswerManager(models.Manager):
       accuracy = round(100*correct_answers/category_user_answers)
       category_data =  {
         "category": category.name,
+        "color": category.color,
         "answered": category_user_answers,
         "correct": correct_answers,
         "accuracy": accuracy,
       }
-      cat_list.append(category_data)
+      category_accuracy_data.append(category_data)
     
-
-    print(cat_list)
-
-    return cat_list
+    return category_accuracy_data
 

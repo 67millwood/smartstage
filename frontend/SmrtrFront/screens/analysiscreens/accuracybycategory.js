@@ -69,13 +69,11 @@ export default class AccuracyDetailsScreen extends Component {
   renderlist = ({ item }) => (
     
     <View>
-          <Text style={styles.percentCompleteText}>    
-          Category: {item.category}
-          </Text>
-
-      <TouchableOpacity 
+      <TouchableOpacity style={ {...styles.belt, backgroundColor: `${item.color}`} }
         >
           <Text style={styles.percentCompleteText}>
+            {item.category}
+            {"\n"}
             Attempted: {item.answered}
             {"\n"}
             Correct: {item.correct}
@@ -96,7 +94,6 @@ export default class AccuracyDetailsScreen extends Component {
     const { navigate } = this.props.navigation
 
     return (
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           <View style={styles.beltContainer}>
                 <FlatList
                 data={this.state.category_stats}
@@ -104,7 +101,6 @@ export default class AccuracyDetailsScreen extends Component {
                 keyExtractor={(item) => String(item.category)}
                 />
           </View>
-        </View>
     );
   }
 
