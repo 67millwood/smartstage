@@ -8,11 +8,10 @@ import {
   Button, 
 } from 'react-native';
 
-import ProfileIcon from '../navigation/ProfileIcon';
 
-import { styles } from '../screens/Mainstyles/mainstyle';
+import { styles } from '../Mainstyles/mainstyle';
 
-export default class Analytics extends Component {
+export default class AccuracyDetailsScreen extends Component {
   constructor(){
     super();
     this.state = {
@@ -71,22 +70,6 @@ export default class Analytics extends Component {
   }
 
 
-  static navigationOptions = () => {
-    return {
-    title: 'Analytics',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-    headerRight: (
-      <View>
-        <ProfileIcon />
-      </View>
-    )
-    }}
 
 
   render() {
@@ -101,13 +84,6 @@ export default class Analytics extends Component {
             {"\n"}
             Accuracy: {this.state.accuracy}%
           </Text>
-          <Button
-            title="Accuracy by Category"
-            onPress={() => {
-              navigate('AccuracyDetails')}
-            }
-
-          />
         </View>
     );
   }

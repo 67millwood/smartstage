@@ -22,3 +22,11 @@ class UserAnswerManager(models.Manager):
     user_attempts = {'all_answered': all_user_answers, 'correct_answers': correct_answers}
     return user_attempts
 
+  # every category specific question the user has ever attempted right or wrong
+  # double __ allows foreign keys to get into other tables on .filter
+  def category_attempts(self, user):
+    category_user_answers = super().get_queryset().filter(user=user).filter(question__category=3)
+    correct_answers = super().get_queryset().filter(user=user).filter(question__category=3).filter(correct=True).distinct()
+    category_attempts = {'category_answered': category_user_answers, 'category_correct_answers': correct_answers}
+    return category_attempts
+
