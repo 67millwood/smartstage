@@ -56,9 +56,9 @@ export default class AccuracyDetailsScreen extends Component {
             response.json().then(data => {
               //console.log(data)
               this.setState({
-                accuracy: data.accuracy,
-                attempts: data.all_attempts,
-                correct: data.correct,
+                accuracy: data.crticialaccuracy,
+                attempts: data.critical,
+                correct: data.criticalcorrect,
               }
               )
             })

@@ -20,11 +20,15 @@ class AccuracyAPI(generics.GenericAPIView):
         category_answers = UserAnswer.objects.category_attempts(user=user)
         category_correct = category_answers['category_correct_answers'].count()
         category_all_attempts = category_answers['category_answered'].count()
+
+        category_accuracy = round(100*category_correct/category_all_attempts)
+
         return Response({
             "correct": correct, 
             "all_attempts": all_attempts, 
             "accuracy": accuracy,
             "critical": category_all_attempts,
             "criticalcorrect": category_correct,
+            "crticialaccuracy": category_accuracy,
             })
 
