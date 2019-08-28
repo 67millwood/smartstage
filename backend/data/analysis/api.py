@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from belts.models import UserAnswer
 from belts.serializers import AnswerSerializer
 
+from .consistency import short_term, medium_term, long_term
+
 # Accuracy API
 class AccuracyAPI(generics.GenericAPIView):
     permission_classes = [
@@ -40,3 +42,18 @@ class BreadthAPI(generics.ListAPIView):
         user = self.request.user
         answers = UserAnswer.objects.breadth(user=user)
         return Response(answers)
+
+class ConsistencyAPI(generics.GenericAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    def get(self, user):
+        user = self.request.user
+        one = short_term(user=user)
+        two = medium_term(user=user)
+        three = long_term(user=user)
+        return Response({
+            "short": one,
+            "med": two,
+            "long": three,
+        })
