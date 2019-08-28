@@ -3,26 +3,50 @@ from datetime import date, timedelta
 from belts.models import UserAnswer
 
 def short_term(user):
-    seven_days_ago = date.today() - timedelta(7)
+    # set today and the start of the range
+    seven_days_ago = date.today() - timedelta(6)
     today = date.today()
-    question_date = [date(2019, 8, 23), date(2019, 8, 24), date(2019, 8, 24), date(2019, 7, 30)]
     interval = timedelta(days=1)
     question_dates = []
+    
+    # create the list of dates when questions were answered
+    question_date = []
+    real_questions = UserAnswer.objects.all().filter(answer_date__gt=seven_days_ago).filter(user=user)
+    for question in real_questions:
+        # need to convert datetime.datetime objects in database to .date()
+        question_date.append(question.answer_date.date())
+    print(seven_days_ago)
+    print(question_date)
+    # user the interval to count down the days individual between start date and today
+    # check each date (converted to .date()) when a question was answered to see if occured on a day with no questions so far
+    # add it to the collection of days and discard it from the original list
+    # repeat until add days have been checked
     while seven_days_ago <= today:
         #print(seven_days_ago)
         for qdate in question_date:
             if qdate == seven_days_ago:
-                #print('yes')
                 if qdate not in question_dates:
                     question_dates.append(qdate)
                 question_date.remove(qdate)
         seven_days_ago += interval
+    
+    # the number of unique dates is called hits....
     hits = len(question_dates)
-    #unqiue_question_dates = set(question_dates)
-    print('this many unique days in the p7:', hits)
-    print('Today: ', today)
-    print('7 days ago: ', seven_days_ago)
-    return 'short'
+    print('This many unique days in the p7:', hits)
+    short_term_rating: ''
+    # give a rating to the consistency over the past 7 days
+    if hits <= 1:
+        short_term_rating = 'Poor'
+    elif hits <=2:
+        short_term_rating = 'Moderate'
+    elif hits <=3:
+        short_term_rating = 'Good'
+    elif hits <=4:
+        short_term_rating = 'Great'
+    else:
+        short_term_rating = 'Amazing'
+    
+    return short_term_rating
 
 def medium_term(user):
     answers = UserAnswer.objects.all().count()

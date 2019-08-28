@@ -49,11 +49,11 @@ class ConsistencyAPI(generics.GenericAPIView):
     ]
     def get(self, user):
         user = self.request.user
-        one = short_term(user=user)
-        two = medium_term(user=user)
-        three = long_term(user=user)
+        short_term_consistency = short_term(user=user)
+        medium_term_consistency = medium_term(user=user)
+        long_term_consistency = long_term(user=user)
         return Response({
-            "short": one,
-            "med": two,
-            "long": three,
+            "short_term": short_term_consistency,
+            "medium_term": medium_term_consistency,
+            "long_term": long_term_consistency,
         })
