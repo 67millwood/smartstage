@@ -182,9 +182,9 @@ export default class Analytics extends Component {
           <Text style={styles.mainlineText}>
             Short Term: {this.state.short_term}
             {"\n"}
-            Medium Term: past 30 days
+            Medium Term: {this.state.medium_term}
             {"\n"}
-            Long Term: past 90 days
+            Long Term: {this.state.long_term}
           </Text>
 
           <Text style={styles.subTitle}>

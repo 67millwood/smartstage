@@ -4,7 +4,7 @@ from belts.models import UserAnswer
 
 def short_term(user):
     # set today and the start of the range
-    seven_days_ago = date.today() - timedelta(6)
+    seven_days_ago = date.today() - timedelta(7)
     today = date.today()
     interval = timedelta(days=1)
     question_dates = []
@@ -49,9 +49,16 @@ def short_term(user):
     return short_term_rating
 
 def medium_term(user):
-    answers = UserAnswer.objects.all().count()
+    thirty_days_ago = date.today() - timedelta(30)
+    today = date.today()
+    interval = timedelta(days=1)
+
+    answers = UserAnswer.objects.all().filter(answer_date__gt=thirty_days_ago).filter(user=user).count()
     return answers    
 
 def long_term(user):
-    print('hello long term')
-    return 'long'
+    ninety_days_ago = date.today() - timedelta(90)
+    today = date.today()
+
+    answers = UserAnswer.objects.all().filter(answer_date__gt=ninety_days_ago).filter(user=user).count()
+    return answers
