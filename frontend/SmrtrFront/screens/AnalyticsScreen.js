@@ -20,6 +20,9 @@ export default class Analytics extends Component {
       attempts: 0,
       correct: 0,
       overall_breadth: '',
+      short_term: '',
+      medium_term: '',
+      long_term: '',
     
     }
   }
@@ -29,6 +32,7 @@ export default class Analytics extends Component {
     this.focusListener = navigation.addListener("didFocus", () => {
       // The screen is focused
       this.getAnalytics();
+      this.getConsistency();
       this.getCategoryBreadth();
   });
 }
@@ -68,8 +72,37 @@ export default class Analytics extends Component {
     };
   }
 
+  getConsistency = async () => {
+    const userToken = await AsyncStorage.getItem('LoginToken');
 
-
+    try {
+        return fetch('http://localhost:8080/api/consistency', {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${userToken}`,
+          },
+      })
+      .then(response => {
+        if(!response.ok) {
+          console.log('crap')      
+          } else {
+            response.json().then(data => {
+              //console.log(data)
+              this.setState({
+                  short_term: data.short_term,
+                  medium_term: '',
+                  long_term: '',
+                  }
+              )
+            })
+        }
+      })}
+    catch(error) {
+      console.log('no analysis coming');
+    };
+  }
 
   getAnalytics = async () => {
     const userToken = await AsyncStorage.getItem('LoginToken');
@@ -147,7 +180,7 @@ export default class Analytics extends Component {
           </Text>
 
           <Text style={styles.mainlineText}>
-            Short Term: past 7 days
+            Short Term: {this.state.short_term}
             {"\n"}
             Medium Term: past 30 days
             {"\n"}
