@@ -71,16 +71,20 @@ export default class AccuracyDetailsScreen extends Component {
     <View>
       <TouchableOpacity style={ {...styles.belt, backgroundColor: `${item.color}`} }
         >
+          <Text style={styles.subTitle}>
+          {item.category}
+          </Text>
           <Text style={styles.percentCompleteText}>
-            {item.category}
-            {"\n"}
+            
             Attempted: {item.answered}
             {"\n"}
             Correct: {item.correct}
             {"\n"}
-            Accuracy:  {item.accuracy}%
-            {"\n"}
           </Text>
+          <Text style={{...styles.highlightedData, ...styles.percentCompleteText}}>
+            Accuracy:  {item.accuracy}%
+          </Text>
+          
           
       </TouchableOpacity>
     </View>

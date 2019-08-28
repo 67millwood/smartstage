@@ -10,6 +10,19 @@ const styles = StyleSheet.create({
 
     },
 
+    subTitle: {
+      paddingTop: 20,
+      fontSize: 22,
+      fontWeight: 'bold',
+      color: 'green',
+    },
+
+    highlightedData: {
+      fontWeight: 'bold',
+      color: 'navy',
+
+    },
+
     selected: {
       borderColor: 'blue',
       borderStyle: 'solid',

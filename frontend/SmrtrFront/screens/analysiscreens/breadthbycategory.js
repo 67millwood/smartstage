@@ -73,12 +73,17 @@ export default class BreadthDetailsScreen extends Component {
     <View>
       <TouchableOpacity style={ {...styles.belt, backgroundColor: `${item.color}`} }
         >
+          <Text style={styles.subTitle}>
+          {item.category}
+          </Text>
+
           <Text style={styles.percentCompleteText}>
-            {item.category}
+            Percent of questions attempted: {item.percent_attempts}%
             {"\n"}
-            Percent of Questions attempted: {item.percent_attempts}%
-            {"\n"}
-            Breadth Rating: {item.categoryrating}
+            Breadth Rating: {" "}
+            <Text style={{fontWeight: 'bold', color: 'red'}}>
+             {item.categoryrating}
+            </Text>
             {"\n"}
           </Text>
           

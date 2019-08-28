@@ -127,6 +127,10 @@ export default class Analytics extends Component {
 
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <Text style={styles.subTitle}>
+            Breadth
+          </Text>
+
           <Text style={styles.mainlineText}>
             Overall Breadth: {this.state.overall_breadth}
           </Text>
@@ -138,9 +142,23 @@ export default class Analytics extends Component {
             }
 
           />
+          <Text style={styles.subTitle}>
+            Consistency
+          </Text>
 
           <Text style={styles.mainlineText}>
+            Short Term: past 7 days
             {"\n"}
+            Medium Term: past 30 days
+            {"\n"}
+            Long Term: past 90 days
+          </Text>
+
+          <Text style={styles.subTitle}>
+            Accuracy
+          </Text>
+
+          <Text style={styles.mainlineText}>
             Attempts: {this.state.attempts}
             {"\n"}
             Correct: {this.state.correct}
