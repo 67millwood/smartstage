@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models import Max
 from content.models import Category
 
+from statistics import stdev 
+
 class BeltManager(models.Manager):
 
   def highest_belt(self, user):
@@ -45,3 +47,44 @@ class UserAnswerManager(models.Manager):
     
     return category_accuracy_data
 
+  # breadth borrows data from all_attempts and category_attempts to give a sense of balance
+  def breadth(self, user):
+    category_answered = self.category_attempts(user=user)
+    total_questions = 0
+    total_correct = 0
+    counter = 0
+    for category in category_answered:
+      total_questions += category['answered']
+      total_correct += category['correct']
+      counter += 1
+    
+    category_mean = 100/counter
+    answered_data = []
+    correct_data = []
+    breadth_packet = []
+
+    for category in category_answered:
+      breadth_analytics = {}
+      category_answered_percentage = category['answered']/total_questions
+      category_correct_perecentage = category['correct']/total_correct
+      answered_data.append(category_answered_percentage)
+      correct_data.append(category_correct_perecentage)
+      breadth_analytics = {
+        "category": category['category'],
+        "color": category['color'],
+
+      }
+      breadth_packet.append(breadth_analytics)
+
+    
+    answer_breadth = 100*stdev(answered_data)
+    correct_breadth = 100*stdev(correct_data)
+    print(answer_breadth)
+    print(correct_breadth)
+    breadth_payload = {
+      "breadth_data": breadth_packet,
+      "answer_deviation": answer_breadth,
+      "correct_deviation": correct_breadth,
+    }
+    
+    return breadth_payload

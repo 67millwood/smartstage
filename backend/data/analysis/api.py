@@ -23,11 +23,20 @@ class AccuracyAPI(generics.GenericAPIView):
             "accuracy": accuracy,
             })
 
-class CategoryAccuracyAPI(generics.ListAPIView):
+class CategoryAccuracyAPI(generics.GenericAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
     def get(self, user):
         user = self.request.user
         answers = UserAnswer.objects.category_attempts(user=user)
+        return Response(answers)
+
+class BreadthAPI(generics.ListAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    def get(self, user):
+        user = self.request.user
+        answers = UserAnswer.objects.breadth(user=user)
         return Response(answers)
