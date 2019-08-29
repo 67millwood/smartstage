@@ -49,16 +49,21 @@ def short_term(user):
     return short_term_rating
 
 def medium_term(user):
-    thirty_days_ago = date.today() - timedelta(30)
     today = date.today()
+    thirty_days = today - timedelta(30)
+    ten_days = today - timedelta(10)
+    twenty_days = ten_days - timedelta(10)
+    # print(today, ten_days, twenty_days, thirty_days)
     interval = timedelta(days=1)
 
-    answers = UserAnswer.objects.all().filter(answer_date__gt=thirty_days_ago).filter(user=user).count()
+
+    
+    answers = UserAnswer.objects.all().filter(answer_date__gt=thirty_days).filter(user=user).count()
     return answers    
 
 def long_term(user):
-    ninety_days_ago = date.today() - timedelta(90)
+    ninety_days = date.today() - timedelta(90)
     today = date.today()
 
-    answers = UserAnswer.objects.all().filter(answer_date__gt=ninety_days_ago).filter(user=user).count()
+    answers = UserAnswer.objects.all().filter(answer_date__gt=ninety_days).filter(user=user).count()
     return answers
