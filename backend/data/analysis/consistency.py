@@ -7,27 +7,29 @@ def short_term(user):
     seven_days_ago = date.today() - timedelta(7)
     today = date.today()
     interval = timedelta(days=1)
-    question_dates = []
     
-    # create the list of dates when questions were answered
-    question_date = []
+    # create the list of ALL dates when questions were answered
+    all_question_dates = []
     real_questions = UserAnswer.objects.all().filter(answer_date__gt=seven_days_ago).filter(user=user)
     for question in real_questions:
         # need to convert datetime.datetime objects in database to .date()
-        question_date.append(question.answer_date.date())
+        all_question_dates.append(question.answer_date.date())
     print(seven_days_ago)
-    print(question_date)
+    print(all_question_dates)
     # user the interval to count down the days individual between start date and today
     # check each date (converted to .date()) when a question was answered to see if occured on a day with no questions so far
     # add it to the collection of days and discard it from the original list
     # repeat until add days have been checked
+    
+    question_dates = []
+
     while seven_days_ago <= today:
         #print(seven_days_ago)
-        for qdate in question_date:
+        for qdate in all_question_dates:
             if qdate == seven_days_ago:
                 if qdate not in question_dates:
                     question_dates.append(qdate)
-                question_date.remove(qdate)
+                all_question_dates.remove(qdate)
         seven_days_ago += interval
     
     # the number of unique dates is called hits....
@@ -57,7 +59,7 @@ def medium_term(user):
     interval = timedelta(days=1)
 
 
-    
+
     answers = UserAnswer.objects.all().filter(answer_date__gt=thirty_days).filter(user=user).count()
     return answers    
 
