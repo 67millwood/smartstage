@@ -82,7 +82,7 @@ export default class AccuracyDetailsScreen extends Component {
             {"\n"}
           </Text>
           <Text style={{...styles.highlightedData, ...styles.percentCompleteText}}>
-            Accuracy:  {item.accuracy}%
+            Accuracy:  {item.accuracy}
           </Text>
           
           

@@ -35,7 +35,10 @@ class UserAnswerManager(models.Manager):
       category_data = {}
       category_user_answers = super().get_queryset().filter(user=user).filter(question__category=category.id).count()
       correct_answers = super().get_queryset().filter(user=user).filter(question__category=category.id).filter(correct=True).distinct().count()
-      accuracy = round(100*correct_answers/category_user_answers)
+      if category_user_answers == 0:
+        accuracy = 'not applicable'
+      else:
+        accuracy = round(100*correct_answers/category_user_answers)
       category_data =  {
         "category": category.name,
         "color": category.color,

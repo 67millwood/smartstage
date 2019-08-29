@@ -93,7 +93,7 @@ export default class Analytics extends Component {
               this.setState({
                   short_term: data.short_term,
                   medium_term: data.medium_term,
-                  long_term: '',
+                  long_term: data.long_term,
                   }
               )
             })
@@ -196,7 +196,7 @@ export default class Analytics extends Component {
             {"\n"}
             Correct: {this.state.correct}
             {"\n"}
-            Accuracy: {this.state.accuracy}%
+            Accuracy: {this.state.accuracy}
           </Text>
           <Button
             title="Accuracy by Category"

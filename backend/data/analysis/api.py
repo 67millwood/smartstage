@@ -18,7 +18,11 @@ class AccuracyAPI(generics.GenericAPIView):
         correct = answers['correct_answers'].count()
         all_attempts = answers['all_answered'].count()
 
-        accuracy = round(100*correct/all_attempts)
+        if all_attempts == 0:
+            accuracy = 'not applicable'
+        else:
+            accuracy = round(100*correct/all_attempts)
+        
         return Response({
             "correct": correct, 
             "all_attempts": all_attempts, 
