@@ -56,7 +56,7 @@ def medium_term(user):
     medium_term_rating: ''
     if first_question == None:
         medium_term_rating = 'No questions answered yet...'
-    elif first_question.answer_date.date() > thirty_days:
+    elif first_question.answer_date.date() < thirty_days:
         medium_term_rating = 'Need a bit more time...'
     elif total_unique_days < 4:
         medium_term_rating = 'Poor'
@@ -107,7 +107,7 @@ def long_term(user):
     long_term_rating: ''
     if first_question == None:
         long_term_rating = 'No questions answered yet...'
-    elif first_question.answer_date.date() > ninety_days:
+    elif first_question.answer_date.date() < ninety_days:
         long_term_rating = 'Need a bit more time...'
     elif total_unique_days < 12:
         long_term_rating = 'Poor'
