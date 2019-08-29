@@ -56,7 +56,7 @@ export default class Analytics extends Component {
       })
       .then(response => {
         if(!response.ok) {
-          console.log('crap')      
+          console.log('breadth crap')      
           } else {
             response.json().then(data => {
               //console.log(data)
@@ -158,6 +158,16 @@ export default class Analytics extends Component {
   render() {
     const { navigate } = this.props.navigation
 
+    let breadthbutton;
+    if (this.state.overall_breadth != 'No data yet...') {
+      breadthbutton = <Button
+                      title="Breadth by Category"
+                      onPress={() => {
+                        navigate('BreadthDetails')}
+                      }
+                    />
+    }
+
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           <Text style={styles.subTitle}>
@@ -168,13 +178,7 @@ export default class Analytics extends Component {
             Overall Breadth: {this.state.overall_breadth}
           </Text>
 
-          <Button
-            title="Breadth by Category"
-            onPress={() => {
-              navigate('BreadthDetails')}
-            }
-
-          />
+          {breadthbutton}
           <Text style={styles.subTitle}>
             Consistency
           </Text>

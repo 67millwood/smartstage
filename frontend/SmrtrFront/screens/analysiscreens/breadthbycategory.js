@@ -17,7 +17,6 @@ export default class BreadthDetailsScreen extends Component {
     super();
     this.state = {
         category_breadth: [],
-        overall_breadth: '',
     
     }
   }
@@ -57,7 +56,6 @@ export default class BreadthDetailsScreen extends Component {
               //console.log(data)
               this.setState({
                 category_breadth: data.breadth_data,
-                overall_breadth: data.answer_deviation,
               }
               )
             })

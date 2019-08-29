@@ -14,9 +14,7 @@ def short_term(user):
     # need to determine if the first question answered is LATER than the time period
     # if NOT, message to user is 'not enough data yet'
     first_question = UserAnswer.objects.all().filter(user=user).first()
-    print(first_question)
 
-    print('This many unique days in the p7:', last7days)
     # give a rating to the consistency over the past 7 days
     short_term_rating: ''
     if first_question == None:
@@ -49,7 +47,6 @@ def medium_term(user):
     last21to30days = UserAnswer.objects.dates('answer_date', 'day').filter(answer_date__range=(thirty_days, twenty_days)).filter(user=user).count()
     
     total_unique_days = last10days + last11to20days + last21to30days
-    print(total_unique_days)
     
     # need to determine if the first question answered is LATER than the time period
     # if NOT, message to user is 'not enough data yet'
@@ -101,7 +98,6 @@ def long_term(user):
     last61to90days = UserAnswer.objects.dates('answer_date', 'day').filter(answer_date__range=(ninety_days, sixty_days)).filter(user=user).count()
     
     total_unique_days = last30days + last31to60days + last61to90days
-    print(total_unique_days)
     
     # need to determine if the first question answered is LATER than the time period
     # if NOT, message to user is 'not enough data yet'
