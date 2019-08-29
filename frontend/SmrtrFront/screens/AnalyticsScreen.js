@@ -92,7 +92,7 @@ export default class Analytics extends Component {
               //console.log(data)
               this.setState({
                   short_term: data.short_term,
-                  medium_term: '',
+                  medium_term: data.medium_term,
                   long_term: '',
                   }
               )
