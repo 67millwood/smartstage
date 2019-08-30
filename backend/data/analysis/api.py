@@ -4,7 +4,10 @@ from rest_framework.response import Response
 from belts.models import UserAnswer
 from belts.serializers import AnswerSerializer
 
+# modules for analytics can be found in data/analysis...
 from .consistency import short_term, medium_term, long_term
+from .accuracy import category_attempts
+from .breadth import breadth
 
 # Accuracy API
 class AccuracyAPI(generics.GenericAPIView):
@@ -35,7 +38,7 @@ class CategoryAccuracyAPI(generics.GenericAPIView):
     ]
     def get(self, user):
         user = self.request.user
-        answers = UserAnswer.objects.category_attempts(user=user)
+        answers = category_attempts(user=user)
         return Response(answers)
 
 class BreadthAPI(generics.ListAPIView):
@@ -44,7 +47,7 @@ class BreadthAPI(generics.ListAPIView):
     ]
     def get(self, user):
         user = self.request.user
-        answers = UserAnswer.objects.breadth(user=user)
+        answers = breadth(user=user)
         return Response(answers)
 
 class ConsistencyAPI(generics.GenericAPIView):
