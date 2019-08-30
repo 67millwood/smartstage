@@ -14,7 +14,7 @@ def category_attempts(user):
       category_user_answers = UserAnswer.objects.all().filter(user=user).filter(question__category=category.id).count()
       correct_answers = UserAnswer.objects.all().filter(user=user).filter(question__category=category.id).filter(correct=True).distinct().count()
       if category_user_answers == 0:
-        accuracy = 'not applicable'
+        accuracy = 0
       else:
         accuracy = round(100*correct_answers/category_user_answers)
       category_data =  {

@@ -160,26 +160,26 @@ export default class Analytics extends Component {
 
     // conditional rendering if user has no questions yet
 
-    let breadthbutton;
+    let breadthinfo;
     if (this.state.overall_breadth != 'No data yet...') {
-      breadthbutton = <Button
+      breadthinfo = <Button
                       title="Breadth by Category"
                       onPress={() => {
                         navigate('BreadthDetails')}
                       }
                     />
-    }
+                    }
     
-    let accuracybutton;
+    let accuracyinfo;
     if (this.state.accuracy != 'No data yet...') {
-      accuracybutton =
+      accuracyinfo =
                     <View> 
                     <Text style={styles.mainlineText}>
                     Attempts: {this.state.attempts}
                     {"\n"}
                     Correct: {this.state.correct}
                     {"\n"}
-                    Accuracy: {this.state.accuracy}
+                    Overall Accuracy: {this.state.accuracy}%
                     </Text>
                     <Button
                       title="Accuracy by Category"
@@ -189,15 +189,31 @@ export default class Analytics extends Component {
                     />
                     </View>
                     } else {
-                    accuracybutton = 
+                    accuracyinfo = 
                     <Text style={styles.mainlineText}>
-                    Accuracy: {this.state.accuracy}
+                    Overall Accuracy: {this.state.accuracy}
                     </Text>
                     }
-
-
+    let consistencyinfo;
+    if (this.state.accuracy != 'No data yet...') {
+      consistencyinfo =
+                    <Text style={styles.mainlineText}>
+                      Short Term: {this.state.short_term}
+                      {"\n"}
+                      Medium Term: {this.state.medium_term}
+                      {"\n"}
+                      Long Term: {this.state.long_term}
+                    </Text>
+                    } else {
+                    consistencyinfo = 
+                    <Text style={styles.mainlineText}>
+                    Consistency: No data yet...
+                    </Text>
+                    }
+                
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          
           <Text style={styles.subTitle}>
             Breadth
           </Text>
@@ -206,24 +222,18 @@ export default class Analytics extends Component {
             Overall Breadth: {this.state.overall_breadth}
           </Text>
 
-          {breadthbutton}
+          {breadthinfo}
+          
           <Text style={styles.subTitle}>
             Consistency
           </Text>
-
-          <Text style={styles.mainlineText}>
-            Short Term: {this.state.short_term}
-            {"\n"}
-            Medium Term: {this.state.medium_term}
-            {"\n"}
-            Long Term: {this.state.long_term}
-          </Text>
+          {consistencyinfo}
 
           <Text style={styles.subTitle}>
             Accuracy
           </Text>
 
-          {accuracybutton}
+          {accuracyinfo}
 
         </View>
     );
