@@ -5,6 +5,7 @@ from content.models import Category
 
   # every category specific question the user has ever attempted right or wrong
   # double __ allows foreign keys to get into other tables on .filter
+  # this is category accuracy...overall accuracy was built into the main UserAnswerManager file
 def category_attempts(user):
     category_accuracy_data = []
     

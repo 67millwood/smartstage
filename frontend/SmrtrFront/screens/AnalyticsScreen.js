@@ -31,7 +31,7 @@ export default class Analytics extends Component {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", () => {
       // The screen is focused
-      this.getAnalytics();
+      this.getAccuracy();
       this.getConsistency();
       this.getCategoryBreadth();
   });
@@ -104,7 +104,7 @@ export default class Analytics extends Component {
     };
   }
 
-  getAnalytics = async () => {
+  getAccuracy = async () => {
     const userToken = await AsyncStorage.getItem('LoginToken');
 
     try {
@@ -158,6 +158,8 @@ export default class Analytics extends Component {
   render() {
     const { navigate } = this.props.navigation
 
+    // conditional rendering if user has no questions yet
+
     let breadthbutton;
     if (this.state.overall_breadth != 'No data yet...') {
       breadthbutton = <Button
@@ -167,6 +169,32 @@ export default class Analytics extends Component {
                       }
                     />
     }
+    
+    let accuracybutton;
+    if (this.state.accuracy != 'No data yet...') {
+      accuracybutton =
+                    <View> 
+                    <Text style={styles.mainlineText}>
+                    Attempts: {this.state.attempts}
+                    {"\n"}
+                    Correct: {this.state.correct}
+                    {"\n"}
+                    Accuracy: {this.state.accuracy}
+                    </Text>
+                    <Button
+                      title="Accuracy by Category"
+                      onPress={() => {
+                        navigate('AccuracyDetails')}
+                      }
+                    />
+                    </View>
+                    } else {
+                    accuracybutton = 
+                    <Text style={styles.mainlineText}>
+                    Accuracy: {this.state.accuracy}
+                    </Text>
+                    }
+
 
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -195,20 +223,7 @@ export default class Analytics extends Component {
             Accuracy
           </Text>
 
-          <Text style={styles.mainlineText}>
-            Attempts: {this.state.attempts}
-            {"\n"}
-            Correct: {this.state.correct}
-            {"\n"}
-            Accuracy: {this.state.accuracy}
-          </Text>
-          <Button
-            title="Accuracy by Category"
-            onPress={() => {
-              navigate('AccuracyDetails')}
-            }
-
-          />
+          {accuracybutton}
 
         </View>
     );

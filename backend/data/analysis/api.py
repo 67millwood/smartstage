@@ -22,7 +22,7 @@ class AccuracyAPI(generics.GenericAPIView):
         all_attempts = answers['all_answered'].count()
 
         if all_attempts == 0:
-            accuracy = 'not applicable'
+            accuracy = 'No data yet...'
         else:
             accuracy = round(100*correct/all_attempts)
         
