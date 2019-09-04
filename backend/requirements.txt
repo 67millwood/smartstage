@@ -16,7 +16,7 @@ django-username-email==2.2.4
 djangorestframework==3.9.4
 Faker==1.0.5
 graphviz==0.10.1
-httpie==1.0.2
+httpie==1.0.3
 idna==2.8
 psycopg2==2.8.2
 psycopg2-binary==2.8.2
