@@ -1,3 +1,4 @@
 # Django files
 content/__pycache__/*
 *.pyc
+nocommitment/
