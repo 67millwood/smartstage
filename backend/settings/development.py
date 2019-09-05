@@ -2,9 +2,9 @@ from .base import *
 
 import django_heroku
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0rm@@dbrhuv0m)=&%fxeb9_fybu392on)dfjbn!goc(!*tci+('
+with open('./nocommitment/secretkey.txt') as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
