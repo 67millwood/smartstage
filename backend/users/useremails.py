@@ -14,8 +14,8 @@ def sendGridmailer(user):
    message = Mail(
       from_email='info@smrtr.life',
       to_emails='info@track2development.com',
-      subject='Woody I\'m going to steal your girlfriend',
-      html_content='<strong>oui oui!</strong>')
+      subject='Makin it rain $$$',
+      html_content='<strong>boom</strong>')
    try:
       # sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
       sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
