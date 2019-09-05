@@ -3,9 +3,12 @@
 import os
 import sys
 
-
+# modify the environmental variable to:
+#  'settings.local' or,
+#  'settings.development' or,
+#  'settings.production'
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.local')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
