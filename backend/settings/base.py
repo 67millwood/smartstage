@@ -14,6 +14,9 @@ import os
 from datetime import timedelta
 from rest_framework.settings import api_settings
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -86,6 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 # take Bcrypt first
 PASSWORD_HASHERS = [

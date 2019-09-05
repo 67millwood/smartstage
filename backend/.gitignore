@@ -2,3 +2,4 @@
 content/__pycache__/*
 *.pyc
 nocommitment/
+.env
