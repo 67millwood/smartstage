@@ -25,16 +25,16 @@ def sendGridmailer(user):
                "email": "info@track2development.com"
             }
             ],
-               "subject": name
+               "subject": "Thank you for registering"
             }
          ],
          "from": {
-            "email": "test@example.com"
+            "email": "info@smrtr.life"
          },
          "content": [
             {
                "type": "text/plain",
-               "value": "Hello, Email!"
+               "value": name
             }
          ]
    }
