@@ -9,7 +9,7 @@ from content.models import Question
 
 from .manager import BeltManager, UserAnswerManager
 from .beltansweremailer import completedBeltEmail
-from users.useremails import registration_email
+from users.useremails import registration_email, belt_earned_email
 
 from datetime import datetime
 
@@ -95,12 +95,15 @@ def is_complete(sender, instance, **kwargs):
   # mark userbelt complete if enough notches
   if instance.percent_complete >= 100:
     person = CustomUser.objects.get(pk=instance.user_id)
-    belt_earned = BeltLevel.objects.filter(pk=instance.belt_level_id).values('belt_name')[0]
-    belt_earned_name = belt_earned['belt_name']
+    belt_earned = BeltLevel.objects.get(pk=instance.belt_level_id)
+    print(belt_earned.belt_name)
+    print(belt_earned.belt_color)
+    belt_earned_name = belt_earned.belt_name
+    belt_earned_color = belt_earned.belt_color
     instance.belt_complete = True
     instance.belt_complete_date = datetime.now()
     # generates an email to congratulate person on earning their belt
-    completedBeltEmail(person, belt_earned_name)
+    belt_earned_email(person, belt_earned_name, belt_earned_color)
     UserBelts.objects.get_or_create(user_id=instance.user_id, belt_level_id=(1 + instance.belt_level_id))
   # revert to not complete and no completion date (if admin wipes notches)
   else:
