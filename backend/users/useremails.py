@@ -14,7 +14,6 @@ def userSignUp(emailto):
 
 def sendGridmailer(user):
    name = str(user)
-   print(name)
    sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
 
    data = {
@@ -25,18 +24,19 @@ def sendGridmailer(user):
                "email": "info@track2development.com"
             }
             ],
-               "subject": "Thank you for registering"
+             "dynamic_template_data": {
+               "username": name,
+               "adjective": "",
+               "noun": "",
+               "currentDayofWeek": ""
+            },
+               "subject": "Thank you for registering SIR"
             }
          ],
          "from": {
             "email": "info@smrtr.life"
          },
-         "content": [
-            {
-               "type": "text/plain",
-               "value": name
-            }
-         ]
+         "template_id":"d-8f1fbaa927e94fba98a7d91ad473e501"
    }
    response = sg.client.mail.send.post(request_body=data)
    print(response.status_code)
