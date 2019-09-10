@@ -26,3 +26,8 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+# change sandbox mode to True if you DON'T want to send emails
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"

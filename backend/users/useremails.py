@@ -25,7 +25,7 @@ def sendGridmailer(user):
             }
             ],
              "dynamic_template_data": {
-               "username": name,
+               "username": name + " booger",
                "adjective": "",
                "noun": "",
                "currentDayofWeek": ""
