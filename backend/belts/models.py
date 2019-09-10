@@ -9,7 +9,7 @@ from content.models import Question
 
 from .manager import BeltManager, UserAnswerManager
 from .beltansweremailer import completedBeltEmail
-from users.useremails import userSignUp, sendGridmailer
+from users.useremails import registration_email
 
 from datetime import datetime
 
@@ -61,8 +61,7 @@ class UserBelts(models.Model):
     person = CustomUser.objects.get(pk=instance.id)
     
     if kwargs.get('created', False):
-      userSignUp(person)
-      sendGridmailer(person)
+      registration_email(person)
       UserBelts.objects.get_or_create(user_id=instance.id, belt_level_id=1)
 
 # signal to listen for UserAnswer being created, updates the belt level accordingly

@@ -1,4 +1,3 @@
-from django.core.mail import send_mail
 from django.http import HttpResponse
 
 import sendgrid
@@ -8,11 +7,8 @@ from sendgrid.helpers.mail import Mail
 
 import json
 
-def userSignUp(emailto):
-   send_mail("Thanks for signing up!", "Welcome...", "info@smrtr.life", [emailto])
-   # return HttpResponse('%s'%res)
-
-def sendGridmailer(user):
+# registration email
+def registration_email(user):
    name = str(user)
    sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
 
@@ -25,10 +21,7 @@ def sendGridmailer(user):
             }
             ],
              "dynamic_template_data": {
-               "username": name + " booger",
-               "adjective": "",
-               "noun": "",
-               "currentDayofWeek": ""
+               "username": name,
             },
                "subject": "Thank you for registering SIR"
             }
@@ -36,13 +29,14 @@ def sendGridmailer(user):
          "from": {
             "email": "info@smrtr.life"
          },
-         "template_id":"d-8f1fbaa927e94fba98a7d91ad473e501"
+         "template_id":"d-7765e50a92c34a3a8e160fba57d78425"
    }
    response = sg.client.mail.send.post(request_body=data)
    print(response.status_code)
    print(response.body)
    print(response.headers)
 
+# password reset email
 def resetPwd(email, new_token):
    user = str(email)
    token = str(new_token)
@@ -66,7 +60,7 @@ def resetPwd(email, new_token):
          "from": {
             "email": "info@smrtr.life"
          },
-         "template_id":"d-8f1fbaa927e94fba98a7d91ad473e501"
+         "template_id":"d-2d1c6725aa34497e8056d733f552f1da"
    }
    response = sg.client.mail.send.post(request_body=data)
    print(response.status_code)
