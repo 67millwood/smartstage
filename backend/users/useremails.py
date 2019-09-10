@@ -42,3 +42,33 @@ def sendGridmailer(user):
    print(response.status_code)
    print(response.body)
    print(response.headers)
+
+def resetPwd(email, new_token):
+   user = str(email)
+   token = str(new_token)
+   sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
+
+   data = {
+      "personalizations": [
+         {
+            "to": [
+            {
+               "email": user
+            }
+            ],
+             "dynamic_template_data": {
+               "token": token,
+               "user": user,
+            },
+               "subject": "Thank you for registering SIR"
+            }
+         ],
+         "from": {
+            "email": "info@smrtr.life"
+         },
+         "template_id":"d-8f1fbaa927e94fba98a7d91ad473e501"
+   }
+   response = sg.client.mail.send.post(request_body=data)
+   print(response.status_code)
+   print(response.body)
+   print(response.headers)
