@@ -8,7 +8,6 @@ from users.models import CustomUser
 from content.models import Question
 
 from .manager import BeltManager, UserAnswerManager
-from .beltansweremailer import completedBeltEmail
 from users.useremails import registration_email, belt_earned_email
 
 from datetime import datetime
