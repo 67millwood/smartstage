@@ -6,15 +6,15 @@ try:
                                   password = "millwood",
                                   host = "localhost",
                                   port = "",
-                                  database = "content2")
+                                  database = "prod1")
 
     cursor = connection.cursor()
 
     data_actions = [
         "TRUNCATE content_beltlevel, content_question, content_category, content_questiontype CASCADE;",
-        "COPY content_beltlevel FROM '/Users/kmhome/Development/Experiment/buildout1/backend/data/beltlevels2.csv' DELIMITER ',' CSV",
-        "COPY content_category FROM '/Users/kmhome/Development/Experiment/buildout1/backend/data/category.csv' DELIMITER ',' CSV",
-        "COPY content_questiontype FROM '/Users/kmhome/Development/Experiment/buildout1/backend/data/questiontypes.csv' DELIMITER ',' CSV",
+        "COPY content_beltlevel FROM '/Users/kmhome/Development/corporate/backend/data/beltlevels2.csv' DELIMITER ',' CSV",
+        "COPY content_category FROM '/Users/kmhome/Development/corporate/backend/data/category.csv' DELIMITER ',' CSV",
+        "COPY content_questiontype FROM '/Users/kmhome/Development/corporate/backend/data/questiontypes.csv' DELIMITER ',' CSV",
         ]
 
     # Loop to run through all data_actions to populate database
