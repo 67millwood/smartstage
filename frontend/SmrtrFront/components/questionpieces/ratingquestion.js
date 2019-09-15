@@ -19,7 +19,7 @@ export default class RatingQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          value: 0,
+          value: 4,
           modalVisible: false,
           response: '',
           usercorrect: false,
@@ -29,7 +29,7 @@ export default class RatingQuestion extends Component {
     componentDidUpdate(prevProp) {
       if (this.props.currentquestion.question_text !== prevProp.currentquestion.question_text) {
         this.setState({ 
-          value: 0,
+          value: 4,
           usercorrect: false,
       })
       }
@@ -88,7 +88,38 @@ export default class RatingQuestion extends Component {
             
 
     render() {
-        const question = this.props.currentquestion
+        const question = this.props.currentquestion;
+        const score = this.state.value;
+        let words;
+        
+        switch (score) {
+          case 1:
+            words = 'Completely Disagree';
+            break;
+          case 2:
+            words = 'Strongly Disagree';
+            break;
+
+          case 3:
+            words = 'Disagree';
+            break;
+
+          case 4:
+            words = 'Neither Agree nor Disagree';
+            break;
+
+          case 5:
+            words = 'Agree';
+            break;
+
+          case 6:
+            words = 'Strongly Agree';
+            break;
+
+          case 7:
+            words = 'Completely Agree';
+        }
+
         return (
             <View>
                 <Text style={styles.title}>
@@ -97,14 +128,19 @@ export default class RatingQuestion extends Component {
                 <Text style={styles.questionText}>
                     {question.question_text}
                 </Text>
-                <Text style={{ fontSize: 20, color: 'blue'}}>
-                    Rating: {this.state.value} out of 7
+                <Text style={{ textAlign: 'center', marginTop: 25, marginBottom: 5 }}>
+                  How do you feel about this statement?
+                  {"\n"}
+                  (Move the slider left and right to choose your answer)
+                </Text>
+                <Text style={{ fontSize: 20, color: 'blue', textAlign: 'center'}}>
+                    {words}
                 </Text>
                 <Slider
                     value={this.state.value}
                     onValueChange={value => this.setState({ value })}
                     style={styles.slider}
-                    minimumValue={0}
+                    minimumValue={1}
                     maximumValue={7}
                     step={1}
                     minimumTrackTintColor="green"

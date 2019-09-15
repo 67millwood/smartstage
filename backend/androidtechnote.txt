@@ -1,0 +1,4 @@
+run in the terminal to allow android device to work on local
+adb reverse tcp:8080 tcp:8080
+
+

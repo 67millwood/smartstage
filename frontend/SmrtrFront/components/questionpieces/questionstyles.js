@@ -86,7 +86,11 @@ const styles = StyleSheet.create({
     //rating question
     slider: {
         alignItems: "stretch",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 25,
+        marginBottom: 25,
 
     },
     //submit button for answers
