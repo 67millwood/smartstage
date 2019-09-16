@@ -16,8 +16,7 @@ const styles = StyleSheet.create({
       fontSize: 17,
       color: 'black',
       flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center'
+      marginBottom: 5,
 
     },
     
@@ -83,6 +82,16 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 5
     },
+    //ranking choice (all) not selected
+    rankingChoices: {
+      backgroundColor: 'burlywood',
+      marginLeft: 5,
+      marginRight: 5,
+      marginBottom: 5,
+      justifyContent: 'center' 
+
+    },
+
     //rating question
     slider: {
         alignItems: "stretch",

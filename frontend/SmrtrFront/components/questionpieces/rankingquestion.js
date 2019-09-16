@@ -112,26 +112,13 @@ export default class RankingQuestion extends Component {
         }))})
       }
 
-  
-
-    
-
-
-
 
     renderItem = ({ item, index, move, moveEnd, isActive }) => {
         const schemes = ['coral', 'green', 'aqua', 'burlywood']
         return (
           <TouchableOpacity
             
-            style={{ 
-              backgroundColor: isActive ? 'blue' : `${schemes[index]}`,
-              marginLeft: 5,
-              marginRight: 5,
-              marginBottom: 5,
-              alignItems: 'center', 
-              justifyContent: 'center' 
-            }}
+            style={ isActive ? {...styles.rankingChoices, ...styles.selected} : styles.rankingChoices }
             onLongPress={move}
             onPressOut={moveEnd}
           >
@@ -151,12 +138,16 @@ export default class RankingQuestion extends Component {
         return (
             <View>
                 <Text style={styles.title}>
-                    Rank these 4 choices...
+                    Rank these 4 answers...
                 </Text>
                 
                 <Text style={styles.questionText}>
                     {question.question_text}
                 </Text>
+                <Text style={{ textAlign: 'center', marginTop: 25, marginBottom: 5 }}>
+                  (Press and hold to move the answers)
+                </Text>
+
   
                 <View style={{ height: 350 }}>
                   {/* setting the hard 300 height not great but works 
