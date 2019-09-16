@@ -111,6 +111,7 @@ export default class HomeScreen extends Component {
   }
 
   render() {
+    if (3 == 3) {
       return (
             <View style={styles.container}>
               <Text style={styles.getStartedText}>
@@ -131,6 +132,18 @@ export default class HomeScreen extends Component {
             </View>
             </View>
       )
+                  }
+      else {
+        return (
+          <View style={styles.container}>
+          <Text style={styles.getStartedText}>
+            Smrtr.life
+          </Text>
+          <Text>You need to wait</Text>
+          </View>
+
+        )
+      }
     }
 }
 
