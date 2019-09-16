@@ -57,6 +57,12 @@ class AnswerSerializer(serializers.Serializer):
             if validated_data['ratingAnswer'] == answer['score']:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
                 return correct_feedback
+            elif validated_data['ratingAnswer'] == answer['score'] - 1:
+                UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
+                return correct_feedback
+            elif validated_data['ratingAnswer'] == answer['score'] + 1:
+                UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=True)
+                return correct_feedback
             else:
                 UserAnswer.objects.create(user=user, question_id=validated_data['id'], correct=False)
                 return incorrect_feedback

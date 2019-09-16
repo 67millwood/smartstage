@@ -91,6 +91,9 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginTop: 25,
         marginBottom: 25,
+        backgroundColor: 'burlywood',
+        height: 40,
+        borderRadius: 10,
 
     },
     //submit button for answers

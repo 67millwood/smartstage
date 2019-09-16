@@ -8,8 +8,6 @@ import {
     Button,
 } from 'react-native';
 
-//import Slider from '@react-native-community/slider';
-
 import { styles } from './questionstyles';
 import AnswerModal from './answermodal';
 
@@ -143,8 +141,9 @@ export default class RatingQuestion extends Component {
                     minimumValue={1}
                     maximumValue={7}
                     step={1}
-                    minimumTrackTintColor="green"
-                    maximumTrackTintColor="red"
+                    minimumTrackTintColor="transparent"
+                    maximumTrackTintColor="transparent"
+                    thumbTintColor='blue'
                 />
 
                 <View style={styles.submit}>

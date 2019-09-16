@@ -92,7 +92,7 @@ getQuestions = async () => {
             //console.log(data)
             //console.log(this.state.questions)
             if (data.length == 0) {
-              Alert.alert(this.state.category, '\nThere are no questions left\nat this level.', onPress= () => navigate('Home')
+              Alert.alert(this.state.category, '\nThere are no questions left\nat this level.', [{text: 'Ok', onPress: () => navigate('Home')}]
               )
             } else {
               this.singleQuestion()
