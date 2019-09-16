@@ -1,6 +1,7 @@
 from content.models import Question, MultipleChoice, TrueFalse, Rating, Ranking
 from belts.models import UserAnswer, UserBelts
-#from content.views import starting_point
+
+from .dailylimit import dailylimit
 import random
 
 def question_set(user, category):
@@ -76,6 +77,6 @@ def app_question_set(user, category):
         question_session.append(nice)
       except:
         pass
-        
+    dailylimit(user=user)   
     return question_session
 
