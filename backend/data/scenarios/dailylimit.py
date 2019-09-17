@@ -1,6 +1,7 @@
 from belts.models import UserAnswer
 
 from datetime import datetime, timezone, timedelta
+import time
 
 def dailylimit (user):
     last_answer = UserAnswer.objects.latest('answer_date')
@@ -14,6 +15,7 @@ def dailylimit (user):
     if q_in_last_three_minutes >= 3:
         time_unlock = last_answer_time + timedelta(days=0.5) - now
         #time_next = time_unlock.strftime("%A, %I:%M %p")
+        for_api = time_unlock.seconds
         appdelay = str(time_unlock)
         print(appdelay)
-        return {'appdelay': appdelay}
+        return {'appdelay': for_api}
