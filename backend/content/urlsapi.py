@@ -1,7 +1,16 @@
 from django.urls import path
 
 from rest_framework import routers
-from .api import QuestionViewSet, ReadingViewSet, MultipleChoiceViewSet, TrueFalseViewSet, RatingViewSet, RankingViewSet, ShuffleSetViewSet
+from .api import (
+    QuestionViewSet, 
+    ReadingViewSet, 
+    MultipleChoiceViewSet, 
+    TrueFalseViewSet, 
+    RatingViewSet, 
+    RankingViewSet, 
+    ShuffleSetViewSet,
+    DailyLimit,
+)
 
 router = routers.DefaultRouter()
 
@@ -13,6 +22,7 @@ urlpatterns = [
     path('api/rating', RatingViewSet.as_view()),
     path('api/ranking', RankingViewSet.as_view()),
     path('api/shuffleset', ShuffleSetViewSet.as_view()),
+    path('api/dailylimit', DailyLimit.as_view()),
 
 ]
 

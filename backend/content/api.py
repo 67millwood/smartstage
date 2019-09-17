@@ -2,9 +2,20 @@ from .models import Question, Reading, MultipleChoice, TrueFalse, Rating, Rankin
 from belts.models import UserBelts
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions, generics
-from .serializers import QuestionSerializer, ReadingSerializer, MultipleChoiceSerializer, TrueFalseSerializer, RatingSerializer, RankingSerializer, IdSerializer, MegaDeskSerializer
+from .serializers import (
+    QuestionSerializer, 
+    ReadingSerializer, 
+    MultipleChoiceSerializer, 
+    TrueFalseSerializer, 
+    RatingSerializer, 
+    RankingSerializer, 
+    IdSerializer, 
+    MegaDeskSerializer, 
+    TimeDelay,
+    )
 
 from data.scenarios.question_creation import app_question_set
+from data.scenarios.dailylimit import dailylimit
 
 
 # Question Viewset
@@ -91,3 +102,15 @@ class ShuffleSetViewSet(generics.ListAPIView):
         questionlist = app_question_set(user=user, category=category)
         return questionlist
 
+# Daily limit on questions
+class DailyLimit(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = TimeDelay
+    
+    def get_object(self):
+        user = self.request.user
+
+        timedelay = dailylimit(user=user)
+        return timedelay

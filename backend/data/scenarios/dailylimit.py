@@ -11,11 +11,9 @@ def dailylimit (user):
     print(three_min_ago)
     q_in_last_three_minutes = UserAnswer.objects.filter(answer_date__gt=three_min_ago).count()
     print(q_in_last_three_minutes)
-    if q_in_last_three_minutes >= 4:
-        time_lock = True
-        time_unlock = last_answer_time + timedelta(days=0.5)
-        time_next = time_unlock.strftime("%A, %I:%M %p")
-        print(time_next)
-
-    time_since_lastq = now - last_answer.answer_date 
-    print(time_since_lastq)
+    if q_in_last_three_minutes >= 3:
+        time_unlock = last_answer_time + timedelta(days=0.5) - now
+        #time_next = time_unlock.strftime("%A, %I:%M %p")
+        appdelay = str(time_unlock)
+        print(appdelay)
+        return {'appdelay': appdelay}

@@ -76,5 +76,9 @@ class MegaDeskSerializer(serializers.Serializer):
     #rating fields
     score = serializers.IntegerField(required=False, max_value=None, min_value=None)
 
+class TimeDelay(serializers.Serializer):
+    appdelay = serializers.CharField(max_length=600)
+
+
 
 
