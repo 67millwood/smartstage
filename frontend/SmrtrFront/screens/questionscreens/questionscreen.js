@@ -58,7 +58,7 @@ componentWillUnmount() {
     this.focusListener.remove();
   }
 
-// gets the readings via the api
+// gets the questions via the api
 getQuestions = async () => {
   const { navigate } = this.props.navigation        
 

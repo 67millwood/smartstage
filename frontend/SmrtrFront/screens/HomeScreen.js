@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 
 import ProfileIcon from '../navigation/ProfileIcon';
+import QuestionCountdown from './questionscreens/questioncountdown';
 
-//import Carousel from 'react-native-anchor-carousel';
 import Carousel from 'react-native-snap-carousel';
 
 const data = [
@@ -130,6 +130,7 @@ export default class HomeScreen extends Component {
                     }}
                 />
             </View>
+            <QuestionCountdown />
             </View>
       )
                   }
