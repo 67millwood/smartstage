@@ -9,8 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+
 import ProfileIcon from '../navigation/ProfileIcon';
-import QuestionCountdown from './questionscreens/questioncountdown';
 
 import Carousel from 'react-native-snap-carousel';
 
@@ -30,6 +30,9 @@ export default class HomeScreen extends Component {
     this.state = {
         category: '',
         category_id: null,
+        countdown: null,
+        hours: null,
+        minutes: null,
         }
   }
 
@@ -41,6 +44,7 @@ export default class HomeScreen extends Component {
     this.focusListener = navigation.addListener("didFocus", () => {
       // The screen is focused
       printMyToken();
+      this.checkCountdown();
     });
   }
 
@@ -48,6 +52,49 @@ export default class HomeScreen extends Component {
     // Remove the event listener
     this.focusListener.remove();
   }
+
+  checkCountdown = async () => {
+  
+    const userToken = await AsyncStorage.getItem('LoginToken');
+    console.log(userToken)
+  
+    try {
+        return fetch(('http://localhost:8080/api/dailylimit'), {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${userToken}`,
+          },
+      })
+      .then(response => {
+        if(!response.ok) {
+          console.log('crap')      
+          } else {
+            response.json().then(data => {
+              this.setState({
+                countdown: data.appdelay
+              }
+              )
+              if (this.state.countdown != null) {
+                this.setState({
+                  hours: Math.floor(data.appdelay / 3600),
+                  minutes: Math.floor(data.appdelay % 3600 / 60),
+                })
+              }
+              console.log(data)
+              console.log(this.state.countdown)
+            })
+        }
+      })
+      }
+    catch(error) {
+      console.log('something went wrong');
+    };
+  }
+
+
+  
 
   //Method for carosel
   renderItem = ({item, index}) => {
@@ -110,8 +157,9 @@ export default class HomeScreen extends Component {
     //navigate('Question')
   }
 
+
   render() {
-    if (3 == 3) {
+   if (this.state.countdown == null) {
       return (
             <View style={styles.container}>
               <Text style={styles.getStartedText}>
@@ -130,9 +178,12 @@ export default class HomeScreen extends Component {
                     }}
                 />
             </View>
-            <QuestionCountdown />
+            <Text>
+              
+            </Text>
             </View>
       )
+      
                   }
       else {
         return (
@@ -140,11 +191,16 @@ export default class HomeScreen extends Component {
           <Text style={styles.getStartedText}>
             Smrtr.life
           </Text>
-          <Text>You need to wait</Text>
+          <Text>You need to wait for:
+          {"\n"}
+          {this.state.hours} hours.
+          {"\n"}
+          {this.state.minutes} minutes.</Text>
           </View>
 
         )
       }
+      
     }
 }
 
