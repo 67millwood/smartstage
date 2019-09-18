@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native'
 
-
-
 const styles = StyleSheet.create({
 
     // style for general user among Screens

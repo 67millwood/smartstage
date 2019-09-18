@@ -9,6 +9,8 @@ import {
     Button,
 } from 'react-native';
 
+import { styles } from '../Mainstyles/authstyles';
+
 
 export default class Login extends Component {
     constructor(props) {
@@ -116,8 +118,13 @@ export default class Login extends Component {
         return (
 
             <View style={styles.container} >
-                <Text style={styles.container}
-                    style={{fontSize: 27}}>
+              <View style={{ flex: 1, marginLeft: 5 }}>
+                <Text style={styles.title}>
+                  Welcome...{'\n'}Smrtr.life
+                </Text>
+              </View>
+              <View style={styles.userActivity}>
+                <Text style={{fontSize: 30}}>
                     Login
                 </Text>
                 
@@ -136,15 +143,13 @@ export default class Login extends Component {
                     value={this.state.password}
                     secureTextEntry={true}
                 />
-                <View style={{margin:7}}>
                 <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
+                    style={styles.inputButton} 
                     onPress={this.extrafeature}
                       >
-                        <Text>ENTER</Text>
+                        <Text style={{ fontSize: 25 }}>ENTER</Text>
 
                 </TouchableOpacity>
-                </View>
                 <View  style={{alignItems: 'flex-end'}}>
                   <TouchableOpacity
                   style={styles.register}
@@ -152,8 +157,6 @@ export default class Login extends Component {
                   >
                   <Text style={styles.register}>Register</Text>
                   </TouchableOpacity>
-                </View>
-                <View  style={{alignItems: 'flex-end'}}>
                   <TouchableOpacity
                   style={styles.register}
                   onPress={() => navigate('Forgot')}
@@ -161,12 +164,7 @@ export default class Login extends Component {
                   <Text style={styles.register}>Forgot?</Text>
                   </TouchableOpacity>
                 </View>
-
-                
-                <View style={styles.container}>
-                  <Button title="Pretend I'm Logged In" onPress={() => {navigate('Home')}} />
-                </View>
-
+              </View>
 
             </View>
             )
@@ -174,21 +172,3 @@ export default class Login extends Component {
 }
 
 
-const styles = StyleSheet.create({
-    input: {
-      padding: 5,
-      borderBottomColor: 15,
-      borderBottomWidth: 1,
-    },
-    container: {
-      flex: 1,
-      marginTop: 100,
-      marginLeft: 15,
-      marginRight: 15,
-    },
-    register: {
-      fontSize: 12,
-      justifyContent: 'flex-start',
-      marginRight: 5,
-    }
-  });

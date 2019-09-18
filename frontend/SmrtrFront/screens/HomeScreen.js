@@ -194,7 +194,7 @@ export default class HomeScreen extends Component {
             Smrtr.life
           </Text>
           <View style={styles.countdowntext}>
-            <Text style={{ textAlign: 'center', fontSize: 20 }}>
+            <Text style={{ textAlign: 'center', fontSize: 20, marginLeft: 5, marginRight: 5 }}>
               You've been doing a great job but it's good to take a break.
               More readings and questions will be available in:
             </Text>
