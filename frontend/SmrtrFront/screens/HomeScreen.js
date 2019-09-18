@@ -161,12 +161,12 @@ export default class HomeScreen extends Component {
   render() {
    if (this.state.countdown == null) {
       return (
-            <View style={styles.container}>
+            <View style={styles.contentContainer}>
               <Text style={styles.getStartedText}>
                 Smrtr.life
               </Text>
             
-            <View style={{backgroundColor: '#fff', marginTop: 50}}>
+            <View style={{backgroundColor: '#F5F5DC', marginTop: 50}}>
                 <Carousel  style={styles.carousel}
                     data={data}
                     renderItem={this.renderItem}
@@ -187,15 +187,16 @@ export default class HomeScreen extends Component {
                   }
       else {
         return (
-          <View style={styles.container}>
+          <View style={styles.contentContainer}>
           <Text style={styles.getStartedText}>
             Smrtr.life
           </Text>
-          <Text>You need to wait for:
-          {"\n"}
-          {this.state.hours} hours.
-          {"\n"}
-          {this.state.minutes} minutes.</Text>
+          <View style={styles.countdowntext}>
+            <Text style={{ textAlign: 'center', fontSize: 25 }}>You need to wait for:</Text>
+          </View>
+          <Text style={styles.countdownclock}>
+          {this.state.hours} hours and {this.state.minutes} minutes.
+          </Text>
           </View>
 
         )
@@ -232,11 +233,10 @@ HomeScreen.navigationOptions = {
 
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-  },
   contentContainer: {
-    paddingTop: 50,
+    flex: 1,
+    backgroundColor: '#F5F5DC',
+    paddingTop: 20,
   },
   getStartedText: {
     marginTop: 15,
@@ -245,20 +245,37 @@ const styles = StyleSheet.create({
     color: 'blueviolet',
     textAlign: 'center',
   },
+  countdownclock: {
+    textAlign: 'center',
+    fontSize: 40,
+    flex: 2,
+    backgroundColor: 'blue'
+
+
+
+  },
+  countdowntext: {
+    flex: 2,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    
+    
+
+
+
+  },
     carousel: {
       marginTop: 100,
       height: 500,
-      flex:1
+      flex:1,
+      backgroundColor: '#F5F5DC',
   },
-  
   item: {
     height: 450,
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  
-
   text: {
     fontSize: 30,
     color: 'white',
