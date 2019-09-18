@@ -192,10 +192,15 @@ export default class HomeScreen extends Component {
             Smrtr.life
           </Text>
           <View style={styles.countdowntext}>
-            <Text style={{ textAlign: 'center', fontSize: 25 }}>You need to wait for:</Text>
+            <Text style={{ textAlign: 'center', fontSize: 20 }}>
+              You've been doing a great job but it's good to take a break.
+              More readings and questions will be available in:
+            </Text>
           </View>
           <Text style={styles.countdownclock}>
-          {this.state.hours} hours and {this.state.minutes} minutes.
+          {this.state.hours} hours
+          {"\n"}
+          {this.state.minutes} minutes
           </Text>
           </View>
 
@@ -249,19 +254,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 40,
     flex: 2,
-    backgroundColor: 'blue'
-
-
 
   },
   countdowntext: {
     flex: 2,
     backgroundColor: 'red',
     justifyContent: 'center',
-    
-    
-
-
 
   },
     carousel: {
