@@ -10,6 +10,7 @@ import {
     Alert,
 } from 'react-native';
 
+import { styles } from '../Mainstyles/authstyles';
 
 export default class EmailChangeScreen extends Component {
     constructor(props) {
@@ -99,9 +100,11 @@ export default class EmailChangeScreen extends Component {
         const { navigate } = this.props.navigation        
         return (
 
-            <View style={styles.container} >
-                <Text style={styles.container}
-                    style={{fontSize: 27}}>
+             <View style={{...styles.container, marginTop: 5 }}>
+              <View style={{...styles.userActivity, justifyContent: 'center'}}>
+
+                <Text style={{fontSize: 27}}>
+                    
                     Change your email....
                 </Text>
                 
@@ -120,16 +123,14 @@ export default class EmailChangeScreen extends Component {
                     value={this.state.email2}
                 />
 
-                <View style={{margin:7}}>
                 <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
+                    style={styles.inputButton}
                     onPress={this.checkandchange}
                       >
-                        <Text>ENTER</Text>
+                        <Text style={{ fontSize: 25 }}>ENTER</Text>
 
                 </TouchableOpacity>
-                </View>
-                
+              </View>
 
 
             </View>
@@ -138,21 +139,3 @@ export default class EmailChangeScreen extends Component {
 }
 
 
-const styles = StyleSheet.create({
-    input: {
-      padding: 5,
-      borderBottomColor: 15,
-      borderBottomWidth: 1,
-    },
-    container: {
-      flex: 1,
-      marginTop: 100,
-      marginLeft: 15,
-      marginRight: 15,
-    },
-    register: {
-      fontSize: 12,
-      justifyContent: 'flex-start',
-      marginRight: 5,
-    }
-  });

@@ -3,6 +3,8 @@ import { View, StyleSheet, Text, Button, AsyncStorage } from 'react-native';
 
 import HomeIcon from '../../navigation/HomeIcon';
 
+import { styles } from '../Mainstyles/authstyles';
+
 export default class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -78,8 +80,9 @@ export default class ProfilePage extends Component {
         const { navigate } = this.props.navigation
         return (
              
-                <View style={styles.container}>
-                <Text>
+            <View style={{...styles.container, marginTop: 5 }}>
+              <View style={{...styles.userActivity, justifyContent: 'center'}}>
+                <Text style={{ textAlign: 'center'}}>
                   {this.state.email}
                 </Text>
                 <Button
@@ -108,8 +111,8 @@ export default class ProfilePage extends Component {
                             navigate('Login')
                          }
                          } />
-
-                </View>
+              </View>
+            </View>
         );
     }
   }
@@ -133,10 +136,3 @@ export default class ProfilePage extends Component {
   
 
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });

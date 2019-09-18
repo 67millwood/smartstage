@@ -113,7 +113,7 @@ export default class ResetTokenScreen extends Component {
         const { navigate } = this.props.navigation        
         return (
 
-            <View style={styles.container} >
+            <View style={styles.container } >
               <View style={{...styles.userActivity, justifyContent: 'center'}}>
 
                 <Text style={{fontSize: 27}}>
