@@ -10,6 +10,8 @@ import {
     Alert,
 } from 'react-native';
 
+import { styles } from '../Mainstyles/authstyles';
+
 
 export default class ResetTokenScreen extends Component {
     constructor(props) {
@@ -112,9 +114,10 @@ export default class ResetTokenScreen extends Component {
         return (
 
             <View style={styles.container} >
-                <Text style={styles.container}
-                    style={{fontSize: 27}}>
-                    Enter your token and new password....
+              <View style={{...styles.userActivity, justifyContent: 'center'}}>
+
+                <Text style={{fontSize: 27}}>
+                    Create a new password....
                 </Text>
                 
                 <TextInput 
@@ -126,7 +129,7 @@ export default class ResetTokenScreen extends Component {
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder='enter your new password'
+                    placeholder='enter new password'
                     autoCapitalize = 'none'
                     onChangeText={(new_password)=>this.setState({new_password})}
                     value={this.state.new_password}
@@ -135,25 +138,20 @@ export default class ResetTokenScreen extends Component {
                 />
                 <TextInput 
                     style={styles.input}
-                    placeholder='re-enter your new password'
+                    placeholder='re-enter new password'
                     autoCapitalize = 'none'
                     onChangeText={(new_password2)=>this.setState({new_password2})}
                     value={this.state.new_password2}
                     secureTextEntry={true}
 
                 />
-
-
-
-                <View style={{margin:7}}>
                 <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
+                    style={styles.inputButton} 
                     onPress={this.checkandchange}
                       >
-                        <Text>ENTER</Text>
+                        <Text style={{ fontSize: 25 }}>ENTER</Text>
 
                 </TouchableOpacity>
-                </View>
                 <View  style={{alignItems: 'flex-end'}}>
                   <TouchableOpacity
                   style={styles.register}
@@ -162,6 +160,7 @@ export default class ResetTokenScreen extends Component {
                   <Text style={styles.register}>Return to Login</Text>
                   </TouchableOpacity>
                 </View>
+              </View>
 
                 
 
@@ -172,21 +171,3 @@ export default class ResetTokenScreen extends Component {
 }
 
 
-const styles = StyleSheet.create({
-    input: {
-      padding: 5,
-      borderBottomColor: 15,
-      borderBottomWidth: 1,
-    },
-    container: {
-      flex: 1,
-      marginTop: 100,
-      marginLeft: 15,
-      marginRight: 15,
-    },
-    register: {
-      fontSize: 12,
-      justifyContent: 'flex-start',
-      marginRight: 5,
-    }
-  });

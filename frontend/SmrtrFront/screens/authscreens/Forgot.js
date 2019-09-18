@@ -10,6 +10,8 @@ import {
     Alert,
 } from 'react-native';
 
+import { styles } from '../Mainstyles/authstyles';
+
 
 export default class ResetPasswordScreen extends Component {
     constructor(props) {
@@ -80,29 +82,27 @@ export default class ResetPasswordScreen extends Component {
         const { navigate } = this.props.navigation        
         return (
 
-            <View style={styles.container} >
-                <Text style={styles.container}
-                    style={{fontSize: 27}}>
-                    Enter your email....
+            <View style={styles.container } >
+              <View style={{...styles.userActivity, justifyContent: 'center'}}>
+                <Text style={{fontSize: 30}}>
+                    Forgot your pwd?! 🙁
                 </Text>
                 
                 <TextInput 
                     style={styles.input}
-                    placeholder='email registered with Smrtr.life'
+                    placeholder='enter your registered email'
                     autoCapitalize = 'none'
                     onChangeText={(email)=>this.setState({email})}
                     value={this.state.email}
                 />
-
-                <View style={{margin:7}}>
                 <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
+                    style={styles.inputButton} 
                     onPress={this.resetPassword}
                       >
-                        <Text>ENTER</Text>
+                        <Text style={{ fontSize: 25 }}>ENTER</Text>
 
                 </TouchableOpacity>
-                </View>
+                
                 <View  style={{alignItems: 'flex-end'}}>
                   <TouchableOpacity
                   style={styles.register}
@@ -111,31 +111,10 @@ export default class ResetPasswordScreen extends Component {
                   <Text style={styles.register}>Have token already?</Text>
                   </TouchableOpacity>
                 </View>
-
-                
-
-
+              </View>
             </View>
             )
     }
 }
 
 
-const styles = StyleSheet.create({
-    input: {
-      padding: 5,
-      borderBottomColor: 15,
-      borderBottomWidth: 1,
-    },
-    container: {
-      flex: 1,
-      marginTop: 100,
-      marginLeft: 15,
-      marginRight: 15,
-    },
-    register: {
-      fontSize: 12,
-      justifyContent: 'flex-start',
-      marginRight: 5,
-    }
-  });

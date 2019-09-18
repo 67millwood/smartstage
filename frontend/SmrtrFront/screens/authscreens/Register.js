@@ -9,6 +9,7 @@ import {
     Button,
 } from 'react-native';
 
+import { styles } from '../Mainstyles/authstyles';
 
 export default class Register extends Component {
     constructor(props) {
@@ -92,10 +93,16 @@ export default class Register extends Component {
         return (
 
               <View style={styles.container} >
-                    <Text 
-                    style={{fontSize: 27}}>
-                    Register
-                </Text>
+                <View style={{ flex: 1, marginLeft: 5 }}>
+                  <Text style={styles.title}>
+                    Welcome...{'\n'}Smrtr.life
+                  </Text>
+                </View>
+
+                <View style={styles.userActivity}>
+                  <Text style={{fontSize: 30}}>
+                      Register
+                  </Text>
                 <TextInput 
                     style={styles.input}
                     placeholder='Email'
@@ -113,10 +120,10 @@ export default class Register extends Component {
                 />
                 <View style={{margin:7}} >
                 <TouchableOpacity
-                    style={{backgroundColor: 'aqua' }} 
+                    style={styles.inputButton} 
                     onPress={this.extrafeature}
                       >
-                        <Text>ENTER</Text>
+                        <Text style={{ fontSize: 25 }}>ENTER</Text>
 
                 </TouchableOpacity>
                 </View>
@@ -128,6 +135,7 @@ export default class Register extends Component {
                   <Text style={styles.register}>Already Registered? Login</Text>
                   </TouchableOpacity>
                 </View>
+                </View>
               </View>
 
             )
@@ -135,21 +143,3 @@ export default class Register extends Component {
 }
 
 
-const styles = StyleSheet.create({
-  input: {
-    padding: 5,
-    borderBottomColor: 15,
-    borderBottomWidth: 1,
-  },
-  container: {
-    flex: 1,
-    marginTop: 100,
-    marginLeft: 15,
-    marginRight: 15,
-  },
-  register: {
-    fontSize: 12,
-    justifyContent: 'flex-start',
-    marginRight: 5,
-  }
-});
