@@ -56,7 +56,6 @@ export default class HomeScreen extends Component {
   checkCountdown = async () => {
   
     const userToken = await AsyncStorage.getItem('LoginToken');
-    console.log(userToken)
   
     try {
         return fetch(('http://localhost:8080/api/dailylimit'), {
@@ -82,8 +81,8 @@ export default class HomeScreen extends Component {
                   minutes: Math.floor(data.appdelay % 3600 / 60),
                 })
               }
-              console.log(data)
-              console.log(this.state.countdown)
+              //console.log(data)
+              //console.log(this.state.countdown)
             })
         }
       })
