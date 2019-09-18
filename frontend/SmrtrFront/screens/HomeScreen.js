@@ -106,7 +106,7 @@ export default class HomeScreen extends Component {
           style={[styles.item, {backgroundColor}]} >
               <Text style={styles.text}>{title}</Text>
               <TouchableOpacity
-                    style={{flex: 1, width: 180, backgroundColor: 'cadetblue' }} 
+                    style={{flex: 1, width: 210, backgroundColor: 'aqua' }} 
                     onPress={() => {
                       this.setState({ category: {title}})
                       this.setState({ category_id: {category_id}})
@@ -122,7 +122,7 @@ export default class HomeScreen extends Component {
                 </TouchableOpacity>
 
               <TouchableOpacity
-                    style={{flex: 1, width: 180, backgroundColor: 'aqua', marginBottom: 5 }} 
+                    style={{flex: 1, width: 210, backgroundColor: 'cadetblue', marginBottom: 5 }} 
                     onPress={() => {
                       this.setState({ category: {title}})
                       this.setState({ category_id: {category_id}})
@@ -161,15 +161,17 @@ export default class HomeScreen extends Component {
    if (this.state.countdown == null) {
       return (
             <View style={styles.contentContainer}>
-              <Text style={styles.getStartedText}>
-                Smrtr.life
-              </Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.getStartedText}>
+                    Smrtr.life
+                  </Text>
+                </View>
             
-            <View style={{backgroundColor: '#F5F5DC', marginTop: 50}}>
+            <View style={{ flex: 7, backgroundColor: '#F5F5DC', marginTop: 50}}>
                 <Carousel  style={styles.carousel}
                     data={data}
                     renderItem={this.renderItem}
-                    itemWidth={200}
+                    itemWidth={225}
                     enableSnap={true}
                     sliderWidth={width - 20} 
                     ref={(c) => {
@@ -187,6 +189,7 @@ export default class HomeScreen extends Component {
       else {
         return (
           <View style={styles.contentContainer}>
+          
           <Text style={styles.getStartedText}>
             Smrtr.life
           </Text>
@@ -262,13 +265,12 @@ const styles = StyleSheet.create({
 
   },
     carousel: {
+      flex: 1,
       marginTop: 100,
-      height: 500,
-      flex:1,
       backgroundColor: '#F5F5DC',
   },
   item: {
-    height: 450,
+    flex: 1,
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center'
