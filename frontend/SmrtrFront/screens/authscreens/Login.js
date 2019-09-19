@@ -59,14 +59,28 @@ export default class Login extends Component {
           }
         }
       this.setState({
-        email: '',
         password: '',
       });
     }
 
+  //event listener runs any function when page 'didFocus' or reloads
+  componentDidMount() {
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener("didFocus", () => {
+      // The screen is focused
+      this.getUserEmail();
+    });
+  }
+
+  componentWillUnmount() {
+    // Remove the event listener
+    this.focusListener.remove();
+  }
+
     setToken= async () => {
       try {
         await AsyncStorage.setItem('LoginToken', (`${this.state.token}`))
+        await AsyncStorage.setItem('UserEmail', (`${this.state.email}`))
       } catch(e) {
         console.log('didn\'t work')
       }
@@ -111,6 +125,22 @@ export default class Login extends Component {
       extrafeature = () => {
         this.logintobackend();
       }
+
+      getUserEmail = async () => {
+        try {
+          const userEmail = await AsyncStorage.getItem('UserEmail');
+          if (userEmail !== null) {
+            this.setState({
+              email: userEmail,
+            })
+          } else {
+            console.log('no email there')
+          }
+        } catch (error) {
+          console.log(Math.random());
+        }
+      }
+      
 
     
     render() {

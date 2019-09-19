@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import {
-    ScrollView,
     Text,
     TextInput,
     View,
     TouchableOpacity,
-    StyleSheet,
+    Alert,
+    AsyncStorage,
     Button,
 } from 'react-native';
 
@@ -16,7 +16,8 @@ export default class Register extends Component {
         super(props)
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            password2: '',
             }
         this.registration=this.registration.bind(this);
     }
@@ -49,8 +50,8 @@ export default class Register extends Component {
         }
 
       this.setState({
-        email: '',
         password: '',
+        password2: '',
       });
     }
 
@@ -76,6 +77,8 @@ export default class Register extends Component {
             } else {
               response.json().then(data => {
                 console.log(data)
+                Alert.alert('You\'re Registered!', `Please login as ${this.state.email}.`)
+                this.setEmail();
                 navigate('Login')
               })
           }
@@ -84,9 +87,30 @@ export default class Register extends Component {
       }
     
 
-      extrafeature = () => {
-        this.registration();
-      }
+      checkandchange = () => {
+        if (this.state.password == this.state.password2) {
+          this.registration();
+        } else {
+          Alert.alert('Ooops!', 'Those passwords don\'t match');
+          this.setState({
+            password: '',
+            password2: '',
+          })
+        }
+          
+        }
+
+        setEmail= async () => {
+          try {
+            await AsyncStorage.setItem('UserEmail', (`${this.state.email}`))
+          } catch(e) {
+            console.log('didn\'t work at point of registration')
+          }
+        
+          console.log('Done.')
+        }
+    
+  
     
     render() {
         const { navigate } = this.props.navigation;        
@@ -118,10 +142,19 @@ export default class Register extends Component {
                     value={this.state.password}
                     secureTextEntry={true}
                 />
+                <TextInput 
+                    style={styles.input}
+                    placeholder='Re-enter Password'
+                    autoCapitalize = 'none'
+                    onChangeText={(password2)=>this.setState({password2})}
+                    value={this.state.password2}
+                    secureTextEntry={true}
+                />
+
                 <View style={{margin:7}} >
                 <TouchableOpacity
                     style={styles.inputButton} 
-                    onPress={this.extrafeature}
+                    onPress={this.checkandchange}
                       >
                         <Text style={{ fontSize: 25 }}>ENTER</Text>
 
