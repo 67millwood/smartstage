@@ -44,9 +44,11 @@ export default class DeleteAccountScreen extends Component {
             } else {
               response.json().then(data => {
                 console.log('good')
+                AsyncStorage.removeItem('UserEmail')
                 this.logout()
                 navigate('Login')
               })
+              
             }
         })
         .catch(() => {
@@ -67,6 +69,7 @@ export default class DeleteAccountScreen extends Component {
             },
           })
           .then( await AsyncStorage.removeItem('LoginToken'));
+          
         } 
         catch (error) {
           console.log('not removed')
