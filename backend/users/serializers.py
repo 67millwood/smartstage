@@ -1,6 +1,6 @@
 from rest_framework import serializers 
 from .models import CustomUser
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, password_validation
 
 from django.contrib.auth.hashers import make_password
 
@@ -19,6 +19,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ('email', 'password', 'middle_name',)
         extra_kwargs = {'password': {'write_only': True}}
 
+    def validate_password(self, data):
+        password_validation.validate_password(password=data, user=None)
+        return data
 
     def create(self, validated_data):
         user = CustomUser.objects.create(
@@ -47,6 +50,10 @@ class PwdChangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ('password', )
+
+    def validate_password(self, data):
+        password_validation.validate_password(password=data, user=None)
+        return data
 
 # EmailChange Serializer
 

@@ -28,6 +28,16 @@ export default class PwdChangeScreen extends Component {
           case 'This field may not be blank.':
             alert('Missing password');
             break;
+          case 'This password is entirely numeric.':
+            alert('This password is entirely numeric.')
+            break;
+          case 'This password is too short. It must contain at least 8 characters.':
+              alert('This password is too short. It must contain at least 8 characters.')
+              break;
+          case 'This password is too common.':
+              alert('This password is too common.')
+              break;
+
           default:
             console.log('all good')
           }
