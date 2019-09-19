@@ -40,6 +40,17 @@ export default class EmailChangeScreen extends Component {
       }
     }
 
+    setUserEmail= async () => {
+      try {
+        await AsyncStorage.setItem('UserEmail', (`${this.state.email}`))
+      } catch(e) {
+        console.log('didn\'t work')
+      }
+    
+      console.log('Done.')
+    }
+
+
 
 
     emailchange = async () => {
@@ -71,6 +82,7 @@ export default class EmailChangeScreen extends Component {
             } else {
               response.json().then(data => {
                 console.log('good change')
+                this.setUserEmail();
                 Alert.alert('Change Successful!', 'Let\'s get back at it 🦄...')
                 navigate('Home')
               })
