@@ -45,7 +45,7 @@ def breadth(user):
           rating = 'Perfect Balance'
         elif attepmted_delta <= 5:
           rating = 'Good'
-        elif attepmted_delta <= 8:
+        elif attepmted_delta <= 11:
           rating = 'Overdeveloped'
         elif attepmted_delta >= 12:
           rating = 'Very Overdeveloped'
