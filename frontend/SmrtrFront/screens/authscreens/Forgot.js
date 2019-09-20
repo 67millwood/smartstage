@@ -83,7 +83,7 @@ export default class ResetPasswordScreen extends Component {
         return (
 
             <View style={styles.container } >
-              <View style={{...styles.userActivity, justifyContent: 'center'}}>
+              <View style={styles.userActivity2}>
                 <Text style={{fontSize: 30}}>
                     Forgot your pwd?! 🙁
                 </Text>

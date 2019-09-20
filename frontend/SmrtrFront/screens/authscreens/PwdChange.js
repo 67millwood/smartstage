@@ -105,7 +105,7 @@ export default class PwdChangeScreen extends Component {
         return (
 
             <View style={{...styles.container, marginTop: 5 }}>
-              <View style={{...styles.userActivity, justifyContent: 'center'}}>
+              <View style={styles.userActivity2}>
                 <Text style={{fontSize: 27}}>
                     Change your password....
                 </Text>

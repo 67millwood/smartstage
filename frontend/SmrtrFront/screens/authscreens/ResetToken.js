@@ -114,7 +114,7 @@ export default class ResetTokenScreen extends Component {
         return (
 
             <View style={styles.container } >
-              <View style={{...styles.userActivity, justifyContent: 'center'}}>
+              <View style={styles.userActivity2}>
 
                 <Text style={{fontSize: 27}}>
                     Create a new password....

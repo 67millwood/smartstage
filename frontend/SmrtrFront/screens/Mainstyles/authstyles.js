@@ -20,6 +20,14 @@ const styles = StyleSheet.create({
         marginRight: 5,
 
     },
+    userActivity2: {
+      flex: 3, 
+      marginTop: 20,
+      marginLeft: 5,
+      marginRight: 5,
+
+  },
+
     container: {
       backgroundColor: '#F5F5DC',
       flex: 1,
