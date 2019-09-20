@@ -70,7 +70,8 @@ export default class BeltsScreen extends Component {
     
     <View>
           <Text style={styles.percentCompleteText}>    
-          Your {item.belt_level.belt_name} belt is {item.percent_complete}% complete:
+          {item.percent_complete >= 100 ? `Your ${item.belt_level.belt_name} belt is complete...` : `Your ${item.belt_level.belt_name} belt is ${item.percent_complete}% complete:`}
+          
           </Text>
 
       <TouchableOpacity 
@@ -78,7 +79,7 @@ export default class BeltsScreen extends Component {
           <Text style={styles.percentCompleteText}>
             Notches Earned: {item.notches_complete}
             {"\n"}
-            {item.percent_complete >= 100 ? `🦋🦋Nice Work!🦋🦋\nCompleted: ${item.belt_complete_date}` : ''}
+            {item.percent_complete >= 100 ? `💥 Nice Work!\nCompleted: ${item.formatted_completion_date}` : ''}
             {"\n"}
             
 

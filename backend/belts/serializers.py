@@ -5,6 +5,8 @@ from content.models import BeltLevel
 from users.serializers import CustomUserSerializer
 from django.contrib.auth import authenticate
 
+from datetime import datetime
+
 
 # User Serializer
 
@@ -15,9 +17,18 @@ class BeltLevelSerializer(serializers.ModelSerializer):
 
 class UserBeltsSerializer(serializers.ModelSerializer):
     belt_level = BeltLevelSerializer()
+    formatted_completion_date = serializers.SerializerMethodField()
+
     class Meta:
         model = UserBelts
         fields = ('__all__')
+    
+    def get_formatted_completion_date(self, object):
+        if object.belt_complete_date != None:
+            friend = object.belt_complete_date.strftime("%B %d, %Y")
+            return friend
+        else:
+            return None
 
 # Answer Serializer
 class AnswerSerializer(serializers.Serializer):
