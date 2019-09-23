@@ -141,6 +141,7 @@ export default class Register extends Component {
                     style={styles.input}
                     placeholder='Email'
                     autoCapitalize = 'none'
+                    clearButtonMode = 'always'
                     onChangeText={(email)=>this.setState({email})}
                     value={this.state.email}
                 />

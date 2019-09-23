@@ -124,6 +124,7 @@ export default class ResetTokenScreen extends Component {
                     style={styles.input}
                     placeholder='token you received via email'
                     autoCapitalize = 'none'
+                    clearButtonMode = 'always'
                     onChangeText={(token)=>this.setState({token})}
                     value={this.state.token}
                 />

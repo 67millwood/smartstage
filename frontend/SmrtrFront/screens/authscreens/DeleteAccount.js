@@ -107,6 +107,7 @@ export default class DeleteAccountScreen extends Component {
                     style={styles.input}
                     placeholder='enter email address'
                     autoCapitalize = 'none'
+                    clearButtonMode = 'always'
                     onChangeText={(email)=>this.setState({email})}
                     value={this.state.email}
                 />
@@ -114,6 +115,7 @@ export default class DeleteAccountScreen extends Component {
                     style={styles.input}
                     placeholder='Re-enter email'
                     autoCapitalize = 'none'
+                    clearButtonMode = 'always'
                     onChangeText={(email2)=>this.setState({email2})}
                     value={this.state.email2}
                 />
